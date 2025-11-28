@@ -1,0 +1,552 @@
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// CLINIC
+// ============================================
+model Clinic {
+  id                   String   @id @default(cuid())
+  name                 String
+  slug                 String   @unique
+  email                String
+  phone                String
+  address              String
+  city                 String
+  state                String   @default("NSW")
+  postcode             String
+  country              String   @default("Australia")
+  timezone             String   @default("Australia/Sydney")
+  
+  // Business Info
+  abn                  String?
+  website              String?
+  logoUrl              String?
+  
+  // Operating Hours (JSON)
+  businessHours        Json     @default("{\"monday\":{\"open\":\"09:00\",\"close\":\"17:00\",\"closed\":false},\"tuesday\":{\"open\":\"09:00\",\"close\":\"17:00\",\"closed\":false},\"wednesday\":{\"open\":\"09:00\",\"close\":\"17:00\",\"closed\":false},\"thursday\":{\"open\":\"09:00\",\"close\":\"17:00\",\"closed\":false},\"friday\":{\"open\":\"09:00\",\"close\":\"17:00\",\"closed\":false},\"saturday\":{\"open\":\"09:00\",\"close\":\"13:00\",\"closed\":false},\"sunday\":{\"open\":\"09:00\",\"close\":\"17:00\",\"closed\":true}}")
+  
+  // Settings
+  bookingBufferMinutes Int      @default(15)
+  defaultApptDuration  Int      @default(30)
+  allowOnlineBooking   Boolean  @default(true)
+  requireApproval      Boolean  @default(false)
+  sendReminders        Boolean  @default(true)
+  reminderHoursBefore  Int      @default(24)
+  
+  // Branding
+  primaryColor         String   @default("#14b8a6")
+  accentColor          String   @default("#3b82f6")
+  
+  // Subscription
+  subscriptionStatus   String   @default("trial")
+  subscriptionTier     String   @default("starter")
+  trialEndsAt          DateTime?
+  
+  // Relationships
+  users                User[]
+  pets                 Pet[]
+  appointments         Appointment[]
+  services             Service[]
+  availabilityRules    AvailabilityRule[]
+  
+  // Timestamps
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  
+  @@index([slug])
+}
+
+// ============================================
+// USER (Staff + Pet Owners)
+// ============================================
+model User {
+  id                    String    @id @default(cuid())
+  clinicId              String
+  clinic                Clinic    @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  
+  // Personal Info
+  email                 String    @unique
+  emailVerified         DateTime?
+  password              String?
+  firstName             String
+  lastName              String
+  phone                 String?
+  mobile                String?
+  
+  // Role & Permissions
+  role                  Role      @default(PET_OWNER)
+  isActive              Boolean   @default(true)
+  
+  // Profile
+  avatarUrl             String?
+  dateOfBirth           DateTime?
+  address               String?
+  city                  String?
+  state                 String?
+  postcode              String?
+  
+  // Preferences
+  receiveEmailReminders Boolean   @default(true)
+  receiveSmsReminders   Boolean   @default(true)
+  receiveMarketingEmails Boolean  @default(false)
+  
+  // Vet-specific
+  veterinaryLicenseNo   String?
+  specialization        String?
+  availableForBooking   Boolean   @default(true)
+  
+  // Relationships
+  pets                  Pet[]     @relation("PetOwner")
+  appointments          Appointment[] @relation("AppointmentVet")
+  bookedAppointments    Appointment[] @relation("BookedBy")
+  availabilityRules     AvailabilityRule[]
+  medicalRecords        MedicalRecord[]
+  
+  // NextAuth
+  accounts              Account[]
+  sessions              Session[]
+  
+  // Timestamps
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  lastLoginAt           DateTime?
+  
+  @@index([clinicId, role])
+  @@index([email])
+}
+
+enum Role {
+  SUPER_ADMIN
+  CLINIC_ADMIN
+  VET
+  RECEPTIONIST
+  PET_OWNER
+}
+
+// ============================================
+// PET
+// ============================================
+model Pet {
+  id                String   @id @default(cuid())
+  clinicId          String
+  clinic            Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  ownerId           String
+  owner             User     @relation("PetOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  
+  // Basic Info
+  name              String
+  species           Species
+  breed             String?
+  color             String?
+  microchipNo       String?  @unique
+  
+  // Details
+  gender            Gender
+  dateOfBirth       DateTime?
+  weight            Float?
+  isNeutered        Boolean  @default(false)
+  
+  // Medical
+  allergies         String?
+  medicalNotes      String?
+  dietaryNeeds      String?
+  
+  // Status
+  isActive          Boolean  @default(true)
+  isDeceased        Boolean  @default(false)
+  deceasedDate      DateTime?
+  
+  // Profile
+  photoUrl          String?
+  
+  // Relationships
+  appointments      Appointment[]
+  vaccinations      Vaccination[]
+  medicalRecords    MedicalRecord[]
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([clinicId, ownerId])
+  @@index([microchipNo])
+}
+
+enum Species {
+  DOG
+  CAT
+  BIRD
+  RABBIT
+  GUINEA_PIG
+  HAMSTER
+  REPTILE
+  HORSE
+  OTHER
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+// ============================================
+// SERVICE
+// ============================================
+model Service {
+  id                String   @id @default(cuid())
+  clinicId          String
+  clinic            Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  
+  // Service Details
+  name              String
+  description       String?
+  duration          Int      // in minutes
+  price             Float?
+  
+  // Availability
+  isActive          Boolean  @default(true)
+  allowOnlineBooking Boolean @default(true)
+  requiresApproval  Boolean  @default(false)
+  
+  // Category
+  category          ServiceCategory @default(CONSULTATION)
+  
+  // Color coding
+  color             String   @default("#3b82f6")
+  
+  // Relationships
+  appointments      Appointment[]
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([clinicId, isActive])
+}
+
+enum ServiceCategory {
+  CONSULTATION
+  VACCINATION
+  SURGERY
+  DENTAL
+  GROOMING
+  EMERGENCY
+  DIAGNOSTICS
+  WELLNESS_CHECK
+  OTHER
+}
+
+// ============================================
+// APPOINTMENT
+// ============================================
+model Appointment {
+  id                String   @id @default(cuid())
+  clinicId          String
+  clinic            Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  
+  // Core Info
+  petId             String
+  pet               Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
+  vetId             String?
+  vet               User?    @relation("AppointmentVet", fields: [vetId], references: [id], onDelete: SetNull)
+  serviceId         String
+  service           Service  @relation(fields: [serviceId], references: [id])
+  
+  // Booking Info
+  bookedById        String
+  bookedBy          User     @relation("BookedBy", fields: [bookedById], references: [id])
+  bookingSource     BookingSource @default(ONLINE)
+  
+  // Schedule
+  appointmentDate   DateTime
+  duration          Int
+  
+  // Status
+  status            AppointmentStatus @default(CONFIRMED)
+  
+  // Notes
+  reasonForVisit    String?
+  internalNotes     String?
+  
+  // Check-in/out
+  checkedInAt       DateTime?
+  checkedOutAt      DateTime?
+  
+  // Reminders
+  reminderSentAt    DateTime?
+  reminderConfirmedAt DateTime?
+  
+  // Cancellation
+  canceledAt        DateTime?
+  cancelReason      String?
+  canceledBy        String?
+  
+  // Medical Record
+  medicalRecordId   String?  @unique
+  medicalRecord     MedicalRecord? @relation(fields: [medicalRecordId], references: [id])
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([clinicId, appointmentDate])
+  @@index([petId])
+  @@index([vetId])
+  @@index([status])
+}
+
+enum BookingSource {
+  ONLINE
+  PHONE
+  WALK_IN
+  ADMIN
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CHECKED_IN
+  IN_PROGRESS
+  COMPLETED
+  NO_SHOW
+  CANCELED
+}
+
+// ============================================
+// AVAILABILITY RULE
+// ============================================
+model AvailabilityRule {
+  id                String   @id @default(cuid())
+  clinicId          String
+  clinic            Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  vetId             String?
+  vet               User?    @relation(fields: [vetId], references: [id], onDelete: Cascade)
+  
+  // Rule Type
+  type              AvailabilityType
+  
+  // Recurring Schedule
+  dayOfWeek         Int?
+  startTime         String?
+  endTime           String?
+  
+  // Date Range
+  startDate         DateTime?
+  endDate           DateTime?
+  allDay            Boolean  @default(true)
+  
+  // Details
+  title             String?
+  notes             String?
+  
+  // Recurrence
+  isRecurring       Boolean  @default(false)
+  recurrencePattern Json?
+  
+  // Status
+  isActive          Boolean  @default(true)
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([clinicId, vetId])
+  @@index([type, startDate, endDate])
+}
+
+enum AvailabilityType {
+  WORKING_HOURS
+  BLOCKED
+  VACATION
+  OVERRIDE
+}
+
+// ============================================
+// MEDICAL RECORD
+// ============================================
+model MedicalRecord {
+  id                String   @id @default(cuid())
+  clinicId          String
+  petId             String
+  pet               Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
+  
+  // Associated Appointment
+  appointment       Appointment?
+  
+  // Visit Details
+  visitDate         DateTime
+  vetId             String
+  vet               User     @relation(fields: [vetId], references: [id])
+  
+  // Medical Info
+  diagnosis         String?
+  treatment         String?
+  prescription      String?
+  notes             String?
+  
+  // Vitals
+  weight            Float?
+  temperature       Float?
+  heartRate         Int?
+  
+  // Follow-up
+  followUpRequired  Boolean  @default(false)
+  followUpDate      DateTime?
+  followUpNotes     String?
+  
+  // Attachments
+  attachments       Json?
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([petId, visitDate])
+}
+
+// ============================================
+// VACCINATION
+// ============================================
+model Vaccination {
+  id                String   @id @default(cuid())
+  petId             String
+  pet               Pet      @relation(fields: [petId], references: [id], onDelete: Cascade)
+  
+  // Vaccine Details
+  vaccineName       String
+  batchNumber       String?
+  manufacturer      String?
+  
+  // Administration
+  dateGiven         DateTime
+  givenBy           String
+  
+  // Next Due
+  nextDueDate       DateTime?
+  
+  // Status
+  isCompleted       Boolean  @default(true)
+  
+  // Notes
+  notes             String?
+  reaction          String?
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([petId, nextDueDate])
+}
+
+// ============================================
+// NOTIFICATION
+// ============================================
+model Notification {
+  id                String   @id @default(cuid())
+  clinicId          String
+  
+  // Recipient
+  userId            String?
+  recipientEmail    String?
+  recipientPhone    String?
+  
+  // Notification Details
+  type              NotificationType
+  channel           NotificationChannel
+  
+  // Content
+  subject           String?
+  message           String
+  
+  // Status
+  status            NotificationStatus @default(PENDING)
+  sentAt            DateTime?
+  deliveredAt       DateTime?
+  failedAt          DateTime?
+  errorMessage      String?
+  
+  // Related Entity
+  appointmentId     String?
+  
+  // Provider Info
+  externalId        String?
+  
+  // Timestamps
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  @@index([clinicId, status])
+  @@index([appointmentId])
+}
+
+enum NotificationType {
+  APPOINTMENT_CONFIRMATION
+  APPOINTMENT_REMINDER
+  APPOINTMENT_CANCELED
+  APPOINTMENT_RESCHEDULED
+  VACCINATION_DUE
+  PAYMENT_RECEIPT
+  WELCOME_EMAIL
+}
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  PUSH
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  DELIVERED
+  FAILED
+  BOUNCED
+}
+
+// ============================================
+// NEXTAUTH TABLES
+// ============================================
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
