@@ -3,6 +3,7 @@
 import { prisma } from "@/lib/prisma"
 import { startOfDay, endOfDay, addMinutes, format, parse, isBefore, isAfter, set } from "date-fns"
 import { Appointment, User } from "@prisma/client"
+import { sendAppointmentConfirmation } from "@/lib/email"
 
 export async function getServices(clinicSlug: string) {
     try {
@@ -315,6 +316,18 @@ export async function createBooking(data: {
                 reasonForVisit: `Online Booking: ${service.name}`,
             }
         })
+
+        // 5. Send Confirmation Email
+        // Run in background (don't await) to speed up response
+        sendAppointmentConfirmation({
+            to: owner.email,
+            appointmentDate: appointment.appointmentDate,
+            petName: pet.name,
+            serviceName: service.name,
+            clinicName: clinic.name,
+            clinicAddress: clinic.address,
+            vetName: assignedVetId ? (await prisma.user.findUnique({ where: { id: assignedVetId } }))?.firstName + ' ' + (await prisma.user.findUnique({ where: { id: assignedVetId } }))?.lastName : 'Available Vet',
+        }).catch(err => console.error("Failed to send email:", err))
 
         return { success: true, bookingId: appointment.id }
     } catch (error) {
