@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ChevronRight, ChevronLeft, Check, Loader2 } from "lucide-react"
+import { ChevronRight, ChevronLeft, Check, Loader2, X } from "lucide-react"
 import ServiceSelection from "@/components/booking/service-selection"
 import VetSelection from "@/components/booking/vet-selection"
 import TimeSelection from "@/components/booking/time-selection"
@@ -164,7 +165,12 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
         <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
                 {/* Header */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-12 relative">
+                    <Link href="/" className="absolute right-0 top-0 md:right-[-2rem]">
+                        <Button variant="ghost" size="icon" className="rounded-full hover:bg-gray-200">
+                            <X className="w-6 h-6 text-gray-500" />
+                        </Button>
+                    </Link>
                     <h1 className="text-3xl font-bold text-gray-900">Book an Appointment</h1>
                     <p className="mt-2 text-gray-600">Schedule a visit with {params.clinicSlug}</p>
                 </div>
