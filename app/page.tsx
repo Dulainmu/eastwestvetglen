@@ -442,7 +442,7 @@ export default function LandingPage() {
                                     </Button>
                                 </Link>
                                 <Link href="#contact">
-                                    <Button variant="outline" size="lg" className="border-2 border-white/20 text-white hover:bg-white/10 h-16 px-12 text-lg font-bold rounded-full backdrop-blur-sm">
+                                    <Button variant="outline" size="lg" className="bg-transparent border-2 border-white/20 text-white hover:bg-white/10 h-16 px-12 text-lg font-bold rounded-full backdrop-blur-sm">
                                         Contact Support
                                     </Button>
                                 </Link>
