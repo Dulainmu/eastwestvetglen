@@ -2,136 +2,232 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { Calendar, Heart, Shield, Clock, MapPin, Phone, Star, ArrowRight, Stethoscope, Syringe, Scissors } from "lucide-react"
+import { motion, useScroll, useTransform } from "framer-motion"
+import { Heart, Clock, MapPin, Phone, ArrowRight, Stethoscope, Syringe, Scissors, Star, Activity } from "lucide-react"
 
 export default function LandingPage() {
+    const { scrollY } = useScroll()
+    const headerOpacity = useTransform(scrollY, [0, 100], [0, 1])
+    const headerY = useTransform(scrollY, [0, 100], [-20, 0])
+
     const fadeIn = {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.5 }
+        transition: { duration: 0.6, ease: "easeOut" }
+    }
+
+    const staggerContainer = {
+        animate: {
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
     }
 
     return (
-        <div className="min-h-screen bg-white">
-            {/* Navigation */}
-            <nav className="fixed w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
-                <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="min-h-screen bg-white selection:bg-primary-100 selection:text-primary-900 font-sans">
+            {/* Floating Header */}
+            <motion.nav
+                style={{ opacity: headerOpacity, y: headerY }}
+                className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100 shadow-sm"
+            >
+                <div className="container mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                        <div className="bg-primary-600 p-2 rounded-lg">
+                        <div className="bg-primary-600 p-2 rounded-xl shadow-lg shadow-primary-600/20">
                             <Heart className="w-6 h-6 text-white fill-current" />
                         </div>
-                        <span className="text-xl font-bold text-gray-900">Happy Paws</span>
+                        <span className="text-xl font-bold text-gray-900 tracking-tight">Happy Paws</span>
                     </div>
                     <div className="hidden md:flex items-center space-x-8">
-                        <Link href="#services" className="text-gray-600 hover:text-primary-600 transition-colors">Services</Link>
-                        <Link href="#about" className="text-gray-600 hover:text-primary-600 transition-colors">About</Link>
-                        <Link href="#contact" className="text-gray-600 hover:text-primary-600 transition-colors">Contact</Link>
+                        <Link href="#services" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition-colors">Services</Link>
+                        <Link href="#about" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition-colors">About</Link>
+                        <Link href="#team" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition-colors">Team</Link>
                         <Link href="/book/happy-paws">
-                            <Button className="bg-primary-600 hover:bg-primary-700 text-white">
-                                Book Appointment
+                            <Button className="bg-primary-600 hover:bg-primary-700 text-white rounded-full px-6 shadow-lg shadow-primary-600/20 transition-all hover:scale-105">
+                                Book Now
                             </Button>
                         </Link>
                     </div>
                 </div>
-            </nav>
+            </motion.nav>
 
-            {/* Hero Section */}
-            <section className="pt-32 pb-20 px-4 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-                <div className="container mx-auto max-w-6xl">
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Hero Section - 100vh */}
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#F8FAFC]">
+                {/* Abstract Background Shapes */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute -top-[20%] -right-[10%] w-[70%] h-[70%] bg-gradient-to-br from-blue-100/40 to-purple-100/40 rounded-full blur-3xl animate-blob" />
+                    <div className="absolute top-[20%] -left-[10%] w-[50%] h-[50%] bg-gradient-to-tr from-teal-100/40 to-emerald-100/40 rounded-full blur-3xl animate-blob animation-delay-2000" />
+                    <div className="absolute -bottom-[20%] left-[20%] w-[60%] h-[60%] bg-gradient-to-t from-orange-100/40 to-rose-100/40 rounded-full blur-3xl animate-blob animation-delay-4000" />
+                </div>
+
+                <div className="container mx-auto px-6 relative z-10 pt-20">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="max-w-2xl"
                         >
-                            <div className="inline-block px-4 py-2 bg-blue-100 text-primary-700 rounded-full text-sm font-medium mb-6">
-                                ✨ Voted #1 Vet Clinic in Sydney
-                            </div>
-                            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                                Expert Care for Your <span className="text-primary-600">Best Friend</span>
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.2 }}
+                                className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100 mb-8"
+                            >
+                                <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                                <span className="text-sm font-medium text-gray-600">Accepting new patients</span>
+                            </motion.div>
+
+                            <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 leading-[1.1] mb-8 tracking-tight">
+                                Modern care for <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-blue-600">
+                                    modern pets.
+                                </span>
                             </h1>
-                            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                                We provide compassionate, state-of-the-art veterinary care. From routine check-ups to emergency surgery, your pet is in safe hands.
+
+                            <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-lg">
+                                Experience veterinary care reimagined. We combine advanced medicine with a gentle touch to keep your best friend happy and healthy.
                             </p>
+
                             <div className="flex flex-col sm:flex-row gap-4">
                                 <Link href="/book/happy-paws">
-                                    <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-600/20">
-                                        Book Online Now
+                                    <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full bg-gray-900 hover:bg-gray-800 text-white shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+                                        Book Appointment
                                         <ArrowRight className="ml-2 w-5 h-5" />
                                     </Button>
                                 </Link>
-                                <Button variant="outline" size="lg" className="w-full sm:w-auto text-lg h-14 px-8">
+                                <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full border-2 hover:bg-gray-50">
                                     <Phone className="mr-2 w-5 h-5" />
                                     (02) 1234 5678
                                 </Button>
                             </div>
-                            <div className="mt-10 flex items-center gap-4 text-sm text-gray-500">
-                                <div className="flex -space-x-2">
+
+                            <div className="mt-12 flex items-center gap-6">
+                                <div className="flex -space-x-3">
                                     {[1, 2, 3, 4].map((i) => (
-                                        <div key={i} className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white" />
+                                        <img
+                                            key={i}
+                                            src={`https://i.pravatar.cc/100?img=${i + 10}`}
+                                            alt="User"
+                                            className="w-10 h-10 rounded-full border-2 border-white"
+                                        />
                                     ))}
                                 </div>
-                                <p>Trusted by 2,000+ local pet owners</p>
+                                <div>
+                                    <div className="flex items-center text-yellow-400 mb-1">
+                                        {[1, 2, 3, 4, 5].map((i) => (
+                                            <Star key={i} className="w-4 h-4 fill-current" />
+                                        ))}
+                                    </div>
+                                    <p className="text-sm font-medium text-gray-600">Loved by 2,000+ pet parents</p>
+                                </div>
                             </div>
                         </motion.div>
 
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            className="relative"
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="relative hidden lg:block"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-tr from-primary-200 to-blue-200 rounded-full blur-3xl opacity-30 animate-pulse" />
-                            <img
-                                src="https://images.unsplash.com/photo-1599443015574-be5fe8a05783?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                                alt="Happy dog with vet"
-                                className="relative rounded-3xl shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500"
-                            />
-                            {/* Floating Card */}
-                            <motion.div
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.8 }}
-                                className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl flex items-center gap-4 max-w-xs"
-                            >
-                                <div className="bg-green-100 p-3 rounded-full">
-                                    <Clock className="w-6 h-6 text-green-600" />
-                                </div>
-                                <div>
-                                    <p className="font-bold text-gray-900">Open 7 Days</p>
-                                    <p className="text-sm text-gray-500">8:00 AM - 8:00 PM</p>
-                                </div>
-                            </motion.div>
+                            <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 transform rotate-2 hover:rotate-0 transition-transform duration-700 ease-out">
+                                <img
+                                    src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                    alt="Happy dog"
+                                    className="w-full h-auto object-cover"
+                                />
+
+                                {/* Floating Glass Cards */}
+                                <motion.div
+                                    initial={{ x: 20, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    transition={{ delay: 0.6 }}
+                                    className="absolute top-8 right-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20 max-w-[180px]"
+                                >
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="p-2 bg-green-100 rounded-lg">
+                                            <Activity className="w-5 h-5 text-green-600" />
+                                        </div>
+                                        <span className="font-bold text-gray-900">Health</span>
+                                    </div>
+                                    <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                                        <div className="bg-green-500 h-full w-[92%]" />
+                                    </div>
+                                    <p className="text-xs text-gray-500 mt-2 font-medium">Optimal Condition</p>
+                                </motion.div>
+
+                                <motion.div
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.8 }}
+                                    className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/20 flex items-center gap-4"
+                                >
+                                    <div className="bg-blue-100 p-3 rounded-xl">
+                                        <Clock className="w-6 h-6 text-blue-600" />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-gray-900">Open 7 Days</p>
+                                        <p className="text-sm text-gray-500">8:00 AM - 8:00 PM</p>
+                                    </div>
+                                </motion.div>
+                            </div>
+
+                            {/* Decorative Elements */}
+                            <div className="absolute -top-12 -right-12 w-24 h-24 bg-yellow-400 rounded-full opacity-20 blur-2xl" />
+                            <div className="absolute -bottom-12 -left-12 w-32 h-32 bg-primary-600 rounded-full opacity-20 blur-2xl" />
                         </motion.div>
                     </div>
                 </div>
+
+                {/* Scroll Indicator */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 1 }}
+                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-400"
+                >
+                    <span className="text-xs uppercase tracking-widest">Scroll</span>
+                    <div className="w-[1px] h-12 bg-gradient-to-b from-gray-400 to-transparent" />
+                </motion.div>
             </section>
 
             {/* Services Section */}
-            <section id="services" className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Comprehensive Veterinary Services</h2>
-                        <p className="text-lg text-gray-600">Everything your pet needs for a long, happy, and healthy life.</p>
-                    </div>
+            <section id="services" className="py-32 bg-white relative">
+                <div className="container mx-auto px-6">
+                    <motion.div
+                        variants={staggerContainer}
+                        initial="initial"
+                        whileInView="animate"
+                        viewport={{ once: true }}
+                        className="text-center max-w-3xl mx-auto mb-20"
+                    >
+                        <motion.h2 variants={fadeIn} className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+                            Comprehensive Care
+                        </motion.h2>
+                        <motion.p variants={fadeIn} className="text-xl text-gray-600">
+                            From preventative wellness to advanced surgery, we provide everything your pet needs under one roof.
+                        </motion.p>
+                    </motion.div>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
                             {
-                                icon: <Stethoscope className="w-8 h-8 text-blue-600" />,
+                                icon: <Stethoscope className="w-8 h-8 text-white" />,
                                 title: "Wellness Exams",
-                                desc: "Comprehensive nose-to-tail checkups to keep your pet in peak condition."
+                                desc: "Comprehensive nose-to-tail checkups to keep your pet in peak condition.",
+                                color: "bg-blue-500"
                             },
                             {
-                                icon: <Syringe className="w-8 h-8 text-green-600" />,
+                                icon: <Syringe className="w-8 h-8 text-white" />,
                                 title: "Vaccinations",
-                                desc: "Essential protection against common diseases tailored to your pet's lifestyle."
+                                desc: "Essential protection against common diseases tailored to your pet's lifestyle.",
+                                color: "bg-emerald-500"
                             },
                             {
-                                icon: <Scissors className="w-8 h-8 text-purple-600" />,
+                                icon: <Scissors className="w-8 h-8 text-white" />,
                                 title: "Surgery & Dental",
-                                desc: "Advanced surgical suite and dental care facilities for complete health."
+                                desc: "Advanced surgical suite and dental care facilities for complete health.",
+                                color: "bg-purple-500"
                             }
                         ].map((service, idx) => (
                             <motion.div
@@ -140,16 +236,16 @@ export default function LandingPage() {
                                 initial="initial"
                                 whileInView="animate"
                                 viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
+                                whileHover={{ y: -10 }}
+                                className="group bg-gray-50 rounded-[2rem] p-10 transition-all duration-300 hover:bg-white hover:shadow-2xl hover:shadow-gray-200/50 border border-transparent hover:border-gray-100"
                             >
-                                <div className="w-16 h-16 bg-gray-50 rounded-xl flex items-center justify-center mb-6">
+                                <div className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center mb-8 shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
                                     {service.icon}
                                 </div>
-                                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                                <p className="text-gray-600 mb-6">{service.desc}</p>
-                                <Link href="/book/happy-paws" className="text-primary-600 font-medium hover:text-primary-700 inline-flex items-center">
-                                    Book Service <ArrowRight className="w-4 h-4 ml-1" />
+                                <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
+                                <p className="text-gray-600 mb-8 leading-relaxed">{service.desc}</p>
+                                <Link href="/book/happy-paws" className="inline-flex items-center text-gray-900 font-semibold group-hover:text-primary-600 transition-colors">
+                                    Book Service <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </motion.div>
                         ))}
@@ -157,128 +253,75 @@ export default function LandingPage() {
                 </div>
             </section>
 
-            {/* Features / Why Choose Us */}
-            <section className="py-20">
-                <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <div className="relative">
-                            <div className="absolute -inset-4 bg-primary-100 rounded-3xl transform -rotate-3" />
-                            <img
-                                src="https://images.unsplash.com/photo-1623366302587-b38b1ddaefd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
-                                alt="Vet examining cat"
-                                className="relative rounded-2xl shadow-lg"
-                            />
-                        </div>
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Why Pet Owners Trust Us</h2>
-                            <div className="space-y-8">
-                                {[
-                                    {
-                                        title: "Experienced Team",
-                                        desc: "Our vets have over 20 years of combined experience in small animal medicine."
-                                    },
-                                    {
-                                        title: "Modern Facilities",
-                                        desc: "Equipped with digital X-ray, ultrasound, and in-house laboratory for fast results."
-                                    },
-                                    {
-                                        title: "Stress-Free Environment",
-                                        desc: "We use Fear Free handling techniques to make visits positive for your pet."
-                                    }
-                                ].map((item, idx) => (
-                                    <div key={idx} className="flex gap-4">
-                                        <div className="mt-1 bg-primary-100 p-2 rounded-lg h-fit">
-                                            <CheckIcon className="w-5 h-5 text-primary-600" />
-                                        </div>
-                                        <div>
-                                            <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                                            <p className="text-gray-600">{item.desc}</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* About Section */}
-            <section id="about" className="py-20 bg-white overflow-hidden">
-                <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
+            <section id="about" className="py-32 bg-[#0F172A] text-white overflow-hidden relative">
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light"></div>
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
+                            transition={{ duration: 0.8 }}
                         >
-                            <div className="inline-block px-4 py-2 bg-blue-50 text-primary-700 rounded-full text-sm font-medium mb-6">
-                                Our Story
+                            <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8 border border-white/10">
+                                Since 2010
                             </div>
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">More Than Just a Clinic</h2>
-                            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                                Founded in 2010, Happy Paws began with a simple mission: to treat every pet as if they were our own. Over the last decade, we've grown from a small single-vet practice to Sydney's premier veterinary hospital.
-                            </p>
-                            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                                We believe in a holistic approach to veterinary care, combining cutting-edge medical technology with old-fashioned compassion. Our state-of-the-art facility is designed to be calming for pets and welcoming for owners.
+                            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+                                More than just a clinic. <br />
+                                <span className="text-primary-400">We're family.</span>
+                            </h2>
+                            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                                Happy Paws began with a simple mission: to treat every pet as if they were our own. Over the last decade, we've grown from a small single-vet practice to Sydney's premier veterinary hospital.
                             </p>
 
-                            <div className="grid grid-cols-2 gap-8">
-                                <div>
-                                    <div className="text-4xl font-bold text-primary-600 mb-2">15k+</div>
-                                    <div className="text-gray-600">Happy Pets Healed</div>
-                                </div>
-                                <div>
-                                    <div className="text-4xl font-bold text-primary-600 mb-2">24/7</div>
-                                    <div className="text-gray-600">Emergency Support</div>
-                                </div>
-                                <div>
-                                    <div className="text-4xl font-bold text-primary-600 mb-2">50+</div>
-                                    <div className="text-gray-600">Veterinary Experts</div>
-                                </div>
-                                <div>
-                                    <div className="text-4xl font-bold text-primary-600 mb-2">12</div>
-                                    <div className="text-gray-600">Awards Won</div>
-                                </div>
+                            <div className="grid grid-cols-2 gap-12 mt-12">
+                                {[
+                                    { label: "Happy Pets", value: "15k+" },
+                                    { label: "Experts", value: "50+" },
+                                    { label: "Years", value: "12+" },
+                                    { label: "Awards", value: "24" },
+                                ].map((stat, idx) => (
+                                    <div key={idx}>
+                                        <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
+                                        <div className="text-gray-400 font-medium">{stat.label}</div>
+                                    </div>
+                                ))}
                             </div>
                         </motion.div>
 
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="relative"
-                        >
-                            <div className="absolute -top-10 -right-10 w-64 h-64 bg-yellow-100 rounded-full blur-3xl opacity-50" />
-                            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-50" />
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <img
+                        <div className="relative">
+                            <div className="grid grid-cols-2 gap-6">
+                                <motion.img
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.2 }}
                                     src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                                     alt="Clinic interior"
-                                    className="rounded-2xl shadow-lg mt-12"
+                                    className="rounded-3xl shadow-2xl mt-20"
                                 />
-                                <img
+                                <motion.img
+                                    initial={{ opacity: 0, y: -20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.4 }}
                                     src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
                                     alt="Happy dog"
-                                    className="rounded-2xl shadow-lg"
+                                    className="rounded-3xl shadow-2xl"
                                 />
                             </div>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* Meet the Team Section */}
-            <section className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <div className="inline-block px-4 py-2 bg-purple-50 text-purple-700 rounded-full text-sm font-medium mb-6">
-                            Our Experts
-                        </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Meet Our Dedicated Team</h2>
-                        <p className="text-lg text-gray-600">
+            {/* Team Section */}
+            <section id="team" className="py-32 bg-white">
+                <div className="container mx-auto px-6">
+                    <div className="text-center max-w-3xl mx-auto mb-20">
+                        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Meet the Experts</h2>
+                        <p className="text-xl text-gray-600">
                             Passionate professionals committed to your pet's health and happiness.
                         </p>
                     </div>
@@ -289,25 +332,25 @@ export default function LandingPage() {
                                 name: "Dr. Sarah Wilson",
                                 role: "Medical Director",
                                 image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                                specialty: "Surgery & Orthopedics"
+                                specialty: "Surgery"
                             },
                             {
                                 name: "Dr. Michael Chen",
-                                role: "Senior Veterinarian",
+                                role: "Senior Vet",
                                 image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                                specialty: "Internal Medicine"
+                                specialty: "Internal Med"
                             },
                             {
                                 name: "Emily Parker",
-                                role: "Head Vet Nurse",
+                                role: "Head Nurse",
                                 image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                                 specialty: "Patient Care"
                             },
                             {
                                 name: "James Wilson",
-                                role: "Practice Manager",
+                                role: "Manager",
                                 image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                                specialty: "Client Relations"
+                                specialty: "Operations"
                             }
                         ].map((member, idx) => (
                             <motion.div
@@ -317,29 +360,29 @@ export default function LandingPage() {
                                 whileInView="animate"
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                                className="group relative"
                             >
-                                <div className="relative h-64 overflow-hidden">
-                                    <div className="absolute inset-0 bg-primary-600/0 group-hover:bg-primary-600/10 transition-colors z-10" />
+                                <div className="relative overflow-hidden rounded-3xl aspect-[3/4] mb-6">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
                                     <img
                                         src={member.image}
                                         alt={member.name}
                                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                                     />
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-                                    <p className="text-primary-600 font-medium mb-2">{member.role}</p>
-                                    <p className="text-sm text-gray-500">{member.specialty}</p>
-
-                                    <div className="mt-4 flex space-x-3 opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
-                                        <button className="p-2 bg-gray-100 rounded-full hover:bg-primary-50 text-gray-600 hover:text-primary-600 transition-colors">
-                                            <LinkedinIcon className="w-4 h-4" />
-                                        </button>
-                                        <button className="p-2 bg-gray-100 rounded-full hover:bg-primary-50 text-gray-600 hover:text-primary-600 transition-colors">
-                                            <MailIcon className="w-4 h-4" />
-                                        </button>
+                                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
+                                        <div className="flex gap-3 justify-center">
+                                            <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white hover:text-primary-600 transition-colors">
+                                                <LinkedinIcon className="w-5 h-5" />
+                                            </button>
+                                            <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white hover:text-primary-600 transition-colors">
+                                                <MailIcon className="w-5 h-5" />
+                                            </button>
+                                        </div>
                                     </div>
+                                </div>
+                                <div className="text-center">
+                                    <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
+                                    <p className="text-primary-600 font-medium">{member.role}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -348,76 +391,71 @@ export default function LandingPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-20 bg-primary-600 text-white">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to schedule a visit?</h2>
-                    <p className="text-xl text-primary-100 mb-10 max-w-2xl mx-auto">
-                        Book your appointment online in less than 2 minutes. We can't wait to meet you and your pet!
-                    </p>
-                    <Link href="/book/happy-paws">
-                        <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100 h-14 px-8 text-lg font-bold">
-                            Book Appointment Now
-                        </Button>
-                    </Link>
+            <section className="py-32 bg-gray-50">
+                <div className="container mx-auto px-6">
+                    <div className="bg-primary-600 rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
+                        {/* Background Pattern */}
+                        <div className="absolute top-0 left-0 w-full h-full opacity-10">
+                            <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" />
+                            <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/3 translate-y-1/3" />
+                        </div>
+
+                        <div className="relative z-10 max-w-3xl mx-auto">
+                            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">Ready to schedule a visit?</h2>
+                            <p className="text-xl text-primary-100 mb-12">
+                                Book your appointment online in less than 2 minutes. We can't wait to meet you and your pet!
+                            </p>
+                            <Link href="/book/happy-paws">
+                                <Button size="lg" className="bg-white text-primary-900 hover:bg-gray-100 h-16 px-10 text-lg font-bold rounded-full shadow-2xl hover:shadow-white/20 hover:-translate-y-1 transition-all">
+                                    Book Appointment Now
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             {/* Footer */}
-            <footer className="bg-gray-900 text-gray-300 py-12">
-                <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-4 gap-8 mb-8">
-                        <div>
+            <footer className="bg-white border-t border-gray-100 pt-20 pb-10">
+                <div className="container mx-auto px-6">
+                    <div className="grid md:grid-cols-4 gap-12 mb-16">
+                        <div className="col-span-1 md:col-span-2">
                             <div className="flex items-center space-x-2 mb-6">
-                                <Heart className="w-6 h-6 text-primary-500 fill-current" />
-                                <span className="text-xl font-bold text-white">Happy Paws</span>
+                                <div className="bg-primary-600 p-2 rounded-lg">
+                                    <Heart className="w-5 h-5 text-white fill-current" />
+                                </div>
+                                <span className="text-xl font-bold text-gray-900">Happy Paws</span>
                             </div>
-                            <p className="text-sm text-gray-400">
-                                Providing exceptional veterinary care to the community since 2010.
+                            <p className="text-gray-500 max-w-sm leading-relaxed">
+                                Providing exceptional veterinary care to the Sydney community since 2010. We treat your pets like family.
                             </p>
                         </div>
                         <div>
-                            <h4 className="text-white font-bold mb-4">Contact</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li className="flex items-center"><MapPin className="w-4 h-4 mr-2" /> 123 Pet Street, Sydney</li>
-                                <li className="flex items-center"><Phone className="w-4 h-4 mr-2" /> (02) 1234 5678</li>
+                            <h4 className="font-bold text-gray-900 mb-6">Contact</h4>
+                            <ul className="space-y-4 text-gray-500">
+                                <li className="flex items-start"><MapPin className="w-5 h-5 mr-3 text-primary-600 shrink-0" /> 123 Pet Street, Sydney NSW 2000</li>
+                                <li className="flex items-center"><Phone className="w-5 h-5 mr-3 text-primary-600 shrink-0" /> (02) 1234 5678</li>
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-white font-bold mb-4">Hours</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li>Mon - Fri: 8am - 8pm</li>
-                                <li>Sat: 9am - 5pm</li>
-                                <li>Sun: 10am - 4pm</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="text-white font-bold mb-4">Quick Links</h4>
-                            <ul className="space-y-2 text-sm">
-                                <li><Link href="/book/happy-paws" className="hover:text-white">Book Appointment</Link></li>
-                                <li><Link href="/login" className="hover:text-white">Staff Login</Link></li>
+                            <h4 className="font-bold text-gray-900 mb-6">Hours</h4>
+                            <ul className="space-y-4 text-gray-500">
+                                <li className="flex justify-between"><span>Mon - Fri</span> <span className="font-medium text-gray-900">8am - 8pm</span></li>
+                                <li className="flex justify-between"><span>Saturday</span> <span className="font-medium text-gray-900">9am - 5pm</span></li>
+                                <li className="flex justify-between"><span>Sunday</span> <span className="font-medium text-gray-900">10am - 4pm</span></li>
                             </ul>
                         </div>
                     </div>
-                    <div className="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
-                        © 2025 Happy Paws Veterinary Clinic. All rights reserved.
+                    <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+                        <p>© 2025 Happy Paws Veterinary Clinic. All rights reserved.</p>
+                        <div className="flex gap-6">
+                            <Link href="#" className="hover:text-primary-600 transition-colors">Privacy Policy</Link>
+                            <Link href="#" className="hover:text-primary-600 transition-colors">Terms of Service</Link>
+                        </div>
                     </div>
                 </div>
             </footer>
         </div>
-    )
-}
-
-function CheckIcon({ className }: { className?: string }) {
-    return (
-        <svg
-            className={className}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-        >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-        </svg>
     )
 }
 
