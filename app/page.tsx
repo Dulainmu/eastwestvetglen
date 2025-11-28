@@ -192,8 +192,12 @@ export default function LandingPage() {
             </section>
 
             {/* Services Section */}
-            <section id="services" className="py-32 bg-white relative">
-                <div className="container mx-auto px-6">
+            <section id="services" className="py-32 bg-gray-50 relative overflow-hidden">
+                {/* Decorative blobs */}
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-100/50 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+
+                <div className="container mx-auto px-6 relative z-10">
                     <motion.div
                         variants={staggerContainer}
                         initial="initial"
@@ -201,10 +205,13 @@ export default function LandingPage() {
                         viewport={{ once: true }}
                         className="text-center max-w-3xl mx-auto mb-20"
                     >
+                        <motion.span variants={fadeIn} className="text-primary-600 font-semibold tracking-wider uppercase text-sm mb-4 block">
+                            Our Expertise
+                        </motion.span>
                         <motion.h2 variants={fadeIn} className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-                            Comprehensive Care
+                            Comprehensive Care for <br /> Every Stage of Life
                         </motion.h2>
-                        <motion.p variants={fadeIn} className="text-xl text-gray-600">
+                        <motion.p variants={fadeIn} className="text-xl text-gray-600 leading-relaxed">
                             From preventative wellness to advanced surgery, we provide everything your pet needs under one roof.
                         </motion.p>
                     </motion.div>
@@ -215,19 +222,22 @@ export default function LandingPage() {
                                 icon: <Stethoscope className="w-8 h-8 text-white" />,
                                 title: "Wellness Exams",
                                 desc: "Comprehensive nose-to-tail checkups to keep your pet in peak condition.",
-                                color: "bg-blue-500"
+                                color: "bg-blue-500",
+                                gradient: "from-blue-500 to-blue-600"
                             },
                             {
                                 icon: <Syringe className="w-8 h-8 text-white" />,
                                 title: "Vaccinations",
                                 desc: "Essential protection against common diseases tailored to your pet's lifestyle.",
-                                color: "bg-emerald-500"
+                                color: "bg-emerald-500",
+                                gradient: "from-emerald-500 to-emerald-600"
                             },
                             {
                                 icon: <Scissors className="w-8 h-8 text-white" />,
                                 title: "Surgery & Dental",
                                 desc: "Advanced surgical suite and dental care facilities for complete health.",
-                                color: "bg-purple-500"
+                                color: "bg-purple-500",
+                                gradient: "from-purple-500 to-purple-600"
                             }
                         ].map((service, idx) => (
                             <motion.div
@@ -237,15 +247,17 @@ export default function LandingPage() {
                                 whileInView="animate"
                                 viewport={{ once: true }}
                                 whileHover={{ y: -10 }}
-                                className="group bg-gray-50 rounded-[2rem] p-10 transition-all duration-300 hover:bg-white hover:shadow-2xl hover:shadow-gray-200/50 border border-transparent hover:border-gray-100"
+                                className="group bg-white rounded-[2.5rem] p-10 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-primary-900/5 border border-gray-100 transition-all duration-300 relative overflow-hidden"
                             >
-                                <div className={`w-16 h-16 ${service.color} rounded-2xl flex items-center justify-center mb-8 shadow-lg transform group-hover:scale-110 transition-transform duration-300`}>
+                                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} opacity-10 rounded-bl-[100px] transition-all duration-500 group-hover:scale-150`} />
+
+                                <div className={`w-16 h-16 bg-gradient-to-br ${service.gradient} rounded-2xl flex items-center justify-center mb-8 shadow-lg transform group-hover:rotate-6 transition-transform duration-300`}>
                                     {service.icon}
                                 </div>
                                 <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
                                 <p className="text-gray-600 mb-8 leading-relaxed">{service.desc}</p>
-                                <Link href="/book/happy-paws" className="inline-flex items-center text-gray-900 font-semibold group-hover:text-primary-600 transition-colors">
-                                    Book Service <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                                <Link href="/book/happy-paws" className="inline-flex items-center text-gray-900 font-bold group-hover:text-primary-600 transition-colors">
+                                    Book Service <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </motion.div>
                         ))}
@@ -256,6 +268,10 @@ export default function LandingPage() {
             {/* About Section */}
             <section id="about" className="py-32 bg-[#0F172A] text-white overflow-hidden relative">
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light"></div>
+                {/* Glowing orbs */}
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]" />
+                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[100px]" />
+
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
                         <motion.div
@@ -264,27 +280,28 @@ export default function LandingPage() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
                         >
-                            <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8 border border-white/10">
-                                Since 2010
+                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-sm font-medium mb-8 border border-white/10 text-blue-200">
+                                <Star className="w-4 h-4 fill-current" />
+                                Serving Sydney Since 2010
                             </div>
-                            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-                                More than just a clinic. <br />
-                                <span className="text-primary-400">We're family.</span>
+                            <h2 className="text-5xl md:text-6xl font-bold mb-8 leading-tight tracking-tight">
+                                More than a clinic. <br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">We're family.</span>
                             </h2>
-                            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                                Happy Paws began with a simple mission: to treat every pet as if they were our own. Over the last decade, we've grown from a small single-vet practice to Sydney's premier veterinary hospital.
+                            <p className="text-lg text-gray-300 mb-8 leading-relaxed max-w-xl">
+                                Happy Paws began with a simple mission: to treat every pet as if they were our own. We combine cutting-edge technology with old-fashioned compassion to provide the highest standard of care.
                             </p>
 
-                            <div className="grid grid-cols-2 gap-12 mt-12">
+                            <div className="grid grid-cols-2 gap-x-12 gap-y-10 mt-12 border-t border-white/10 pt-12">
                                 {[
                                     { label: "Happy Pets", value: "15k+" },
-                                    { label: "Experts", value: "50+" },
-                                    { label: "Years", value: "12+" },
-                                    { label: "Awards", value: "24" },
+                                    { label: "Veterinary Experts", value: "50+" },
+                                    { label: "Years of Excellence", value: "12+" },
+                                    { label: "Industry Awards", value: "24" },
                                 ].map((stat, idx) => (
                                     <div key={idx}>
-                                        <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
-                                        <div className="text-gray-400 font-medium">{stat.label}</div>
+                                        <div className="text-4xl font-bold text-white mb-2 tracking-tight">{stat.value}</div>
+                                        <div className="text-gray-400 font-medium text-sm uppercase tracking-wider">{stat.label}</div>
                                     </div>
                                 ))}
                             </div>
@@ -292,24 +309,35 @@ export default function LandingPage() {
 
                         <div className="relative">
                             <div className="grid grid-cols-2 gap-6">
-                                <motion.img
-                                    initial={{ opacity: 0, y: 20 }}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 40 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: 0.2 }}
-                                    src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="Clinic interior"
-                                    className="rounded-3xl shadow-2xl mt-20"
-                                />
-                                <motion.img
-                                    initial={{ opacity: 0, y: -20 }}
+                                    transition={{ delay: 0.2, duration: 0.8 }}
+                                    className="mt-24"
+                                >
+                                    <img
+                                        src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                        alt="Clinic interior"
+                                        className="rounded-[2rem] shadow-2xl border-4 border-white/10"
+                                    />
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, y: -40 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: 0.4 }}
-                                    src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                                    alt="Happy dog"
-                                    className="rounded-3xl shadow-2xl"
-                                />
+                                    transition={{ delay: 0.4, duration: 0.8 }}
+                                >
+                                    <img
+                                        src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                        alt="Happy dog"
+                                        className="rounded-[2rem] shadow-2xl border-4 border-white/10"
+                                    />
+                                    <div className="mt-6 bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/10">
+                                        <p className="text-gray-200 italic">"The best care I've ever received for my dog. The team is simply amazing!"</p>
+                                        <p className="text-blue-300 mt-4 font-bold text-sm">- Sarah & Max</p>
+                                    </div>
+                                </motion.div>
                             </div>
                         </div>
                     </div>
@@ -320,7 +348,7 @@ export default function LandingPage() {
             <section id="team" className="py-32 bg-white">
                 <div className="container mx-auto px-6">
                     <div className="text-center max-w-3xl mx-auto mb-20">
-                        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Meet the Experts</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">Meet the Experts</h2>
                         <p className="text-xl text-gray-600">
                             Passionate professionals committed to your pet's health and happiness.
                         </p>
@@ -360,21 +388,23 @@ export default function LandingPage() {
                                 whileInView="animate"
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.1 }}
+                                whileHover={{ y: -10 }}
                                 className="group relative"
                             >
-                                <div className="relative overflow-hidden rounded-3xl aspect-[3/4] mb-6">
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                                <div className="relative overflow-hidden rounded-[2rem] aspect-[3/4] mb-6 shadow-lg">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                                     <img
                                         src={member.image}
                                         alt={member.name}
-                                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                                     />
-                                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
-                                        <div className="flex gap-3 justify-center">
-                                            <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white hover:text-primary-600 transition-colors">
+                                    <div className="absolute bottom-0 left-0 right-0 p-8 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-20">
+                                        <p className="text-sm font-medium text-gray-300 mb-4">{member.specialty}</p>
+                                        <div className="flex gap-3">
+                                            <button className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white hover:text-primary-900 transition-colors">
                                                 <LinkedinIcon className="w-5 h-5" />
                                             </button>
-                                            <button className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white hover:text-primary-600 transition-colors">
+                                            <button className="p-3 bg-white/20 backdrop-blur-md rounded-full hover:bg-white hover:text-primary-900 transition-colors">
                                                 <MailIcon className="w-5 h-5" />
                                             </button>
                                         </div>
@@ -391,66 +421,91 @@ export default function LandingPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-32 bg-gray-50">
+            <section className="py-32 bg-white">
                 <div className="container mx-auto px-6">
-                    <div className="bg-primary-600 rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
-                        {/* Background Pattern */}
-                        <div className="absolute top-0 left-0 w-full h-full opacity-10">
-                            <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full -translate-x-1/2 -translate-y-1/2" />
-                            <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/3 translate-y-1/3" />
+                    <div className="bg-gradient-to-br from-primary-900 to-blue-900 rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl shadow-primary-900/30">
+                        {/* Animated Background */}
+                        <div className="absolute inset-0">
+                            <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+                            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse animation-delay-2000" />
                         </div>
 
-                        <div className="relative z-10 max-w-3xl mx-auto">
-                            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">Ready to schedule a visit?</h2>
-                            <p className="text-xl text-primary-100 mb-12">
-                                Book your appointment online in less than 2 minutes. We can't wait to meet you and your pet!
+                        <div className="relative z-10 max-w-4xl mx-auto">
+                            <h2 className="text-4xl md:text-7xl font-bold text-white mb-8 tracking-tight">Ready to schedule a visit?</h2>
+                            <p className="text-xl md:text-2xl text-blue-100 mb-12 font-light">
+                                Book your appointment online in less than 2 minutes. <br /> We can't wait to meet you and your pet!
                             </p>
-                            <Link href="/book/happy-paws">
-                                <Button size="lg" className="bg-white text-primary-900 hover:bg-gray-100 h-16 px-10 text-lg font-bold rounded-full shadow-2xl hover:shadow-white/20 hover:-translate-y-1 transition-all">
-                                    Book Appointment Now
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                                <Link href="/book/happy-paws">
+                                    <Button size="lg" className="bg-white text-primary-900 hover:bg-blue-50 h-16 px-12 text-lg font-bold rounded-full shadow-xl hover:shadow-white/20 hover:-translate-y-1 transition-all duration-300">
+                                        Book Appointment Now
+                                    </Button>
+                                </Link>
+                                <Button variant="outline" size="lg" className="border-2 border-white/20 text-white hover:bg-white/10 h-16 px-12 text-lg font-bold rounded-full backdrop-blur-sm">
+                                    Contact Support
                                 </Button>
-                            </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Footer */}
-            <footer className="bg-white border-t border-gray-100 pt-20 pb-10">
+            <footer className="bg-white border-t border-gray-100 pt-24 pb-12">
                 <div className="container mx-auto px-6">
-                    <div className="grid md:grid-cols-4 gap-12 mb-16">
+                    <div className="grid md:grid-cols-4 gap-12 mb-20">
                         <div className="col-span-1 md:col-span-2">
-                            <div className="flex items-center space-x-2 mb-6">
-                                <div className="bg-primary-600 p-2 rounded-lg">
-                                    <Heart className="w-5 h-5 text-white fill-current" />
+                            <div className="flex items-center space-x-2 mb-8">
+                                <div className="bg-primary-600 p-2.5 rounded-xl shadow-lg shadow-primary-600/20">
+                                    <Heart className="w-6 h-6 text-white fill-current" />
                                 </div>
-                                <span className="text-xl font-bold text-gray-900">Happy Paws</span>
+                                <span className="text-2xl font-bold text-gray-900 tracking-tight">Happy Paws</span>
                             </div>
-                            <p className="text-gray-500 max-w-sm leading-relaxed">
+                            <p className="text-gray-500 max-w-sm leading-relaxed text-lg">
                                 Providing exceptional veterinary care to the Sydney community since 2010. We treat your pets like family.
                             </p>
                         </div>
                         <div>
-                            <h4 className="font-bold text-gray-900 mb-6">Contact</h4>
-                            <ul className="space-y-4 text-gray-500">
-                                <li className="flex items-start"><MapPin className="w-5 h-5 mr-3 text-primary-600 shrink-0" /> 123 Pet Street, Sydney NSW 2000</li>
-                                <li className="flex items-center"><Phone className="w-5 h-5 mr-3 text-primary-600 shrink-0" /> (02) 1234 5678</li>
+                            <h4 className="font-bold text-gray-900 mb-8 text-lg">Contact</h4>
+                            <ul className="space-y-6 text-gray-500">
+                                <li className="flex items-start group">
+                                    <div className="bg-primary-50 p-2 rounded-lg mr-4 group-hover:bg-primary-100 transition-colors">
+                                        <MapPin className="w-5 h-5 text-primary-600 shrink-0" />
+                                    </div>
+                                    <span className="group-hover:text-primary-700 transition-colors">123 Pet Street, <br /> Sydney NSW 2000</span>
+                                </li>
+                                <li className="flex items-center group">
+                                    <div className="bg-primary-50 p-2 rounded-lg mr-4 group-hover:bg-primary-100 transition-colors">
+                                        <Phone className="w-5 h-5 text-primary-600 shrink-0" />
+                                    </div>
+                                    <span className="group-hover:text-primary-700 transition-colors font-medium">(02) 1234 5678</span>
+                                </li>
                             </ul>
                         </div>
                         <div>
-                            <h4 className="font-bold text-gray-900 mb-6">Hours</h4>
+                            <h4 className="font-bold text-gray-900 mb-8 text-lg">Hours</h4>
                             <ul className="space-y-4 text-gray-500">
-                                <li className="flex justify-between"><span>Mon - Fri</span> <span className="font-medium text-gray-900">8am - 8pm</span></li>
-                                <li className="flex justify-between"><span>Saturday</span> <span className="font-medium text-gray-900">9am - 5pm</span></li>
-                                <li className="flex justify-between"><span>Sunday</span> <span className="font-medium text-gray-900">10am - 4pm</span></li>
+                                <li className="flex justify-between items-center border-b border-gray-50 pb-2">
+                                    <span>Mon - Fri</span>
+                                    <span className="font-medium text-gray-900 bg-gray-50 px-3 py-1 rounded-full text-sm">8am - 8pm</span>
+                                </li>
+                                <li className="flex justify-between items-center border-b border-gray-50 pb-2">
+                                    <span>Saturday</span>
+                                    <span className="font-medium text-gray-900 bg-gray-50 px-3 py-1 rounded-full text-sm">9am - 5pm</span>
+                                </li>
+                                <li className="flex justify-between items-center border-b border-gray-50 pb-2">
+                                    <span>Sunday</span>
+                                    <span className="font-medium text-gray-900 bg-gray-50 px-3 py-1 rounded-full text-sm">10am - 4pm</span>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
                         <p>© 2025 Happy Paws Veterinary Clinic. All rights reserved.</p>
-                        <div className="flex gap-6">
+                        <div className="flex gap-8">
                             <Link href="#" className="hover:text-primary-600 transition-colors">Privacy Policy</Link>
                             <Link href="#" className="hover:text-primary-600 transition-colors">Terms of Service</Link>
+                            <Link href="#" className="hover:text-primary-600 transition-colors">Cookie Policy</Link>
                         </div>
                     </div>
                 </div>
