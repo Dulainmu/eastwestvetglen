@@ -9,32 +9,39 @@ export const authConfig = {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth?.user
             const isOnDashboard = nextUrl.pathname.startsWith("/dashboard")
+            const isOnPatientPortal = nextUrl.pathname.startsWith("/patient")
+            const isOnAdmin = nextUrl.pathname.startsWith("/admin")
             const isOnAuth = nextUrl.pathname.startsWith("/login") || nextUrl.pathname.startsWith("/register")
 
             if (isOnDashboard) {
-                if (isLoggedIn) return true
-                return false // Redirect unauthenticated users to login page
+                if (isLoggedIn && auth?.user?.role !== "PET_OWNER") return true
+                return false // Redirect unauthenticated or pet owners
+            } else if (isOnPatientPortal) {
+                if (isLoggedIn && auth?.user?.role === "PET_OWNER") return true
+                return false // Redirect unauthorized users
+            } else if (isOnAdmin) {
+                if (isLoggedIn && auth?.user?.role === "SUPER_ADMIN") return true
+                return false // Redirect unauthorized users
             } else if (isLoggedIn && isOnAuth) {
+                if (auth?.user?.role === "PET_OWNER") {
+                    return Response.redirect(new URL("/patient/dashboard", nextUrl))
+                }
                 return Response.redirect(new URL("/dashboard", nextUrl))
             }
             return true
         },
         async jwt({ token, user }) {
             if (user) {
-                token.id = user.id
-                // @ts-ignore - role exists on user
-                token.role = user.role
-                // @ts-ignore - clinicId exists on user
-                token.clinicId = user.clinicId
+                token.id = user.id || ""
+                token.role = user.role || ""
+                token.clinicId = user.clinicId || ""
             }
             return token
         },
         async session({ session, token }) {
             if (token && session.user) {
                 session.user.id = token.id as string
-                // @ts-ignore
                 session.user.role = token.role
-                // @ts-ignore
                 session.user.clinicId = token.clinicId
             }
             return session

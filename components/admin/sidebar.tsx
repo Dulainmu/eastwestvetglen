@@ -5,12 +5,11 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import {
     LayoutDashboard,
-    Calendar,
+    Building2,
     Users,
-    Settings,
+    BarChart3,
     LogOut,
-    Stethoscope,
-    PawPrint
+    ShieldAlert
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { signOut } from "next-auth/react"
@@ -19,53 +18,41 @@ const routes = [
     {
         label: "Overview",
         icon: LayoutDashboard,
-        href: "/dashboard",
+        href: "/admin",
         color: "text-sky-500",
     },
     {
-        label: "Appointments",
-        icon: Calendar,
-        href: "/dashboard/appointments",
-        color: "text-sky-500",
+        label: "Clinics",
+        icon: Building2,
+        href: "/admin/clinics",
+        color: "text-violet-500",
     },
     {
-        label: "Clients",
+        label: "Users",
         icon: Users,
-        href: "/dashboard/clients",
+        href: "/admin/users",
         color: "text-pink-700",
     },
     {
-        label: "Pets",
-        icon: PawPrint,
-        href: "/dashboard/pets",
+        label: "Analytics",
+        icon: BarChart3,
+        href: "/admin/analytics",
         color: "text-orange-500",
-    },
-    {
-        label: "Staff",
-        icon: Users,
-        href: "/dashboard/settings/staff",
-        color: "text-green-600",
-    },
-    {
-        label: "Settings",
-        icon: Settings,
-        href: "/dashboard/settings",
-        color: "text-gray-500",
     },
 ]
 
-export function Sidebar() {
+export function AdminSidebar() {
     const pathname = usePathname()
 
     return (
-        <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
+        <div className="space-y-4 py-4 flex flex-col h-full bg-slate-900 text-white">
             <div className="px-3 py-2 flex-1">
-                <Link href="/dashboard" className="flex items-center pl-3 mb-14">
+                <Link href="/admin" className="flex items-center pl-3 mb-14">
                     <div className="relative w-8 h-8 mr-4">
-                        <Stethoscope className="w-8 h-8 text-primary-500" />
+                        <ShieldAlert className="w-8 h-8 text-red-500" />
                     </div>
                     <h1 className="text-2xl font-bold">
-                        VetFlow
+                        Super Admin
                     </h1>
                 </Link>
                 <div className="space-y-1">
@@ -75,7 +62,7 @@ export function Sidebar() {
                             href={route.href}
                             className={cn(
                                 "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",
-                                pathname.startsWith(route.href) && route.href !== "/dashboard" || pathname === route.href ? "text-white bg-white/10" : "text-zinc-400"
+                                pathname === route.href ? "text-white bg-white/10" : "text-zinc-400"
                             )}
                         >
                             <div className="flex items-center flex-1">
