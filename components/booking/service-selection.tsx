@@ -48,6 +48,14 @@ export default function ServiceSelection({ clinicSlug, selectedServiceId, onSele
         )
     }
 
+    if (services.length === 0) {
+        return (
+            <div className="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                <p className="text-gray-500">No services are currently available for online booking.</p>
+            </div>
+        )
+    }
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {services.map((service) => {
