@@ -205,42 +205,25 @@ const user = session?.user  // { id, email, role, clinicId, ... }
 
 ---
 
-## 📊 API Endpoints
+## ⚡ Server Actions
 
-### Appointments
-```
-GET    /api/appointments              # List appointments
-GET    /api/appointments/[id]         # Get appointment
-POST   /api/appointments              # Create appointment
-PATCH  /api/appointments/[id]         # Update appointment
-DELETE /api/appointments/[id]         # Cancel appointment
+Instead of API endpoints, we use Server Actions in `lib/`.
 
-POST   /api/appointments/[id]/check-in    # Check in
-POST   /api/appointments/[id]/complete    # Mark complete
-GET    /api/appointments/availability     # Get available slots
-```
+### Appointments (`lib/appointment-actions.ts`)
+- `getAppointments` - List appointments
+- `createManualAppointment` - Create appointment
+- `updateAppointmentStatus` - Change status
+- `updateAppointmentTime` - Reschedule
 
-### Bookings (Public)
-```
-POST   /api/bookings/availability     # Get available slots
-POST   /api/bookings/create           # Create booking (public)
-```
+### Bookings (`lib/booking-actions.ts`)
+- `getAvailableSlots` - Get public slots
+- `createBooking` - Public booking submission
 
-### Pets
-```
-GET    /api/pets                      # List pets
-GET    /api/pets/[id]                 # Get pet
-POST   /api/pets                      # Create pet
-PATCH  /api/pets/[id]                 # Update pet
-```
+### Pets (`lib/pet-actions.ts`)
+- `createPet` - Create pet profile
+- `getClients` - List/Search clients
 
-### Users
-```
-GET    /api/users                     # List users
-GET    /api/users/[id]                # Get user
-POST   /api/users                     # Create user
-PATCH  /api/users/[id]                # Update user
-```
+See `docs/SERVER_ACTIONS.md` for full reference.
 
 ---
 

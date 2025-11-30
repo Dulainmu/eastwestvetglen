@@ -148,15 +148,17 @@ VetFlow is a modern, cloud-based veterinary clinic management and online booking
 
 ### Data Flow:
 ```
-Client → Next.js API Route → Prisma → PostgreSQL
+Client Component → Server Action (lib/*) → Prisma → PostgreSQL
+         ↓
+    Authentication Check (auth())
          ↓
     Validation (Zod)
          ↓
-    Authorization Check (clinicId + role)
-         ↓
     Business Logic
          ↓
-    Response (success/error)
+    Database Operation
+         ↓
+    Revalidate Path (Update UI)
 ```
 
 ---
@@ -631,15 +633,14 @@ END
 
 ---
 
-# 7. API ENDPOINTS & ROUTES
+# 7. SERVER ACTIONS & API
 
-## 7.1 Authentication
+> **Note:** This project primarily uses Next.js Server Actions (`lib/*-actions.ts`) instead of REST API routes. See `docs/SERVER_ACTIONS.md` for details.
+
+## 7.1 Authentication (NextAuth)
 ```
-POST   /api/auth/register
-POST   /api/auth/login (NextAuth)
-POST   /api/auth/logout
-POST   /api/auth/forgot-password
-POST   /api/auth/reset-password
+POST   /api/auth/signin
+POST   /api/auth/signout
 GET    /api/auth/session
 ```
 
