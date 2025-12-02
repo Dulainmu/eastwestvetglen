@@ -42,6 +42,9 @@ export default function LandingPage() {
                         <Link href="#services" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition-colors">Services</Link>
                         <Link href="#about" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition-colors">About</Link>
                         <Link href="#team" className="text-sm font-medium text-gray-600 hover:text-primary-600 transition-colors">Team</Link>
+                        <Link href="/login" className="text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors">
+                            Patient Login
+                        </Link>
                         <Link href="/book/happy-paws">
                             <Button className="bg-primary-600 hover:bg-primary-700 text-white rounded-full px-6 shadow-lg shadow-primary-600/20 transition-all hover:scale-105">
                                 Book Now
@@ -562,7 +565,7 @@ export default function LandingPage() {
                         <div className="flex gap-8">
                             <Link href="#" className="hover:text-primary-600 transition-colors">Privacy Policy</Link>
                             <Link href="#" className="hover:text-primary-600 transition-colors">Terms of Service</Link>
-                            <Link href="#" className="hover:text-primary-600 transition-colors">Cookie Policy</Link>
+                            <Link href="/login" className="hover:text-primary-600 transition-colors font-medium text-gray-500">Admin Portal</Link>
                         </div>
                     </div>
                 </div>

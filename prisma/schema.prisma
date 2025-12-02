@@ -57,6 +57,11 @@ model Clinic {
   appointments         Appointment[]
   services             Service[]
   availabilityRules    AvailabilityRule[]
+  invitations          Invitation[]
+  activityLogs         ActivityLog[]
+  invoices             Invoice[]
+  resources            Resource[]
+  publicHolidays       PublicHoliday[]
   
   // Timestamps
   createdAt            DateTime @default(now())
@@ -104,12 +109,16 @@ model User {
   specialization        String?
   availableForBooking   Boolean   @default(true)
   
+  // Stripe
+  stripeCustomerId String?
+  
   // Relationships
   pets                  Pet[]     @relation("PetOwner")
   appointments          Appointment[] @relation("AppointmentVet")
   bookedAppointments    Appointment[] @relation("BookedBy")
   availabilityRules     AvailabilityRule[]
   medicalRecords        MedicalRecord[]
+  activityLogs          ActivityLog[]
   
   // NextAuth
   accounts              Account[]
@@ -217,6 +226,7 @@ model Service {
   isActive          Boolean  @default(true)
   allowOnlineBooking Boolean @default(true)
   requiresApproval  Boolean  @default(false)
+  depositAmount     Float    @default(0)
   
   // Category
   category          ServiceCategory @default(CONSULTATION)
@@ -225,7 +235,9 @@ model Service {
   color             String   @default("#3b82f6")
   
   // Relationships
+  // Relationships
   appointments      Appointment[]
+  resources         ServiceResource[]
   
   // Timestamps
   createdAt         DateTime @default(now())
@@ -266,6 +278,7 @@ model Appointment {
   bookedById        String
   bookedBy          User     @relation("BookedBy", fields: [bookedById], references: [id])
   bookingSource     BookingSource @default(ONLINE)
+  stripePaymentIntentId String?
   
   // Schedule
   appointmentDate   DateTime
@@ -294,6 +307,8 @@ model Appointment {
   // Medical Record
   medicalRecordId   String?  @unique
   medicalRecord     MedicalRecord? @relation(fields: [medicalRecordId], references: [id])
+  invoice           Invoice?
+  resources         AppointmentResource[]
   
   // Timestamps
   createdAt         DateTime @default(now())
@@ -548,5 +563,177 @@ model VerificationToken {
   token      String   @unique
   expires    DateTime
 
+
   @@unique([identifier, token])
+}
+
+// ============================================
+// INVITATION
+// ============================================
+model Invitation {
+  id        String   @id @default(cuid())
+  email     String
+  role      Role
+  clinicId  String
+  clinic    Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  expiresAt DateTime
+  status    InvitationStatus @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([token])
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+}
+
+// ============================================
+// ACTIVITY LOG
+// ============================================
+model ActivityLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clinicId  String
+  clinic    Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  action    String   // e.g., "CREATE_APPOINTMENT", "DELETE_USER"
+  details   String?  // JSON string or description
+  ipAddress String?
+  createdAt DateTime @default(now())
+  @@index([clinicId])
+  @@index([userId])
+}
+
+// ============================================
+// BILLING & INVOICING
+// ============================================
+model Invoice {
+  id          String   @id @default(cuid())
+  clinicId    String
+  clinic      Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  appointmentId String? @unique
+  appointment Appointment? @relation(fields: [appointmentId], references: [id])
+  
+  invoiceNumber String // e.g., INV-2024-001
+  status      InvoiceStatus @default(DRAFT)
+  issueDate   DateTime @default(now())
+  dueDate     DateTime
+  
+  subtotal    Float
+  tax         Float    // GST
+  total       Float
+  amountPaid  Float    @default(0)
+  
+  items       InvoiceItem[]
+  payments    Payment[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([clinicId, invoiceNumber])
+  @@index([clinicId, status])
+}
+
+model InvoiceItem {
+  id          String   @id @default(cuid())
+  invoiceId   String
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  
+  description String
+  quantity    Int      @default(1)
+  unitPrice   Float
+  total       Float
+}
+
+model Payment {
+  id          String   @id @default(cuid())
+  invoiceId   String
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  
+  amount      Float
+  method      PaymentMethod
+  reference   String?  // e.g., Transaction ID
+  stripePaymentIntentId String?
+  notes       String?
+  
+  processedAt DateTime @default(now())
+}
+
+enum InvoiceStatus {
+  DRAFT
+  ISSUED
+  PAID
+  PARTIALLY_PAID
+  VOID
+  OVERDUE
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  BANK_TRANSFER
+  INSURANCE
+  OTHER
+}
+
+// ============================================
+// ADVANCED AVAILABILITY
+// ============================================
+model Resource {
+  id          String   @id @default(cuid())
+  clinicId    String
+  clinic      Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  name        String
+  type        ResourceType
+  isActive    Boolean  @default(true)
+  
+  services    ServiceResource[]
+  appointments AppointmentResource[]
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([clinicId])
+}
+
+model ServiceResource {
+  serviceId   String
+  service     Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  resourceId  String
+  resource    Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  
+  @@id([serviceId, resourceId])
+}
+
+model AppointmentResource {
+  appointmentId String
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  resourceId    String
+  resource      Resource    @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  
+  @@id([appointmentId, resourceId])
+}
+
+model PublicHoliday {
+  id          String   @id @default(cuid())
+  clinicId    String
+  clinic      Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  date        DateTime
+  name        String
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([clinicId, date])
+}
+
+enum ResourceType {
+  ROOM
+  EQUIPMENT
+  OTHER
 }
