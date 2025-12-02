@@ -10,6 +10,10 @@ export const metadata: Metadata = {
     description: "Manage clinic staff members.",
 }
 
+import { getInvitations } from "@/lib/invitation-actions"
+import { InvitationsList } from "@/components/staff/invitations-list"
+import { InviteStaffDialog } from "@/components/staff/invite-staff-dialog"
+
 export default async function StaffPage() {
     const session = await auth()
 
@@ -17,7 +21,10 @@ export default async function StaffPage() {
         redirect("/login")
     }
 
-    const staff = await getStaffUsers(session.user.clinicId)
+    const [staff, invitations] = await Promise.all([
+        getStaffUsers(session.user.clinicId),
+        getInvitations(),
+    ])
 
     return (
         <div className="flex-1 space-y-4 p-8 pt-6">
@@ -29,9 +36,13 @@ export default async function StaffPage() {
                     </p>
                 </div>
                 <div className="flex items-center space-x-2">
+                    <InviteStaffDialog />
                     <AddStaffDialog />
                 </div>
             </div>
+
+            <InvitationsList invitations={invitations} />
+
             <StaffList staff={staff} currentUserId={session.user.id} />
         </div>
     )

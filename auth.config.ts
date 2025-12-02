@@ -24,7 +24,7 @@ export const authConfig = {
                 return false // Redirect unauthorized users
             } else if (isLoggedIn && isOnAuth) {
                 if (auth?.user?.role === "PET_OWNER") {
-                    return Response.redirect(new URL("/patient/dashboard", nextUrl))
+                    return Response.redirect(new URL("/portal/appointments", nextUrl))
                 }
                 return Response.redirect(new URL("/dashboard", nextUrl))
             }
