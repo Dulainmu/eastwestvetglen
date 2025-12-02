@@ -274,6 +274,7 @@ export async function createBooking(data: {
     }
     stripePaymentIntentId?: string
     password?: string // Optional password for account creation/claiming
+    paymentMethod?: 'ONLINE' | 'CLINIC'
 }) {
     try {
         const clinic = await prisma.clinic.findUnique({

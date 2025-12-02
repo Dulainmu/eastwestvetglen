@@ -11,7 +11,7 @@ import DetailsForm from "@/components/booking/details-form"
 import BookingSummary from "@/components/booking/booking-summary"
 import { checkEmailExists } from "@/lib/auth-actions"
 import { format, addMinutes } from "date-fns"
-import { Check, ChevronLeft, ChevronRight, Calendar as CalendarIcon, Clock, User, ArrowRight, Loader2 } from "lucide-react"
+import { Check, ChevronLeft, ChevronRight, Calendar as CalendarIcon, Clock, User, ArrowRight, Loader2, CreditCard, Store } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
@@ -97,6 +97,7 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
 
     // Payment State
     const [paymentIntentId, setPaymentIntentId] = useState<string | null>(null)
+    const [paymentMethod, setPaymentMethod] = useState<'ONLINE' | 'CLINIC'>('ONLINE')
 
     // ... (Keep existing useEffects for loading data)
     useEffect(() => {
@@ -214,7 +215,8 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
                 time: selectedTime,
                 details,
                 stripePaymentIntentId: paymentIntentId || undefined,
-                password: details.password || undefined // Pass password
+                password: details.password || undefined, // Pass password
+                paymentMethod: paymentMethod // Pass payment method
             })
 
             if (result.success) {
@@ -375,22 +377,42 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
                                 )}
 
                                 {/* Step 5: Payment */}
-                                {
-                                    currentStep === 5 && (
-                                        <div className="space-y-6">
-                                            <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
-                                                <div className="flex justify-between items-center mb-2">
-                                                    <span className="text-gray-600">Service Total</span>
-                                                    <span className="font-semibold text-lg">${selectedService?.price}</span>
-                                                </div>
-                                                {selectedService?.depositAmount! > 0 && (
-                                                    <div className="flex justify-between items-center text-primary-700 bg-primary-50 p-2 rounded">
-                                                        <span className="font-medium">Deposit Required</span>
-                                                        <span className="font-bold">${selectedService?.depositAmount}</span>
-                                                    </div>
-                                                )}
+                                {currentStep === 5 && (
+                                    <div className="space-y-6">
+                                        <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <span className="text-gray-600">Service Total</span>
+                                                <span className="font-semibold text-lg">${selectedService?.price}</span>
                                             </div>
+                                            {selectedService?.depositAmount! > 0 && (
+                                                <div className="flex justify-between items-center text-primary-700 bg-primary-50 p-2 rounded">
+                                                    <span className="font-medium">Deposit Required</span>
+                                                    <span className="font-bold">${selectedService?.depositAmount}</span>
+                                                </div>
+                                            )}
+                                        </div>
 
+                                        <div className="space-y-4">
+                                            <h3 className="text-lg font-medium">Payment Method</h3>
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div
+                                                    className={`border rounded-lg p-4 cursor-pointer flex flex-col items-center justify-center gap-2 transition-all ${paymentMethod === 'ONLINE' ? 'border-primary-600 bg-primary-50 text-primary-700' : 'border-gray-200 hover:border-gray-300'}`}
+                                                    onClick={() => setPaymentMethod('ONLINE')}
+                                                >
+                                                    <CreditCard className="w-6 h-6" />
+                                                    <span className="font-medium">Pay Online</span>
+                                                </div>
+                                                <div
+                                                    className={`border rounded-lg p-4 cursor-pointer flex flex-col items-center justify-center gap-2 transition-all ${paymentMethod === 'CLINIC' ? 'border-primary-600 bg-primary-50 text-primary-700' : 'border-gray-200 hover:border-gray-300'}`}
+                                                    onClick={() => setPaymentMethod('CLINIC')}
+                                                >
+                                                    <Store className="w-6 h-6" />
+                                                    <span className="font-medium">Pay at Clinic</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {paymentMethod === 'ONLINE' ? (
                                             <Elements stripe={stripePromise} options={{
                                                 mode: 'payment',
                                                 amount: Math.round((selectedService?.depositAmount || selectedService?.price || 0) * 100),
@@ -402,9 +424,16 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
                                                     onSuccess={handlePaymentSuccess}
                                                 />
                                             </Elements>
-                                        </div>
-                                    )
-                                }
+                                        ) : (
+                                            <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 text-blue-800">
+                                                <p className="text-sm">
+                                                    You can pay for your appointment when you arrive at the clinic.
+                                                    Please note that your booking is still subject to our cancellation policy.
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
 
                                 {/* Step 6: Confirm */}
                                 {currentStep === 6 && (
