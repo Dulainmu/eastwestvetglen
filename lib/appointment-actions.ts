@@ -14,6 +14,7 @@ export type AppointmentWithDetails = Prisma.AppointmentGetPayload<{
         }
         service: true
         vet: true
+        resource: true
     }
 }>
 
@@ -62,6 +63,7 @@ export async function getAppointments({
                 },
                 service: true,
                 vet: true,
+                resource: true,
             },
             orderBy: {
                 appointmentDate: "asc",
@@ -337,7 +339,8 @@ export async function getAvailabilityRules(clinicId: string, date: Date) {
 export async function updateAppointmentTime(
     id: string,
     newDate: Date,
-    newDuration?: number
+    newVetId?: string,
+    newResourceId?: string
 ) {
     const session = await auth()
     if (!session?.user?.clinicId) {
@@ -352,7 +355,8 @@ export async function updateAppointmentTime(
             },
             data: {
                 appointmentDate: newDate,
-                duration: newDuration, // Optional update if resized
+                ...(newVetId !== undefined && { vetId: newVetId }),
+                ...(newResourceId !== undefined && { resourceId: newResourceId }),
             },
         })
 

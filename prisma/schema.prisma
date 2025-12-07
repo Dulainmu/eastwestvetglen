@@ -139,6 +139,7 @@ enum Role {
   VET
   RECEPTIONIST
   PET_OWNER
+  DRIVER  // Fleet driver for mobile vet services
 }
 
 // ============================================
@@ -278,7 +279,10 @@ model Appointment {
   bookedById        String
   bookedBy          User     @relation("BookedBy", fields: [bookedById], references: [id])
   bookingSource     BookingSource @default(ONLINE)
-  stripePaymentIntentId String?
+  
+  // Resource Assignment (Primary Vehicle/Room for this appointment)
+  resourceId        String?
+  resource          Resource? @relation("AppointmentPrimaryResource", fields: [resourceId], references: [id], onDelete: SetNull)
   
   // Schedule
   appointmentDate   DateTime
@@ -694,6 +698,7 @@ model Resource {
   
   services    ServiceResource[]
   appointments AppointmentResource[]
+  primaryAppointments Appointment[] @relation("AppointmentPrimaryResource")
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

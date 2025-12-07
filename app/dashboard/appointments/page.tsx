@@ -38,7 +38,7 @@ export default async function AppointmentsPage({
     })
 
     // Fetch data for create dialog and calendar
-    const [services, vets, availabilityRules] = await Promise.all([
+    const [services, vets, availabilityRules, resources] = await Promise.all([
         prisma.service.findMany({
             where: { clinicId: session.user.clinicId, isActive: true },
         }),
@@ -50,6 +50,9 @@ export default async function AppointmentsPage({
             },
         }),
         getAvailabilityRules(session.user.clinicId, date),
+        prisma.resource.findMany({
+            where: { clinicId: session.user.clinicId, isActive: true },
+        }),
     ])
 
     // Helper to change date
@@ -122,9 +125,10 @@ export default async function AppointmentsPage({
                 ) : (
                     <CalendarView
                         date={date}
-                        appointments={appointments}
+                        appointments={appointments as any}
                         availabilityRules={availabilityRules as any}
                         vets={vets}
+                        resources={resources}
                     />
                 )}
             </div>
