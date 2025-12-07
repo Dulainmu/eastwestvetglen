@@ -30,14 +30,38 @@ export async function POST(req: Request) {
         // Process Payment
         if (status_code === '2') {
             // Success
-            await prisma.appointment.update({
+            const appointment = await prisma.appointment.update({
                 where: { id: order_id },
                 data: {
-                    status: 'CONFIRMED', // or 'DEPOSIT_PAID'
-                    // You might want to store payment ref: formData.get('payment_id')
+                    status: 'CONFIRMED',
+                },
+                include: {
+                    clinic: true,
+                    pet: true,
+                    service: true,
+                    vet: true,
+                    bookedBy: true // Correct relation name for bookedById
                 }
             })
+
             console.log(`Payment confirmed for Booking ${order_id}`)
+
+            // Send Email
+            if (appointment && appointment.bookedBy && appointment.bookedBy.email) {
+                // We need to import sendAppointmentConfirmation at the top
+                const { sendAppointmentConfirmation } = await import("@/lib/email");
+
+                await sendAppointmentConfirmation({
+                    to: appointment.bookedBy.email,
+                    appointmentDate: appointment.appointmentDate,
+                    petName: appointment.pet.name,
+                    serviceName: appointment.service.name,
+                    clinicName: appointment.clinic.name,
+                    clinicAddress: appointment.clinic.address,
+                    vetName: appointment.vet ? `${appointment.vet.firstName} ${appointment.vet.lastName}` : 'Available Vet'
+                }).catch(err => console.error("Webhook email failed:", err))
+            }
+
         } else {
             // Failed or Cancelled
             console.log(`Payment failed/cancelled for Booking ${order_id} - Status: ${status_code}`)
