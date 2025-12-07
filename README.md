@@ -43,7 +43,7 @@ VetFlow is a comprehensive veterinary clinic management and online booking syste
 - ✅ **Admin Dashboard** - Manage appointments, check-ins, and daily schedules
 - ✅ **Authentication** - Separate secure flows for Clinic Staff and Pet Owners
 - ✅ **Staff Management** - Invite system with role-based access control (Admin, Vet, Nurse, Receptionist)
-- ✅ **Billing & Invoicing** - Create invoices, process Stripe payments, and track revenue
+- ✅ **Billing & Invoicing** - Create invoices, process payments (Cash/PayHere), and track revenue
 - ✅ **Reporting & Analytics** - Interactive charts for revenue, appointment trends, and service popularity
 - ✅ **Pet & Owner Records** - Comprehensive patient database with medical history
 - ✅ **Calendar View** - Visual scheduling with drag-and-drop
@@ -85,7 +85,7 @@ See [docs/ROADMAP.md](./docs/ROADMAP.md) for full feature roadmap.
 ### Integrations
 - **Email:** Resend
 - **SMS:** Twilio
-- **Payments:** Stripe
+- **Payments:** Cash / PayHere (Pilot)
 
 ### Infrastructure
 - **Hosting:** Vercel
@@ -128,8 +128,8 @@ See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) for detailed architecture.
    DATABASE_URL="your-database-url"
    NEXTAUTH_SECRET="generate-with-openssl"
    RESEND_API_KEY="your-resend-key"
-   STRIPE_SECRET_KEY="your-stripe-secret"
-   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="your-stripe-public"
+    PAYHERE_MERCHANT_ID="your-merchant-id"
+    PAYHERE_SECRET="your-payhere-secret"
    # ... see .env.example for full list
    ```
 

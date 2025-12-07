@@ -59,10 +59,9 @@ TWILIO_ACCOUNT_SID="ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 TWILIO_AUTH_TOKEN="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 TWILIO_PHONE_NUMBER="+61xxxxxxxxx"
 
-# Stripe (Optional - Phase 2)
-STRIPE_SECRET_KEY="sk_test_xxxxxxxxxxxx"
-STRIPE_WEBHOOK_SECRET="whsec_xxxxxxxxxxxx"
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_xxxxxxxxxxxx"
+# PayHere (Sri Lanka Pilot)
+PAYHERE_MERCHANT_ID="your-merchant-id"
+PAYHERE_SECRET="your-payhere-secret"
 
 # Sentry (Error Tracking)
 NEXT_PUBLIC_SENTRY_DSN="https://xxxxx@xxxxx.ingest.sentry.io/xxxxx"

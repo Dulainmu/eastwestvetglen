@@ -337,90 +337,19 @@ USING (
 
 ---
 
-## 8.4 Payments (Stripe)
+## 8.4 Payments (Pilot)
 
-**Why Stripe:**
-- Industry standard for online payments
-- Excellent developer experience
-- PCI compliance handled automatically
-- Supports Australian cards, bank transfers (BECS)
-- Built-in fraud protection
-- Recurring billing (subscriptions)
-- Detailed reporting
+**Current Status:**
+- **Cash**: Primary payment method for the pilot phase.
+- **PayHere**: Planned integration for online payments (Sri Lanka).
 
-**Pricing:**
-- 1.75% + $0.30 AUD per transaction (Australian cards)
-- No monthly fees, no setup fees
+**Future Implementation (PayHere):**
+Integration plan includes:
+- Payment Gateway for online bookings
+- Recurring billing for subscriptions (if applicable)
+- LKR Currency support natively
 
-**Phase 2 Feature - Implementation:**
-```typescript
-// lib/stripe.ts
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16',
-});
-
-// Create payment intent for appointment deposit
-export async function createPaymentIntent(amount: number, metadata: {
-  appointmentId: string;
-  clinicId: string;
-  petId: string;
-}) {
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: Math.round(amount * 100), // Convert to cents
-    currency: 'aud',
-    metadata,
-    automatic_payment_methods: { enabled: true },
-  });
-
-  return paymentIntent;
-}
-
-// Create subscription for clinic (SaaS billing)
-export async function createSubscription(params: {
-  clinicId: string;
-  email: string;
-  priceId: string; // Stripe Price ID for plan
-}) {
-  const customer = await stripe.customers.create({
-    email: params.email,
-    metadata: { clinicId: params.clinicId },
-  });
-
-  const subscription = await stripe.subscriptions.create({
-    customer: customer.id,
-    items: [{ price: params.priceId }],
-    trial_period_days: 14,
-  });
-
-  return { customer, subscription };
-}
-
-// Webhook handler
-export async function handleStripeWebhook(
-  rawBody: string,
-  signature: string
-) {
-  const event = stripe.webhooks.constructEvent(
-    rawBody,
-    signature,
-    process.env.STRIPE_WEBHOOK_SECRET!
-  );
-
-  switch (event.type) {
-    case 'payment_intent.succeeded':
-      // Mark appointment as paid
-      break;
-    case 'subscription.updated':
-      // Update clinic subscription status
-      break;
-    case 'invoice.payment_failed':
-      // Notify clinic admin
-      break;
-  }
-}
-```
+*Stripe integration has been deprecated for the Sri Lankan pilot.*
 
 ---
 
