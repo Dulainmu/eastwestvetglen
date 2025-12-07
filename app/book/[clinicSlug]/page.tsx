@@ -420,9 +420,6 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
                                             </>
                                         )}
                                     </Button>
-                                ) : currentStep === 5 ? (
-                                    // Payment step has its own button in PaymentForm
-                                    <div />
                                 ) : (
                                     <Button
                                         onClick={nextStep}
