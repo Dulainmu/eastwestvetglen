@@ -9,12 +9,10 @@ import VetSelection from "@/components/booking/vet-selection"
 import TimeSelection from "@/components/booking/time-selection"
 import DetailsForm from "@/components/booking/details-form"
 import BookingSummary from "@/components/booking/booking-summary"
-import { checkEmailExists } from "@/lib/auth-actions"
 import { format, addMinutes } from "date-fns"
 import { Check, ChevronLeft, ChevronRight, Calendar as CalendarIcon, Clock, User, ArrowRight, Loader2, CreditCard, Store } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import GuestUpsellDialog from "@/components/booking/guest-upsell-dialog"
 import { PayHereButton } from "@/components/booking/payhere-button"
 import { getPayHerePaymentDetails } from "@/lib/payhere-actions"
 
@@ -72,7 +70,6 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
         petBreed: string
         petAge: string
         petGender: string
-        password?: string
     }>({
         ownerName: "",
         ownerEmail: "",
@@ -82,15 +79,7 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
         petBreed: "",
         petAge: "",
         petGender: "MALE",
-        password: ""
     })
-
-    // Auth State
-    const [emailExists, setEmailExists] = useState(false)
-    const [hasPassword, setHasPassword] = useState(false) // New state
-    const [isCheckingEmail, setIsCheckingEmail] = useState(false)
-    const [showUpsell, setShowUpsell] = useState(false) // Upsell dialog state
-    const [showPasswordField, setShowPasswordField] = useState(false) // Force show password field
 
     // Payment State
     // Payment State
@@ -111,23 +100,7 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
     }, [selectedDate, selectedService, selectedVet, params.clinicSlug])
 
     // Email Check Effect
-    useEffect(() => {
-        const checkEmail = async () => {
-            if (details.ownerEmail && details.ownerEmail.includes('@') && details.ownerEmail.includes('.')) {
-                setIsCheckingEmail(true)
-                const result = await checkEmailExists(details.ownerEmail)
-                setEmailExists(result.exists)
-                setHasPassword(result.hasPassword)
-                setIsCheckingEmail(false)
-            } else {
-                setEmailExists(false)
-                setHasPassword(false)
-            }
-        }
 
-        const timeoutId = setTimeout(checkEmail, 500) // Debounce
-        return () => clearTimeout(timeoutId)
-    }, [details.ownerEmail])
 
 
     const nextStep = () => {
@@ -138,31 +111,8 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
                 return // Should be handled by disabled button, but extra safety
             }
 
-            if (emailExists) {
-                if (hasPassword) {
-                    // User exists AND has password -> Must login
-                    // Ideally show error or redirect, UI shows message
-                    return
-                } else {
-                    // User exists but NO password (Claim Flow)
-                    // Must set password to proceed
-                    if (!details.password || details.password.length < 8) {
-                        // Force show password field if not already visible (it should be)
-                        return
-                    }
-                    // Proceed to payment/confirm
-                }
-            } else {
-                // New User
-                // Show Upsell Dialog if we haven't shown it yet and password isn't set
-                if (!showPasswordField && !details.password) {
-                    setShowUpsell(true)
-                    return
-                }
-                // If password field is shown, validate it
-                if (showPasswordField && (!details.password || details.password.length < 8)) {
-                    return
-                }
+            if (!details.ownerName || !details.ownerEmail || !details.ownerPhone || !details.petName) {
+                return // Should be handled by disabled button, but extra safety
             }
         }
 
@@ -209,7 +159,6 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
                 date: selectedDate,
                 time: selectedTime,
                 details,
-                password: details.password || undefined, // Pass password
                 paymentMethod: paymentMethod // Pass payment method
             })
 
@@ -240,27 +189,7 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
     }
 
     // Upsell Handlers
-    const handleGuestUpsellSignUp = () => {
-        setShowUpsell(false)
-        setShowPasswordField(true)
-        // Stay on step 4 so they can enter password
-    }
 
-    const handleGuestUpsellContinue = () => {
-        setShowUpsell(false)
-        // Proceed to next step
-        // We need to manually trigger the next step logic again, skipping the upsell check
-        // Or just call the logic directly.
-        // Let's duplicate the payment check logic here for simplicity
-        const needsPayment = (selectedService?.depositAmount || 0) > 0 || (selectedService?.price || 0) > 0
-        if (!needsPayment) {
-            setDirection(1)
-            setCurrentStep(6)
-        } else {
-            setDirection(1)
-            setCurrentStep(5)
-        }
-    }
 
     if (bookingId) {
         return (
@@ -307,12 +236,7 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
 
     return (
         <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <GuestUpsellDialog
-                open={showUpsell}
-                onOpenChange={setShowUpsell}
-                onSignUp={handleGuestUpsellSignUp}
-                onGuest={handleGuestUpsellContinue}
-            />
+
 
             <div className="max-w-3xl mx-auto">
                 {/* Progress Steps */}
@@ -394,10 +318,6 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
                                     <DetailsForm
                                         defaultValues={details}
                                         onChange={setDetails}
-                                        emailExists={emailExists}
-                                        hasPassword={hasPassword}
-                                        isCheckingEmail={isCheckingEmail}
-                                        showPasswordField={showPasswordField}
                                     />
                                 )}
 
@@ -511,10 +431,7 @@ export default function BookingPage({ params }: { params: { clinicSlug: string }
                                             (currentStep === 3 && !selectedTime) ||
                                             (currentStep === 4 && (
                                                 !details.ownerName ||
-                                                !details.ownerEmail ||
-                                                (emailExists && hasPassword) || // Block if exists with password
-                                                (emailExists && !hasPassword && (!details.password || details.password.length < 8)) || // Block claim if no password
-                                                (showPasswordField && (!details.password || details.password.length < 8)) // Block upsell if no password
+                                                !details.ownerEmail
                                             ))
                                         }
                                     >

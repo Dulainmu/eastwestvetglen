@@ -18,25 +18,16 @@ export type BookingDetails = {
     petBreed: string
     petAge: string
     petGender: string
-    password?: string // Add password to type
 }
 
 interface DetailsFormProps {
     defaultValues?: Partial<BookingDetails>
     onChange: (details: BookingDetails) => void
-    emailExists?: boolean
-    hasPassword?: boolean // New prop to know if existing user has password
-    isCheckingEmail?: boolean
-    showPasswordField?: boolean // New prop to force showing password field (e.g. guest upsell accepted)
 }
 
 export default function DetailsForm({
     defaultValues,
-    onChange,
-    emailExists = false,
-    hasPassword = false,
-    isCheckingEmail = false,
-    showPasswordField = false
+    onChange
 }: DetailsFormProps) {
     const [details, setDetails] = useState<BookingDetails>({
         ownerName: defaultValues?.ownerName || "",
@@ -47,10 +38,7 @@ export default function DetailsForm({
         petBreed: defaultValues?.petBreed || "",
         petAge: defaultValues?.petAge || "",
         petGender: defaultValues?.petGender || "",
-        password: defaultValues?.password || ""
     })
-
-    const [password, setPassword] = useState(defaultValues?.password || "")
 
     const handleChange = (field: keyof BookingDetails, value: string) => {
         const newDetails = { ...details, [field]: value }
@@ -58,51 +46,8 @@ export default function DetailsForm({
         onChange(newDetails)
     }
 
-    const handlePasswordChange = (value: string) => {
-        setPassword(value)
-        const newDetails = { ...details, password: value }
-        onChange(newDetails)
-    }
-
-    // Effect to update parent with password when it changes
-    const updatePassword = (val: string) => {
-        setPassword(val)
-        onChange({ ...details, password: val })
-    }
-
-    const showPasswordInput = showPasswordField || (emailExists && !hasPassword)
-
     return (
         <div className="space-y-8">
-            {/* Login Prompt - Only show if email exists AND has password */}
-            {emailExists && hasPassword && (
-                <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 flex flex-col sm:flex-row justify-between items-center gap-4 animate-in fade-in slide-in-from-top-2">
-                    <div className="text-center sm:text-left">
-                        <h4 className="font-medium text-blue-900">Already have an account?</h4>
-                        <p className="text-sm text-blue-700">Log in to pre-fill your details and manage your booking.</p>
-                    </div>
-                    <Link href="/login">
-                        <Button variant="outline" size="sm" className="bg-white text-blue-700 border-blue-200 hover:bg-blue-50 whitespace-nowrap">
-                            Sign In
-                        </Button>
-                    </Link>
-                </div>
-            )}
-
-            {/* Claim Account Prompt */}
-            {emailExists && !hasPassword && (
-                <div className="bg-purple-50 p-4 rounded-xl border border-purple-100 flex items-start gap-3 animate-in fade-in slide-in-from-top-2">
-                    <div className="p-2 bg-purple-100 rounded-full mt-1">
-                        <User className="w-4 h-4 text-purple-600" />
-                    </div>
-                    <div>
-                        <h4 className="font-medium text-purple-900">Welcome back!</h4>
-                        <p className="text-sm text-purple-700">
-                            It looks like you've booked with us before. Set a password below to claim your account and track your pet's history.
-                        </p>
-                    </div>
-                </div>
-            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Owner Details */}
@@ -122,27 +67,14 @@ export default function DetailsForm({
 
                     <div className="space-y-2">
                         <Label htmlFor="ownerEmail">Email Address</Label>
-                        <div className="relative">
-                            <Input
-                                id="ownerEmail"
-                                type="email"
-                                placeholder="john@example.com"
-                                value={details.ownerEmail}
-                                onChange={(e) => handleChange("ownerEmail", e.target.value)}
-                                className={cn(emailExists && hasPassword && "border-red-300 focus-visible:ring-red-200")}
-                                required
-                            />
-                            {isCheckingEmail && (
-                                <div className="absolute right-3 top-2.5">
-                                    <Loader2 className="h-4 w-4 animate-spin text-gray-400" />
-                                </div>
-                            )}
-                        </div>
-                        {emailExists && hasPassword && (
-                            <p className="text-xs text-red-600 font-medium animate-in slide-in-from-top-1">
-                                This email is already registered. <Link href="/login" className="underline hover:text-red-700">Please log in</Link> to continue.
-                            </p>
-                        )}
+                        <Input
+                            id="ownerEmail"
+                            type="email"
+                            placeholder="john@example.com"
+                            value={details.ownerEmail}
+                            onChange={(e) => handleChange("ownerEmail", e.target.value)}
+                            required
+                        />
                     </div>
 
                     <div className="space-y-2">
@@ -157,27 +89,7 @@ export default function DetailsForm({
                         />
                     </div>
 
-                    {/* Password Field - Conditionally Rendered */}
-                    {showPasswordInput && (
-                        <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
-                            <Label htmlFor="password">Set a Password</Label>
-                            <Input
-                                id="password"
-                                type="password"
-                                placeholder="Min. 8 characters"
-                                value={password}
-                                onChange={(e) => updatePassword(e.target.value)}
-                                required
-                                minLength={8}
-                                className="border-purple-200 focus-visible:ring-purple-200"
-                            />
-                            <p className="text-xs text-gray-500">
-                                {emailExists && !hasPassword
-                                    ? "Create a password to secure your account."
-                                    : "Create a password to save your details for next time."}
-                            </p>
-                        </div>
-                    )}
+
                 </div>
 
                 {/* Pet Details */}
