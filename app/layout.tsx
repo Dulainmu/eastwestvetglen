@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 import { Providers } from "@/components/providers";
+import SchemaHead from "@/components/landing/SchemaHead";
 
-const inter = Inter({
+// Modern, clean sans-serif for body text
+const outfit = Outfit({
     subsets: ["latin"],
-    variable: "--font-inter",
+    variable: "--font-outfit",
+});
+
+// Elegant serif for headings
+const playfair = Playfair_Display({
+    subsets: ["latin"],
+    variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
-    title: "VetFlow - Modern Veterinary Clinic Management",
-    description: "Cloud-based veterinary clinic management and online booking system for Australian vet practices",
-    keywords: ["veterinary", "clinic management", "online booking", "pet care", "Australia"],
+    title: "East West Vets – Glen Waverley Clinic",
+    description: "Integrative veterinary care at the new Glen Waverley clinic – holistic, modern, and trusted.",
 };
 
 export default function RootLayout({
@@ -20,11 +28,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={inter.variable} suppressHydrationWarning>
-            <body className="font-sans antialiased">
-                <Providers>
-                    {children}
-                </Providers>
+        <html lang="en" className="scroll-smooth">
+            <head>
+                <SchemaHead />
+            </head>
+            <body className={`${outfit.variable} ${playfair.variable} font-sans antialiased text-foreground bg-background`}>
+                <Providers>{children}</Providers>
             </body>
         </html>
     );
