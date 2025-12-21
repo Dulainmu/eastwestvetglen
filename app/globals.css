@@ -4,52 +4,77 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Premium Holistic Palette - Deep Emerald & Gold */
+
+    /* Primary: Deep Emerald (#044D42) */
+    /* stored as H S L channels for opacity support */
+    --primary: 171 91% 16%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary: Soft Sage (#E6F4F1) - Clean, clinical but soft */
+    --secondary: 171 30% 93%;
+    --secondary-foreground: 171 91% 16%;
+
+    /* Accent: Warm Gold (#D4AF37) - Metallic/Premium */
+    --accent: 46 64% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Backgrounds */
+    --background: 40 20% 99%;
+    /* Very subtle warm white */
+    --foreground: 171 20% 15%;
+    /* Dark green-grey for text, softer than black */
+
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 171 20% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 174 84% 40%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --popover-foreground: 171 20% 15%;
+
+    --muted: 171 10% 94%;
+    --muted-foreground: 171 10% 40%;
+
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 174 84% 40%;
-    --radius: 0.5rem;
-    --gradient-start: 174 84% 40%;
-    --gradient-end: 199 89% 48%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 171 20% 90%;
+    --input: 171 20% 90%;
+    --ring: 171 91% 16%;
+    --radius: 1rem;
+    /* More organic roundedness */
+
+    /* Animation Variables */
+    --shimmer-angle: 45deg;
   }
 
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 174 84% 45%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 12%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 12%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 15%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 50%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 15%;
-    --input: 217.2 32.6% 15%;
-    --ring: 174 84% 45%;
-    --gradient-start: 174 84% 45%;
-    --gradient-end: 199 89% 48%;
+    /* Deep Forest Mode */
+    --background: 171 50% 5%;
+    --foreground: 171 10% 90%;
+
+    --card: 171 50% 8%;
+    --card-foreground: 171 10% 90%;
+
+    --popover: 171 50% 8%;
+    --popover-foreground: 171 10% 90%;
+
+    --primary: 171 60% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 171 30% 15%;
+    --secondary-foreground: 171 10% 90%;
+
+    --muted: 171 30% 15%;
+    --muted-foreground: 171 20% 60%;
+
+    --accent: 46 64% 52%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 171 30% 15%;
+    --input: 171 30% 15%;
+    --ring: 171 60% 40%;
   }
 }
 
@@ -59,7 +84,44 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground tracking-wide;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif tracking-tight text-balance text-primary;
+  }
+}
+
+/* Glassmorphism & Shapes */
+@layer utilities {
+  .glass {
+    @apply bg-white/60 backdrop-blur-xl border border-white/40 shadow-xl;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-xl;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-accent;
+  }
+
+  .shimmer {
+    background: linear-gradient(var(--shimmer-angle),
+        rgba(255, 255, 255, 0) 40%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 60%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
   }
 }
 
