@@ -120,7 +120,7 @@ export function PricingSection() {
                                 ))}
                             </div>
 
-                            <Link href="/register/clinic" className="block">
+                            <Link href="#contact" className="block">
                                 <Button
                                     size="lg"
                                     variant={plan.popular ? "default" : "outline"}
@@ -129,7 +129,7 @@ export function PricingSection() {
                                         : "border-2 border-gray-200 hover:border-gray-900 hover:bg-gray-50"
                                         }`}
                                 >
-                                    {plan.cta}
+                                    Contact Us
                                 </Button>
                             </Link>
 

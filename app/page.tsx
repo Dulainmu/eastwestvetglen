@@ -44,9 +44,9 @@ export default function LandingPage() {
                         <Link href="#about" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">About</Link>
                         <Link href="#pricing" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Pricing</Link>
                         <Link href="#team" className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Team</Link>
-                        <Link href="/book/happy-paws">
+                        <Link href="#contact">
                             <Button className="bg-primary-600 hover:bg-primary-700 text-white rounded-full px-6 shadow-lg shadow-primary-600/20 transition-all hover:scale-105">
-                                Book Now
+                                Contact Us
                             </Button>
                         </Link>
                     </div>
@@ -92,9 +92,9 @@ export default function LandingPage() {
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <Link href="/book/happy-paws">
+                                <Link href="#contact">
                                     <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-lg rounded-full bg-gray-900 hover:bg-gray-800 text-white shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                                        Book Appointment
+                                        Contact Us
                                         <ArrowRight className="ml-2 w-5 h-5" />
                                     </Button>
                                 </Link>
@@ -258,8 +258,8 @@ export default function LandingPage() {
                                 </div>
                                 <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
                                 <p className="text-gray-600 mb-8 leading-relaxed">{service.desc}</p>
-                                <Link href="/book/happy-paws" className="inline-flex items-center text-gray-900 font-bold group-hover:text-primary-600 transition-colors">
-                                    Book Service <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
+                                <Link href="#contact" className="inline-flex items-center text-gray-900 font-bold group-hover:text-primary-600 transition-colors">
+                                    Contact Us <ArrowRight className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </motion.div>
                         ))}
@@ -484,9 +484,9 @@ export default function LandingPage() {
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                                <Link href="/book/happy-paws">
+                                <Link href="#contact">
                                     <Button size="lg" className="bg-white text-primary-900 hover:bg-blue-50 h-16 px-12 text-lg font-bold rounded-full shadow-2xl hover:shadow-white/25 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group/btn">
-                                        <span className="relative z-10">Book Appointment Now</span>
+                                        <span className="relative z-10">Contact Us Now</span>
                                         <div className="absolute inset-0 bg-gradient-to-r from-blue-100 to-white opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
                                     </Button>
                                 </Link>
@@ -567,7 +567,7 @@ export default function LandingPage() {
                         <div className="flex gap-8">
                             <Link href="#" className="hover:text-primary-600 transition-colors">Privacy Policy</Link>
                             <Link href="#" className="hover:text-primary-600 transition-colors">Terms of Service</Link>
-                            <Link href="/login" className="hover:text-primary-600 transition-colors font-medium text-gray-500">Admin Portal</Link>
+
                         </div>
                     </div>
                 </div>
