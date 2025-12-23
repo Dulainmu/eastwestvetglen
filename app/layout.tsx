@@ -32,7 +32,7 @@ export default function RootLayout({
             <head>
                 <SchemaHead />
             </head>
-            <body className={`${outfit.variable} ${playfair.variable} font-sans antialiased text-foreground bg-background`}>
+            <body className={`${outfit.variable} ${playfair.variable} font-sans antialiased text-foreground bg-background`} suppressHydrationWarning>
                 <Providers>{children}</Providers>
             </body>
         </html>

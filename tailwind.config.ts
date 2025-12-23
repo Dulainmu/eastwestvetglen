@@ -108,7 +108,26 @@ const config = {
             },
         },
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [
+        require("tailwindcss-animate"),
+        function ({ addUtilities }: { addUtilities: any }) {
+            const newUtilities = {
+                ".perspective-1000": {
+                    perspective: "1000px",
+                },
+                ".transform-style-3d": {
+                    transformStyle: "preserve-3d",
+                },
+                ".backface-hidden": {
+                    backfaceVisibility: "hidden",
+                },
+                ".rotate-y-180": {
+                    transform: "rotateY(180deg)",
+                },
+            }
+            addUtilities(newUtilities)
+        },
+    ],
 } satisfies Config
 
 export default config

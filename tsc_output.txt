@@ -1,0 +1,22 @@
+components/landing/OpeningHours.tsx(37,25): error TS2322: Type '{ hidden: { opacity: number; scale: number; }; visible: { opacity: number; scale: number; transition: { duration: number; ease: string; }; }; }' is not assignable to type 'Variants'.
+  Property 'visible' is incompatible with index signature.
+    Type '{ opacity: number; scale: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'Variant'.
+      Type '{ opacity: number; scale: number; transition: { duration: number; ease: string; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ opacity: number; scale: number; transition: { duration: number; ease: string; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues | undefined; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ duration: number; ease: string; }' is not assignable to type 'Transition<any> | undefined'.
+              Type '{ duration: number; ease: string; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ duration: number; ease: string; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'ease' are incompatible.
+                    Type 'string' is not assignable to type 'Easing | Easing[] | undefined'.
+components/landing/TeamSection.tsx(11,13): error TS2322: Type '{ rest: { scale: number; rotateX: number; rotateY: number; z: number; boxShadow: string; }; hover: { scale: number; rotateX: number; rotateY: number; z: number; boxShadow: string; transition: { duration: number; ease: string; }; }; }' is not assignable to type 'Variants'.
+  Property 'hover' is incompatible with index signature.
+    Type '{ scale: number; rotateX: number; rotateY: number; z: number; boxShadow: string; transition: { duration: number; ease: string; }; }' is not assignable to type 'Variant'.
+      Type '{ scale: number; rotateX: number; rotateY: number; z: number; boxShadow: string; transition: { duration: number; ease: string; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ scale: number; rotateX: number; rotateY: number; z: number; boxShadow: string; transition: { duration: number; ease: string; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues | undefined; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ duration: number; ease: string; }' is not assignable to type 'Transition<any> | undefined'.
+              Type '{ duration: number; ease: string; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ duration: number; ease: string; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'ease' are incompatible.
+                    Type 'string' is not assignable to type 'Easing | Easing[] | undefined'.
