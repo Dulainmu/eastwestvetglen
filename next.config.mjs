@@ -3,9 +3,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+
   images: {
     domains: [
       "localhost",

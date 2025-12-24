@@ -28,11 +28,11 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className="scroll-smooth">
+        <html lang="en" className="scroll-smooth" suppressHydrationWarning>
             <head>
                 <SchemaHead />
             </head>
-            <body className={`${outfit.variable} ${playfair.variable} font-sans antialiased text-foreground bg-background`}>
+            <body className={`${outfit.variable} ${playfair.variable} font-sans antialiased text-foreground bg-background`} suppressHydrationWarning>
                 <Providers>{children}</Providers>
             </body>
         </html>
