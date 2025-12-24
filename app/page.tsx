@@ -45,7 +45,7 @@ export default function LandingPage() {
             </div>
 
             {/* Inline Hero Section */}
-            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden perspective-1000">
+            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden perspective-1000 pt-20">
                 {/* Subtle gradient background for Hero */}
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
 
@@ -64,7 +64,7 @@ export default function LandingPage() {
                         >
                             Glen Waverley Clinic
                         </motion.div>
-                        <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary tracking-tight leading-tight">
+                        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-serif font-bold text-primary tracking-tight leading-tight">
                             East West <span className="italic text-accent">Vets</span> <br className="hidden md:block" /> Glen Waverley
                         </h1>
                         <p className="text-lg md:text-xl font-medium text-primary/80 max-w-3xl mx-auto tracking-wide">
@@ -99,7 +99,7 @@ export default function LandingPage() {
             </section>
 
             {/* Main Content Container */}
-            <main className="max-w-7xl mx-auto px-6 py-16 space-y-24">
+            <main className="max-w-7xl mx-auto px-6 py-12 md:py-24 space-y-24">
 
                 {/* About / Intro Section */}
                 <section id="about" className="grid md:grid-cols-2 gap-12 items-center perspective-1000">

@@ -4,6 +4,7 @@ import "./globals.css";
 import Head from "next/head";
 import { Providers } from "@/components/providers";
 import SchemaHead from "@/components/landing/SchemaHead";
+import { Navbar } from "@/components/layout/Navbar";
 
 // Modern, clean sans-serif for body text
 const outfit = Outfit({
@@ -33,7 +34,10 @@ export default function RootLayout({
                 <SchemaHead />
             </head>
             <body className={`${outfit.variable} ${playfair.variable} font-sans antialiased text-foreground bg-background`} suppressHydrationWarning>
-                <Providers>{children}</Providers>
+                <Providers>
+                    <Navbar />
+                    {children}
+                </Providers>
             </body>
         </html>
     );
