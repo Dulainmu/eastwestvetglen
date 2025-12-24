@@ -6,6 +6,7 @@ import { MapEmbed } from "@/components/landing/MapEmbed"
 import { PhilosophySection } from "@/components/landing/PhilosophySection"
 import { ServicesSection } from "@/components/landing/ServicesSection"
 import { ContactForm } from "@/components/landing/contact-form"
+import { motion } from "framer-motion"
 
 import Link from "next/link"
 
@@ -13,23 +14,56 @@ export default function LandingPage() {
     return (
         <div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/20">
 
-            {/* Organic Background Shapes */}
+            {/* Organic Background Shapes - With 3D Parallax Breathing */}
             <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-                <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] opacity-50" />
-                <div className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] bg-secondary/30 rounded-full blur-[100px] opacity-60" />
-                <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px]" />
+                <motion.div
+                    animate={{
+                        y: [0, -20, 0],
+                        scale: [1, 1.05, 1],
+                        rotate: [0, 5, 0]
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] opacity-50"
+                />
+                <motion.div
+                    animate={{
+                        y: [0, 30, 0],
+                        scale: [1, 1.1, 1],
+                        rotate: [0, -5, 0]
+                    }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                    className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] bg-secondary/30 rounded-full blur-[100px] opacity-60"
+                />
+                <motion.div
+                    animate={{
+                        x: [0, 20, 0],
+                        y: [0, -10, 0]
+                    }}
+                    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px]"
+                />
             </div>
 
             {/* Inline Hero Section */}
-            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden perspective-1000">
                 {/* Subtle gradient background for Hero */}
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
 
-                <div className="relative z-10 text-center max-w-5xl mx-auto space-y-8 px-6 animate-fade-in">
+                <motion.div
+                    initial={{ opacity: 0, y: 20, rotateX: 10 }}
+                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className="relative z-10 text-center max-w-5xl mx-auto space-y-8 px-6 transform-style-3d"
+                >
                     <div className="space-y-4">
-                        <div className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-white/40 backdrop-blur-sm text-primary text-sm font-medium tracking-wider uppercase mb-2 animate-slide-down">
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
+                            className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-white/40 backdrop-blur-sm text-primary text-sm font-medium tracking-wider uppercase mb-2"
+                        >
                             Glen Waverley Clinic
-                        </div>
+                        </motion.div>
                         <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary tracking-tight leading-tight">
                             East West <span className="italic text-accent">Vets</span> <br className="hidden md:block" /> Glen Waverley
                         </h1>
@@ -42,53 +76,106 @@ export default function LandingPage() {
                         A new branch of East West Vets, bringing integrative veterinary care to Glen Waverley.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 animate-slide-up">
-                        <button className="px-10 py-4 bg-primary text-white text-lg rounded-full font-medium hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-primary/20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8 }}
+                        className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
+                    >
+                        <button className="px-10 py-4 bg-primary text-white text-lg rounded-full font-medium hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-primary/20 hover:scale-105 active:scale-95">
                             Book Appointment
                         </button>
                         <Link
                             href="#location"
-                            className="px-10 py-4 bg-white/80 backdrop-blur-sm text-primary text-lg border border-primary/10 rounded-full font-medium hover:bg-white hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 inline-block"
+                            className="px-10 py-4 bg-white/80 backdrop-blur-sm text-primary text-lg border border-primary/10 rounded-full font-medium hover:bg-white hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 inline-block hover:scale-105 active:scale-95"
                         >
                             Get Directions
                         </Link>
-                    </div>
-                    <p className="text-xs text-muted-foreground pt-2 animate-slide-up opacity-80">
+                    </motion.div>
+                    <p className="text-xs text-muted-foreground pt-2 opacity-80">
                         Online booking coming soon
                     </p>
-                </div>
+                </motion.div>
             </section>
 
             {/* Main Content Container */}
             <main className="max-w-7xl mx-auto px-6 py-16 space-y-24">
 
                 {/* About / Intro Section */}
-                <section id="about" className="grid md:grid-cols-2 gap-12 items-center">
+                <section id="about" className="grid md:grid-cols-2 gap-12 items-center perspective-1000">
                     <div className="space-y-6">
-                        <h2 className="text-4xl font-serif font-bold text-foreground">Welcome to Our New Clinic</h2>
-                        <div className="space-y-4 text-muted-foreground leading-relaxed text-lg">
+                        <motion.h2
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="text-4xl font-serif font-bold text-foreground"
+                        >
+                            Welcome to Our New Clinic
+                        </motion.h2>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                            viewport={{ once: true }}
+                            className="space-y-4 text-muted-foreground leading-relaxed text-lg"
+                        >
                             <p>
                                 East West Vets Glen Waverley is a newly opening clinic, proudly part of the East West Veterinary Group.
                             </p>
                             <p>
                                 We combine modern Western veterinary medicine with natural and holistic therapies to support the long-term health and wellbeing of your pets.
                             </p>
-                        </div>
-                        {/* Trust Badge */}
-                        <div className="pt-4 flex items-center gap-3">
+                        </motion.div>
+                        {/* Trust Badge - Animated */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="pt-4 flex items-center gap-3"
+                        >
                             <div className="h-px w-12 bg-primary/20"></div>
-                            <span className="text-sm font-medium text-primary/60 uppercase tracking-widest">Backed by East West Vets Bentleigh</span>
-                        </div>
+                            <motion.div
+                                animate={{
+                                    textShadow: [
+                                        "0 0 0px rgba(212, 175, 55, 0)",
+                                        "0 0 10px rgba(212, 175, 55, 0.5)",
+                                        "0 0 0px rgba(212, 175, 55, 0)"
+                                    ]
+                                }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                                className="text-sm font-medium text-primary/80 uppercase tracking-widest border border-primary/20 px-3 py-1 rounded-full bg-primary/5 backdrop-blur-sm"
+                            >
+                                Backed by East West Vets Bentleigh
+                            </motion.div>
+                        </motion.div>
                     </div>
-                    <div className="relative">
-                        <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full transform rotate-6"></div>
-                        <div className="bg-muted/50 rounded-[2rem] h-[400px] w-full flex items-center justify-center text-muted-foreground border border-white/50 backdrop-blur-sm shadow-xl relative overflow-hidden">
+
+                    {/* 3D Image Frame */}
+                    <div className="relative perspective-1000 group">
+                        <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full transform rotate-6 scale-90 group-hover:scale-100 transition-transform duration-700"></div>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
+                            whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                            viewport={{ once: true }}
+                            whileHover={{
+                                rotateY: -5,
+                                rotateX: 5,
+                                scale: 1.02,
+                                boxShadow: "20px 20px 60px -15px rgba(0,0,0,0.3)"
+                            }}
+                            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+                            className="bg-muted/50 rounded-[2rem] h-[400px] w-full flex items-center justify-center text-muted-foreground border border-white/50 backdrop-blur-sm shadow-xl relative overflow-hidden transform-style-3d cursor-pointer"
+                        >
+                            {/* Decorative Shine effect on hover */}
+                            <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:translate-y-0" />
+
                             {/* Placeholder for an image */}
-                            <div className="text-center p-6">
-                                <span className="block text-4xl mb-2">🏥</span>
-                                <span className="font-serif italic text-xl">Glen Waverley Clinic</span>
+                            <div className="text-center p-6 transform-style-3d group-hover:translate-z-10 transition-transform duration-300">
+                                <span className="block text-4xl mb-4 transform group-hover:scale-110 transition-transform">🏥</span>
+                                <span className="font-serif italic text-xl text-primary/70 block">Glen Waverley Clinic</span>
+                                <span className="text-xs uppercase tracking-widest text-primary/40 mt-2 block">Opening Soon</span>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </section>
 
@@ -108,7 +195,7 @@ export default function LandingPage() {
                 </section>
 
                 {/* Info Grid (Opening Hours & Map) */}
-                <section className="grid md:grid-cols-2 gap-8">
+                <section id="location" className="grid md:grid-cols-2 gap-8">
                     <OpeningHours />
                     <div className="min-h-[400px] rounded-3xl overflow-hidden shadow-lg border border-border/50 relative">
                         <MapEmbed />
