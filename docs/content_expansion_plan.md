@@ -10,7 +10,7 @@ We will unite the requested pages into a logical hierarchy to avoid cluttering t
 *   **Home** (`/`)
     *   Intro / Philosophy
     *   Hours & Location Preview
-    *   Featured Servicesv
+    *   Featured Services
     *   Meet the Team Preview
 *   **About** (`/about`)
     *   About East West Vets (History/Philosophy)
