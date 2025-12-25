@@ -19,7 +19,7 @@ export function ContactForm() {
                     <Input
                         id="name"
                         placeholder="Your Name"
-                        className="bg-white/80 border-white/20 focus:border-accent focus:ring-accent/50 text-primary placeholder:text-primary/40 rounded-xl transition-all duration-300 shadow-sm"
+                        className="bg-white/80 border-white/20 focus:border-accent focus:ring-accent/50 text-primary placeholder:text-primary/40 rounded-xl transition-all duration-300 shadow-sm dark:bg-white/10 dark:text-white dark:border-white/10 dark:placeholder:text-gray-400"
                     />
                 </motion.div>
                 <motion.div
@@ -32,7 +32,7 @@ export function ContactForm() {
                         id="email"
                         type="email"
                         placeholder="Email Address"
-                        className="bg-white/80 border-white/20 focus:border-accent focus:ring-accent/50 text-primary placeholder:text-primary/40 rounded-xl transition-all duration-300 shadow-sm"
+                        className="bg-white/80 border-white/20 focus:border-accent focus:ring-accent/50 text-primary placeholder:text-primary/40 rounded-xl transition-all duration-300 shadow-sm dark:bg-white/10 dark:text-white dark:border-white/10 dark:placeholder:text-gray-400"
                     />
                 </motion.div>
             </div>
@@ -46,7 +46,7 @@ export function ContactForm() {
                     id="phone"
                     type="tel"
                     placeholder="(04) 0000 0000"
-                    className="bg-white/80 border-white/20 focus:border-accent focus:ring-accent/50 text-primary placeholder:text-primary/40 rounded-xl transition-all duration-300 shadow-sm"
+                    className="bg-white/80 border-white/20 focus:border-accent focus:ring-accent/50 text-primary placeholder:text-primary/40 rounded-xl transition-all duration-300 shadow-sm dark:bg-white/10 dark:text-white dark:border-white/10 dark:placeholder:text-gray-400"
                 />
             </motion.div>
 
@@ -58,7 +58,7 @@ export function ContactForm() {
                 <Textarea
                     id="message"
                     placeholder="How can we help?"
-                    className="min-h-[120px] bg-white/80 border-white/20 focus:border-accent focus:ring-accent/50 text-primary placeholder:text-primary/40 rounded-xl transition-all duration-300 shadow-sm resize-none"
+                    className="min-h-[120px] bg-white/80 border-white/20 focus:border-accent focus:ring-accent/50 text-primary placeholder:text-primary/40 rounded-xl transition-all duration-300 shadow-sm resize-none dark:bg-white/10 dark:text-white dark:border-white/10 dark:placeholder:text-gray-400"
                 />
             </motion.div>
 

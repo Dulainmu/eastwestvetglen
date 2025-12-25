@@ -45,10 +45,10 @@ export function TeamSection() {
                 </motion.div>
                 <div className="text-center sm:text-left space-y-3">
                     <motion.div variants={{ hover: { z: 10 } }}>
-                        <h3 className="text-2xl font-serif font-bold text-foreground">Dr. Sarah Chen</h3>
-                        <p className="text-primary font-medium tracking-wide text-sm uppercase">Lead Veterinarian & Acupuncturist</p>
+                        <h3 className="text-2xl font-serif font-bold text-foreground dark:text-white">Dr. Sarah Chen</h3>
+                        <p className="text-primary dark:text-accent font-medium tracking-wide text-sm uppercase">Lead Veterinarian & Acupuncturist</p>
                     </motion.div>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <p className="text-muted-foreground dark:text-gray-200 text-sm leading-relaxed">
                         "I believe in treating the whole pet, not just the symptoms. Combining Western medicine with acupuncture allows us to achieve the best possible outcomes."
                     </p>
                     <div className="pt-2">

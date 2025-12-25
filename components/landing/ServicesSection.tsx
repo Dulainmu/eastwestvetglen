@@ -19,8 +19,8 @@ export function ServicesSection() {
     return (
         <section id="services-list" className="py-12 perspective-1000">
             <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">Comprehensive Care</h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary dark:text-white mb-4">Comprehensive Care</h2>
+                <p className="text-muted-foreground dark:text-gray-300 max-w-2xl mx-auto">
                     We offer a wide range of services designed to support every stage of your pet's life, from routine check-ups to specialized holistic treatments.
                 </p>
             </div>
@@ -45,17 +45,17 @@ export function ServicesSection() {
                             boxShadow: "0 20px 40px -10px rgba(0,0,0,0.15)"
                         }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className="glass px-6 py-6 rounded-2xl flex items-center gap-4 shadow-sm border border-white/40 cursor-default transform-style-3d bg-white/60 hover:bg-white/90"
+                        className="glass px-6 py-6 rounded-2xl flex items-center gap-4 shadow-sm border border-white/40 cursor-default transform-style-3d bg-white/60 hover:bg-white/90 dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10"
                     >
                         <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center shrink-0 shadow-inner">
-                            <Check className="w-4 h-4 text-primary" strokeWidth={3} />
+                            <Check className="w-4 h-4 text-primary dark:text-accent" strokeWidth={3} />
                         </div>
-                        <span className="font-medium text-foreground text-sm tracking-wide">{service}</span>
+                        <span className="font-medium text-foreground dark:text-gray-200 text-sm tracking-wide">{service}</span>
                     </motion.div>
                 ))}
             </motion.div>
 
-            <p className="text-center text-xs text-muted-foreground mt-8 italic">
+            <p className="text-center text-xs text-muted-foreground dark:text-gray-400 mt-8 italic">
                 * Additional specialised services will be introduced as our clinic expands.
             </p>
         </section>

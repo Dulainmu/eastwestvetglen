@@ -65,22 +65,22 @@ export function PhilosophySection() {
                                     <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
                                         <pillar.icon className="w-8 h-8" />
                                     </div>
-                                    <h3 className="font-serif font-bold text-xl mb-3 text-primary">{pillar.title}</h3>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">
+                                    <h3 className="font-serif font-bold text-xl mb-3 text-primary dark:text-accent">{pillar.title}</h3>
+                                    <p className="text-sm text-muted-foreground dark:text-gray-200 leading-relaxed">
                                         {pillar.desc}
                                     </p>
                                 </div>
-                                <div className="text-xs text-primary/50 font-medium uppercase tracking-widest mt-4 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div className="text-xs text-primary/50 dark:text-accent/70 font-medium uppercase tracking-widest mt-4 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                     <Info className="w-3 h-3" /> More Info
                                 </div>
                             </div>
 
                             {/* Back Face */}
                             <div
-                                className="absolute inset-0 backface-hidden glass p-6 rounded-3xl border border-primary/20 shadow-xl bg-primary/5 flex flex-col items-center text-center justify-center rotate-y-180"
+                                className="absolute inset-0 backface-hidden glass p-6 rounded-3xl border border-primary/20 shadow-xl bg-primary/5 dark:bg-primary/20 flex flex-col items-center text-center justify-center rotate-y-180"
                             >
-                                <h3 className="font-serif font-bold text-lg mb-4 text-primary">{pillar.title}</h3>
-                                <p className="text-sm text-foreground/80 leading-relaxed font-medium">
+                                <h3 className="font-serif font-bold text-lg mb-4 text-primary dark:text-accent">{pillar.title}</h3>
+                                <p className="text-sm text-foreground/80 dark:text-gray-100 leading-relaxed font-medium">
                                     {pillar.detail}
                                 </p>
                             </div>

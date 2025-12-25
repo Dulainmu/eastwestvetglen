@@ -45,7 +45,7 @@ export default function LandingPage() {
             </div>
 
             {/* Inline Hero Section */}
-            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden perspective-1000">
+            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden perspective-1000 pt-32">
                 {/* Subtle gradient background for Hero */}
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
 
@@ -60,19 +60,19 @@ export default function LandingPage() {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-white/40 backdrop-blur-sm text-primary text-sm font-medium tracking-wider uppercase mb-2"
+                            className="inline-block px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm text-primary dark:text-accent text-sm font-medium tracking-widest uppercase mb-6 dark:border-accent/20 dark:bg-accent/10"
                         >
                             Glen Waverley Clinic
                         </motion.div>
-                        <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary tracking-tight leading-tight">
+                        <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary dark:text-white tracking-tight leading-tight">
                             East West <span className="italic text-accent">Vets</span> <br className="hidden md:block" /> Glen Waverley
                         </h1>
-                        <p className="text-lg md:text-xl font-medium text-primary/80 max-w-3xl mx-auto tracking-wide">
+                        <p className="text-lg md:text-xl font-medium text-primary/80 dark:text-gray-200 max-w-3xl mx-auto tracking-wide">
                             Holistic Veterinary Care – Combining Western & Natural Medicine
                         </p>
                     </div>
 
-                    <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light">
+                    <p className="text-xl md:text-2xl text-muted-foreground dark:text-gray-300 max-w-2xl mx-auto leading-relaxed font-light">
                         A new branch of East West Vets, bringing integrative veterinary care to Glen Waverley.
                     </p>
 
@@ -108,22 +108,22 @@ export default function LandingPage() {
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            className="text-4xl font-serif font-bold text-foreground"
+                            className="text-4xl font-serif font-bold text-foreground dark:text-white"
                         >
-                            Welcome to Our New Clinic
+                            Our Philosophy
                         </motion.h2>
                         <motion.div
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
                             viewport={{ once: true }}
-                            className="space-y-4 text-muted-foreground leading-relaxed text-lg"
+                            className="space-y-4 text-muted-foreground dark:text-gray-300 leading-relaxed text-lg"
                         >
-                            <p>
-                                East West Vets Glen Waverley is a newly opening clinic, proudly part of the East West Veterinary Group.
+                            <p className="font-medium text-primary/80 italic text-xl border-l-4 border-accent pl-6 py-2">
+                                "At East West Vets we practice modern Western medicine along with Chinese medicine to achieve the best outcome for your pet."
                             </p>
                             <p>
-                                We combine modern Western veterinary medicine with natural and holistic therapies to support the long-term health and wellbeing of your pets.
+                                East West Vets Glen Waverley is a newly opening clinic, proudly part of the East West Veterinary Group. We are dedicated to providing comprehensive care that addresses the root cause of illness, not just the symptoms.
                             </p>
                         </motion.div>
                         {/* Trust Badge - Animated */}
@@ -143,7 +143,7 @@ export default function LandingPage() {
                                     ]
                                 }}
                                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                                className="text-sm font-medium text-primary/80 uppercase tracking-widest border border-primary/20 px-3 py-1 rounded-full bg-primary/5 backdrop-blur-sm"
+                                className="text-sm font-medium text-primary/80 uppercase tracking-widest border border-primary/20 px-3 py-1 rounded-full bg-primary/5 backdrop-blur-sm dark:text-accent dark:border-accent/40 dark:bg-accent/10"
                             >
                                 Backed by East West Vets Bentleigh
                             </motion.div>
@@ -164,7 +164,7 @@ export default function LandingPage() {
                                 boxShadow: "20px 20px 60px -15px rgba(0,0,0,0.3)"
                             }}
                             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                            className="bg-muted/50 rounded-[2rem] h-[400px] w-full flex items-center justify-center text-muted-foreground border border-white/50 backdrop-blur-sm shadow-xl relative overflow-hidden transform-style-3d cursor-pointer"
+                            className="bg-muted/50 dark:bg-gray-800/50 rounded-[2rem] h-[400px] w-full flex items-center justify-center text-muted-foreground border border-white/50 backdrop-blur-sm shadow-xl relative overflow-hidden transform-style-3d cursor-pointer"
                         >
                             {/* Decorative Shine effect on hover */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:translate-y-0" />

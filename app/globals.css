@@ -4,77 +4,79 @@
 
 @layer base {
   :root {
-    /* Premium Holistic Palette - Deep Emerald & Gold */
+    /* Modern Compassion Palette - Deep Teal & Soft Coral */
 
-    /* Primary: Deep Emerald (#044D42) */
-    /* stored as H S L channels for opacity support */
-    --primary: 171 91% 16%;
+    /* Primary: Deep Teal (#0E7490) - Trustworthy, medical, fresh */
+    --primary: 189 77% 31%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Soft Sage (#E6F4F1) - Clean, clinical but soft */
-    --secondary: 171 30% 93%;
-    --secondary-foreground: 171 91% 16%;
+    /* Secondary: Soft Aqua (#ECFEFF) */
+    --secondary: 186 100% 94%;
+    --secondary-foreground: 189 77% 31%;
 
-    /* Accent: Warm Gold (#D4AF37) - Metallic/Premium */
-    --accent: 46 64% 52%;
+    /* Accent: Soft Coral (#FB7185) - Warm, friendly, inviting */
+    --accent: 351 95% 71%;
     --accent-foreground: 0 0% 100%;
 
     /* Backgrounds */
-    --background: 40 20% 99%;
-    /* Very subtle warm white */
-    --foreground: 171 20% 15%;
-    /* Dark green-grey for text, softer than black */
+    --background: 210 40% 98%;
+    /* Very cool white/alice blue hint */
+    --foreground: 215 25% 27%;
+    /* Slate for text, softer than black */
 
     --card: 0 0% 100%;
-    --card-foreground: 171 20% 15%;
+    --card-foreground: 215 25% 27%;
     --popover: 0 0% 100%;
-    --popover-foreground: 171 20% 15%;
+    --popover-foreground: 215 25% 27%;
 
-    --muted: 171 10% 94%;
-    --muted-foreground: 171 10% 40%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 171 20% 90%;
-    --input: 171 20% 90%;
-    --ring: 171 91% 16%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 189 77% 31%;
     --radius: 1rem;
-    /* More organic roundedness */
 
     /* Animation Variables */
     --shimmer-angle: 45deg;
   }
 
   .dark {
-    /* Deep Forest Mode */
-    --background: 171 50% 5%;
-    --foreground: 171 10% 90%;
+    /* Modern Compassion Dark - Deep Ocean & Night */
+    --background: 222 47% 11%;
+    /* Deep Slate/Navy */
+    --foreground: 210 40% 98%;
 
-    --card: 171 50% 8%;
-    --card-foreground: 171 10% 90%;
+    --card: 217 33% 17%;
+    /* Lighter Slate */
+    --card-foreground: 210 40% 98%;
 
-    --popover: 171 50% 8%;
-    --popover-foreground: 171 10% 90%;
+    --popover: 217 33% 17%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 171 60% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 186 70% 50%;
+    /* Bright Cyan for dark mode visibility */
+    --primary-foreground: 222 47% 11%;
 
-    --secondary: 171 30% 15%;
-    --secondary-foreground: 171 10% 90%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 171 30% 15%;
-    --muted-foreground: 171 20% 60%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 46 64% 52%;
+    --accent: 351 95% 71%;
+    /* Coral pops beautifully on dark */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 171 30% 15%;
-    --input: 171 30% 15%;
-    --ring: 171 60% 40%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 186 70% 50%;
   }
 }
 
@@ -123,20 +125,20 @@
     background-size: 200% 100%;
     animation: shimmer 3s infinite;
   }
-  
+
   /* 3D Utilities */
   .perspective-1000 {
     perspective: 1000px;
   }
-  
+
   .transform-style-3d {
     transform-style: preserve-3d;
   }
-  
+
   .backface-hidden {
     backface-visibility: hidden;
   }
-  
+
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
