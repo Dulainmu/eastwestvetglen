@@ -6,6 +6,7 @@ import { MapEmbed } from "@/components/landing/MapEmbed"
 import { PhilosophySection } from "@/components/landing/PhilosophySection"
 import { ServicesSection } from "@/components/landing/ServicesSection"
 import { ContactForm } from "@/components/landing/contact-form"
+import { HeroSlideshow } from "@/components/landing/HeroSlideshow"
 import { motion } from "framer-motion"
 
 import Link from "next/link"
@@ -14,40 +15,11 @@ export default function LandingPage() {
     return (
         <div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/20">
 
-            {/* Organic Background Shapes - With 3D Parallax Breathing */}
-            <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-                <motion.div
-                    animate={{
-                        y: [0, -20, 0],
-                        scale: [1, 1.05, 1],
-                        rotate: [0, 5, 0]
-                    }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] opacity-50"
-                />
-                <motion.div
-                    animate={{
-                        y: [0, 30, 0],
-                        scale: [1, 1.1, 1],
-                        rotate: [0, -5, 0]
-                    }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                    className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] bg-secondary/30 rounded-full blur-[100px] opacity-60"
-                />
-                <motion.div
-                    animate={{
-                        x: [0, 20, 0],
-                        y: [0, -10, 0]
-                    }}
-                    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-accent/5 rounded-full blur-[80px]"
-                />
-            </div>
+
 
             {/* Inline Hero Section */}
             <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden perspective-1000 pt-32">
-                {/* Subtle gradient background for Hero */}
-                <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+                <HeroSlideshow />
 
                 <motion.div
                     initial={{ opacity: 0, y: 20, rotateX: 10 }}
