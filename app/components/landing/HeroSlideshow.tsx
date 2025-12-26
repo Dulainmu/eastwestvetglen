@@ -44,9 +44,10 @@ export function HeroSlideshow() {
                         quality={90}
                     />
 
-                    {/* Gradient Overlays for Text Readability */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
+                    {/* Gradient Overlays for Text Readability - Strengthened for high contrast */}
+                    <div className="absolute inset-0 bg-background/30" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-background/40" />
                 </motion.div>
             </AnimatePresence>
         </div>

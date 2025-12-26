@@ -25,7 +25,7 @@ export default function LandingPage() {
                     initial={{ opacity: 0, y: 20, rotateX: 10 }}
                     animate={{ opacity: 1, y: 0, rotateX: 0 }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="relative z-10 text-center w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-3xl 2xl:max-w-5xl mx-auto space-y-4 sm:space-y-6 md:space-y-8 px-6 sm:px-8 md:px-10 lg:px-6 2xl:px-10 transform-style-3d"
+                    className="relative z-10 text-center w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-3xl 2xl:max-w-5xl mx-auto space-y-4 sm:space-y-6 md:space-y-8 px-6 sm:px-8 md:px-10 lg:px-6 2xl:px-10 transform-style-3d drop-shadow-sm"
                 >
                     <div className="space-y-4">
                         <motion.div
