@@ -113,6 +113,15 @@
     @apply bg-black/40 backdrop-blur-xl border border-white/10 shadow-xl;
   }
 
+  /* Hardened styles for Hero background media (images/video) */
+  .hero-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: none !important;
+    -webkit-mask-image: none !important;
+  }
+
   .text-balance {
     text-wrap: balance;
   }

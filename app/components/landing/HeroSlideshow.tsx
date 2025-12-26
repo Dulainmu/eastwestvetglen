@@ -38,7 +38,8 @@ export function HeroSlideshow() {
                         src={images[index]}
                         alt="Hero background"
                         fill
-                        className="object-cover"
+                        className="hero-media"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 100vw"
                         priority
                         quality={90}
                     />

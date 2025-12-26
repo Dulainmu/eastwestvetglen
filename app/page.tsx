@@ -25,26 +25,26 @@ export default function LandingPage() {
                     initial={{ opacity: 0, y: 20, rotateX: 10 }}
                     animate={{ opacity: 1, y: 0, rotateX: 0 }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="relative z-10 text-center max-w-5xl mx-auto space-y-8 px-6 transform-style-3d"
+                    className="relative z-10 text-center w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-3xl 2xl:max-w-5xl mx-auto space-y-4 sm:space-y-6 md:space-y-8 px-6 sm:px-8 md:px-10 lg:px-6 2xl:px-10 transform-style-3d"
                 >
                     <div className="space-y-4">
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            className="inline-block px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm text-primary dark:text-accent text-sm font-medium tracking-widest uppercase mb-6 dark:border-accent/20 dark:bg-accent/10"
+                            className="inline-block px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm text-primary dark:text-accent text-sm font-medium tracking-widest uppercase mb-4 sm:mb-6 dark:border-accent/20 dark:bg-accent/10"
                         >
                             Glen Waverley Clinic
                         </motion.div>
-                        <h1 className="text-5xl md:text-7xl font-serif font-bold text-primary dark:text-white tracking-tight leading-tight">
+                        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-6xl 2xl:text-8xl font-serif font-bold text-primary dark:text-white tracking-tight leading-tight">
                             East West <span className="italic text-accent">Vets</span> <br className="hidden md:block" /> Glen Waverley
                         </h1>
-                        <p className="text-lg md:text-xl font-medium text-primary/80 dark:text-gray-200 max-w-3xl mx-auto tracking-wide">
+                        <p className="text-lg md:text-xl font-medium text-primary/80 dark:text-gray-200 max-w-xl md:max-w-3xl mx-auto tracking-wide">
                             Holistic Veterinary Care – Combining Western & Natural Medicine
                         </p>
                     </div>
 
-                    <p className="text-xl md:text-2xl text-muted-foreground dark:text-gray-300 max-w-2xl mx-auto leading-relaxed font-light">
+                    <p className="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-muted-foreground dark:text-gray-300 max-w-lg md:max-w-2xl mx-auto leading-relaxed font-light">
                         A new branch of East West Vets, bringing integrative veterinary care to Glen Waverley.
                     </p>
 
@@ -52,14 +52,14 @@ export default function LandingPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8 }}
-                        className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
+                        className="flex flex-col sm:flex-row gap-4 justify-center pt-6 sm:pt-8"
                     >
-                        <button className="px-10 py-4 bg-primary text-white text-lg rounded-full font-medium hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-primary/20 hover:scale-105 active:scale-95">
+                        <button className="px-8 sm:px-10 py-3 sm:py-4 bg-primary text-white text-base sm:text-lg rounded-full font-medium hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-primary/20 hover:scale-105 active:scale-95">
                             Book Appointment
                         </button>
                         <Link
                             href="#location"
-                            className="px-10 py-4 bg-white/80 backdrop-blur-sm text-primary text-lg border border-primary/10 rounded-full font-medium hover:bg-white hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 inline-block hover:scale-105 active:scale-95"
+                            className="px-8 sm:px-10 py-3 sm:py-4 bg-white/80 backdrop-blur-sm text-primary text-base sm:text-lg border border-primary/10 rounded-full font-medium hover:bg-white hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 inline-block hover:scale-105 active:scale-95"
                         >
                             Get Directions
                         </Link>
