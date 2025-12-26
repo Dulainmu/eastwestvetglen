@@ -4,25 +4,25 @@
 
 @layer base {
   :root {
-    /* Modern Compassion Palette - Deep Teal & Soft Coral */
+    /* Veterinary Clinic Palette - Deep Emerald & Warm Gold */
 
-    /* Primary: Deep Teal (#0E7490) - Trustworthy, medical, fresh */
-    --primary: 189 77% 31%;
+    /* Primary: Deep Emerald Green (#044d29) - Trustworthy, professional, nature-inspired */
+    --primary: 150 90% 20%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Soft Aqua (#ECFEFF) */
-    --secondary: 186 100% 94%;
-    --secondary-foreground: 189 77% 31%;
+    /* Secondary: Soft Sage (#e6f4ea) - Calming, hygienic background accents */
+    --secondary: 137 38% 95%;
+    --secondary-foreground: 150 90% 20%;
 
-    /* Accent: Soft Coral (#FB7185) - Warm, friendly, inviting */
-    --accent: 351 95% 71%;
+    /* Accent: Warm Gold (#d4a017) - Friendly, highlighting, premium touch */
+    --accent: 43 80% 46%;
     --accent-foreground: 0 0% 100%;
 
     /* Backgrounds */
-    --background: 210 40% 98%;
-    /* Very cool white/alice blue hint */
+    --background: 0 0% 99%;
+    /* Soft Cream/White */
     --foreground: 215 25% 27%;
-    /* Slate for text, softer than black */
+    /* Slate for text readability */
 
     --card: 0 0% 100%;
     --card-foreground: 215 25% 27%;
@@ -37,46 +37,50 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 189 77% 31%;
-    --radius: 1rem;
+    --ring: 150 90% 20%;
+    /* Matches Primary */
+    --radius: 0.75rem;
+    /* Slightly softer radius */
 
     /* Animation Variables */
     --shimmer-angle: 45deg;
   }
 
   .dark {
-    /* Modern Compassion Dark - Deep Ocean & Night */
+    /* Veterinary Dark Mode - Deep Forest & Night */
+
+    /* Background: Deep Charcoal with Green undertone */
     --background: 222 47% 11%;
-    /* Deep Slate/Navy */
     --foreground: 210 40% 98%;
 
-    --card: 217 33% 17%;
-    /* Lighter Slate */
+    --card: 217 33% 15%;
+    /* Slightly Lighter than bg */
     --card-foreground: 210 40% 98%;
 
-    --popover: 217 33% 17%;
+    --popover: 217 33% 15%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 186 70% 50%;
-    /* Bright Cyan for dark mode visibility */
+    /* Primary: Bright Fern Green - High visibility on dark */
+    --primary: 160 84% 39%;
     --primary-foreground: 222 47% 11%;
 
-    --secondary: 217 33% 17%;
+    /* Secondary: Deep Jungle Green */
+    --secondary: 164 90% 15%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    /* Accent: Soft Amber - Warmth that pops */
+    --accent: 43 96% 56%;
+    --accent-foreground: 222 47% 11%;
 
-    --accent: 351 95% 71%;
-    /* Coral pops beautifully on dark */
-    --accent-foreground: 0 0% 100%;
+    --muted: 217 33% 20%;
+    --muted-foreground: 215 20% 70%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 186 70% 50%;
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 160 84% 39%;
   }
 }
 
