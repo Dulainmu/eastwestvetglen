@@ -25,7 +25,7 @@ export default function LandingPage() {
                     initial={{ opacity: 0, y: 20, rotateX: 10 }}
                     animate={{ opacity: 1, y: 0, rotateX: 0 }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="relative z-10 text-center w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-3xl 2xl:max-w-5xl mx-auto space-y-4 sm:space-y-6 md:space-y-8 px-6 sm:px-8 md:px-10 lg:px-6 2xl:px-10 transform-style-3d drop-shadow-sm"
+                    className="relative z-10 text-center w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-lg 2xl:max-w-3xl mx-auto space-y-4 sm:space-y-6 md:space-y-8 px-6 sm:px-8 md:px-10 lg:px-6 2xl:px-10 transform-style-3d drop-shadow-sm"
                 >
                     <div className="space-y-4">
                         <motion.div
@@ -52,14 +52,14 @@ export default function LandingPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8 }}
-                        className="flex flex-col sm:flex-row gap-4 justify-center pt-6 sm:pt-8"
+                        className="flex flex-col sm:flex-row gap-4 justify-center pt-6 sm:pt-8 mt-6 md:mt-12 mb-24 md:mb-0"
                     >
-                        <button className="px-8 sm:px-10 py-3 sm:py-4 bg-primary text-white text-base sm:text-lg rounded-full font-medium hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-primary/20 hover:scale-105 active:scale-95">
+                        <button className="bg-primary text-white rounded-full font-medium hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-primary/20 hover:scale-105 active:scale-95 text-sm px-6 py-3 md:text-lg md:px-10 md:py-4 lg:text-base lg:px-6 2xl:text-xl">
                             Book Appointment
                         </button>
                         <Link
                             href="#location"
-                            className="px-8 sm:px-10 py-3 sm:py-4 bg-white/80 backdrop-blur-sm text-primary text-base sm:text-lg border border-primary/10 rounded-full font-medium hover:bg-white hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 inline-block hover:scale-105 active:scale-95"
+                            className="bg-white/80 backdrop-blur-sm text-primary border border-primary/10 rounded-full font-medium hover:bg-white hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 inline-block hover:scale-105 active:scale-95 text-sm px-6 py-3 md:text-lg md:px-10 md:py-4 lg:text-base lg:px-6 2xl:text-xl"
                         >
                             Get Directions
                         </Link>

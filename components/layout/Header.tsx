@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Stethoscope } from "lucide-react"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export function Header() {
@@ -29,15 +29,19 @@ export function Header() {
     return (
         <>
             <motion.header
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md shadow-sm py-4" : "bg-transparent py-6"
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md shadow-sm py-2 lg:py-4" : "bg-transparent py-4 lg:py-6"
                     }`}
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5 }}
             >
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <span className="text-2xl font-serif font-bold text-primary group-hover:text-accent transition-colors">
+                    <Link href="/" className="flex items-center gap-3 group">
+                        {/* Responsive Logo Icon per User Request */}
+                        <div className="relative flex items-center justify-center">
+                            <Stethoscope className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-primary group-hover:text-accent transition-all duration-300 stroke-[1.5]" />
+                        </div>
+                        <span className="text-xl sm:text-2xl font-serif font-bold text-primary group-hover:text-accent transition-colors">
                             East West Vets
                         </span>
                     </Link>
