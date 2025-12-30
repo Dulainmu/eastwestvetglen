@@ -4,6 +4,7 @@
 import Link from "next/link"
 import { LocalPartners } from "@/components/landing/LocalPartners"
 import { ServicesGrid } from "@/components/landing/ServicesGrid"
+import { SisterClinic } from "@/components/landing/SisterClinic"
 import { motion, Variants } from "framer-motion"
 
 // Animation Variants
@@ -175,6 +176,9 @@ export default function LandingPage() {
 
             {/* Services Section */}
             <ServicesGrid />
+
+            {/* Sister Clinic Section */}
+            <SisterClinic />
 
             {/* Mobile Floating Action Button */}
             <motion.div
