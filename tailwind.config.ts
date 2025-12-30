@@ -19,8 +19,8 @@ const config = {
         },
         extend: {
             fontFamily: {
-                sans: ["var(--font-outfit)", "sans-serif"],
-                serif: ["var(--font-playfair)", "serif"],
+                sans: ["var(--font-jakarta)", "sans-serif"],
+                display: ["var(--font-fraunces)", "serif"],
             },
             colors: {
                 border: "hsl(var(--border))",
@@ -28,10 +28,15 @@ const config = {
                 ring: "hsl(var(--ring))",
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
+                // New Brand Colors
                 primary: {
-                    DEFAULT: "hsl(var(--primary) / <alpha-value>)",
-                    foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
+                    DEFAULT: "#16a34a", // Solid Green
+                    foreground: "#ffffff",
                 },
+                "background-light": "#89A8D6", // Periwinkle Blue
+                "background-dark": "#0f172a", // Dark Slate
+                "navy-custom": "#1e293b",
+
                 secondary: {
                     DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
                     foreground: "hsl(var(--secondary-foreground) / <alpha-value>)",
@@ -57,10 +62,14 @@ const config = {
                     foreground: "hsl(var(--card-foreground) / <alpha-value>)",
                 },
             },
+            backgroundImage: {
+                'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+            },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
+                'arch': '15rem 15rem 0 0',
             },
             keyframes: {
                 "accordion-down": {

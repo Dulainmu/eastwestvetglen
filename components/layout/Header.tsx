@@ -1,80 +1,53 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Stethoscope } from "lucide-react"
-import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export function Header() {
-    const [scrolled, setScrolled] = useState(false)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50)
-        }
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
-
     const navLinks = [
-        { name: "Home", href: "/" },
+        { name: "Things we do", href: "/services" },
+        { name: "Locations", href: "/contact" },
         { name: "About", href: "/about" },
-        { name: "Services", href: "/services" },
-        { name: "Resources", href: "/resources" },
-        { name: "Contact", href: "/contact" },
     ]
 
     return (
-        <>
-            <motion.header
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/80 backdrop-blur-md shadow-sm py-2 lg:py-4" : "bg-transparent py-4 lg:py-6"
-                    }`}
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.5 }}
-            >
-                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-                    <Link href="/" className="flex items-center gap-3 group">
-                        {/* Responsive Logo Icon per User Request */}
-                        <div className="relative flex items-center justify-center">
-                            <Stethoscope className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 text-primary group-hover:text-accent transition-all duration-300 stroke-[1.5]" />
-                        </div>
-                        <span className="text-xl sm:text-2xl font-serif font-bold text-primary group-hover:text-accent transition-colors">
-                            East West Vets
-                        </span>
-                    </Link>
+        <nav className="relative z-20 w-full px-6 py-6 lg:px-12 flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2 group">
+                <span className="font-display font-bold text-2xl tracking-tight text-white dark:text-primary uppercase group-hover:opacity-90 transition-opacity">
+                    East Vets <span className="font-light opacity-80">Glen</span>
+                </span>
+            </Link>
 
-                    {/* Desktop Nav */}
-                    <nav className="hidden md:flex items-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="text-sm font-medium text-primary/80 hover:text-primary transition-colors hover:underline decoration-accent underline-offset-4"
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                        <ThemeToggle />
-                        <Link
-                            href="/contact"
-                            className="bg-primary text-white text-sm font-medium px-6 py-2.5 rounded-full hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 hover:-translate-y-0.5 transform"
-                        >
-                            Book Now
-                        </Link>
-                    </nav>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden text-primary"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            <div className="hidden md:flex items-center gap-8">
+                {navLinks.map((link) => (
+                    <Link
+                        key={link.name}
+                        href={link.href}
+                        className="text-sm font-semibold text-white/90 hover:text-white dark:text-slate-300 dark:hover:text-primary transition-colors tracking-wide uppercase"
                     >
-                        {mobileMenuOpen ? <X /> : <Menu />}
-                    </button>
-                </div>
-            </motion.header>
+                        {link.name}
+                    </Link>
+                ))}
+            </div>
+
+            <div className="hidden md:block">
+                <Link
+                    href="/contact"
+                    className="bg-primary hover:bg-green-700 text-white text-sm font-bold py-3 px-6 rounded-full shadow-lg shadow-green-900/10 transition-all transform hover:-translate-y-0.5"
+                >
+                    Book Appointment
+                </Link>
+            </div>
+
+            <button
+                className="md:hidden text-white dark:text-white"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+                <span className="material-icons-outlined text-3xl">menu</span>
+            </button>
 
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
@@ -84,14 +57,21 @@ export function Header() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
                         transition={{ type: "spring", damping: 20 }}
-                        className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center space-y-8"
+                        className="fixed inset-0 z-50 bg-background-dark/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center space-y-8"
                     >
+                        <button
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="absolute top-6 right-6 text-white"
+                        >
+                            <span className="material-icons-outlined text-3xl">close</span>
+                        </button>
+
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
                                 onClick={() => setMobileMenuOpen(false)}
-                                className="text-2xl font-serif font-medium text-primary hover:text-accent transition-colors block"
+                                className="text-2xl font-display font-bold text-white hover:text-primary transition-colors block uppercase"
                             >
                                 {link.name}
                             </Link>
@@ -99,6 +79,6 @@ export function Header() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </nav>
     )
 }

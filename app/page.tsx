@@ -1,229 +1,99 @@
 "use client"
 
-import { TeamSection } from "@/components/landing/TeamSection"
-import { OpeningHours } from "@/components/landing/OpeningHours"
-import { MapEmbed } from "@/components/landing/MapEmbed"
-import { PhilosophySection } from "@/components/landing/PhilosophySection"
-import { ServicesSection } from "@/components/landing/ServicesSection"
-import { ContactForm } from "@/components/landing/contact-form"
-import { HeroSlideshow } from "@/components/landing/HeroSlideshow"
-import { motion } from "framer-motion"
-
 import Link from "next/link"
 
 export default function LandingPage() {
     return (
-        <div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary/20">
-
-
-
-            {/* Inline Hero Section */}
-            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden perspective-1000 pt-32">
-                <HeroSlideshow />
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20, rotateX: 10 }}
-                    animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
-                    className="relative z-10 text-center w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-lg 2xl:max-w-3xl mx-auto space-y-4 sm:space-y-6 md:space-y-8 px-6 sm:px-8 md:px-10 lg:px-6 2xl:px-10 transform-style-3d drop-shadow-sm"
-                >
-                    <div className="space-y-4">
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="inline-block px-5 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm text-primary dark:text-accent text-sm font-medium tracking-widest uppercase mb-4 sm:mb-6 dark:border-accent/20 dark:bg-accent/10"
-                        >
-                            Glen Waverley Clinic
-                        </motion.div>
-                        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-6xl 2xl:text-8xl font-serif font-bold text-primary dark:text-white tracking-tight leading-tight">
-                            East West <span className="italic text-accent">Vets</span> <br className="hidden md:block" /> Glen Waverley
+        <main className="relative z-10 flex-grow flex items-center justify-center px-6 lg:px-12 py-12 lg:py-0">
+            <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+                {/* Left Column: Content */}
+                <div className="flex flex-col gap-8 text-center lg:text-left order-2 lg:order-1">
+                    <div className="space-y-6">
+                        <div className="hidden lg:flex items-center gap-2 text-white/80 dark:text-primary/80 font-medium tracking-widest text-xs uppercase mb-4">
+                            <span className="w-8 h-[1px] bg-current"></span>
+                            Established 2024
+                        </div>
+                        <h1 className="font-display text-5xl lg:text-7xl font-bold leading-[1.1] text-navy-custom dark:text-white">
+                            Modern Care for Glen Waverley’s Best Friends.
                         </h1>
-                        <p className="text-lg md:text-xl font-medium text-primary/80 dark:text-gray-200 max-w-xl md:max-w-3xl mx-auto tracking-wide">
-                            Holistic Veterinary Care – Combining Western & Natural Medicine
+                        <p className="font-sans text-lg lg:text-xl text-navy-custom/80 dark:text-slate-300 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
+                            Independent, family-owned veterinary care where your pet is treated like one of our own.
                         </p>
                     </div>
 
-                    <p className="text-lg sm:text-xl md:text-2xl lg:text-xl 2xl:text-2xl text-muted-foreground dark:text-gray-300 max-w-lg md:max-w-2xl mx-auto leading-relaxed font-light">
-                        A new branch of East West Vets, bringing integrative veterinary care to Glen Waverley.
-                    </p>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.8 }}
-                        className="flex flex-col sm:flex-row gap-4 justify-center pt-6 sm:pt-8 mt-6 md:mt-12 mb-24 md:mb-0"
-                    >
-                        <button className="bg-primary text-white rounded-full font-medium hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 shadow-primary/20 hover:scale-105 active:scale-95 text-sm px-6 py-3 md:text-lg md:px-10 md:py-4 lg:text-base lg:px-6 2xl:text-xl">
-                            Book Appointment
-                        </button>
+                    <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 mt-2">
                         <Link
-                            href="#location"
-                            className="bg-white/80 backdrop-blur-sm text-primary border border-primary/10 rounded-full font-medium hover:bg-white hover:border-primary/30 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 inline-block hover:scale-105 active:scale-95 text-sm px-6 py-3 md:text-lg md:px-10 md:py-4 lg:text-base lg:px-6 2xl:text-xl"
+                            href="/contact"
+                            className="bg-primary hover:bg-green-700 text-white font-bold py-4 px-8 rounded-full shadow-xl shadow-primary/20 transition-all transform hover:scale-105 hover:shadow-2xl flex items-center gap-2"
                         >
-                            Get Directions
+                            <span>Book an Appointment</span>
+                            <span className="material-icons-outlined text-sm">calendar_month</span>
                         </Link>
-                    </motion.div>
-                    <p className="text-xs text-muted-foreground pt-2 opacity-80">
-                        Online booking coming soon
-                    </p>
-                </motion.div>
-            </section>
-
-            {/* Main Content Container */}
-            <main className="max-w-7xl mx-auto px-6 py-16 space-y-24">
-
-                {/* About / Intro Section */}
-                <section id="about" className="grid md:grid-cols-2 gap-12 items-center perspective-1000">
-                    <div className="space-y-6">
-                        <motion.h2
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="text-4xl font-serif font-bold text-foreground dark:text-white"
+                        <Link
+                            href="/about"
+                            className="group flex items-center gap-2 text-navy-custom dark:text-white font-semibold hover:text-white dark:hover:text-primary transition-colors"
                         >
-                            Our Philosophy
-                        </motion.h2>
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            viewport={{ once: true }}
-                            className="space-y-4 text-muted-foreground dark:text-gray-300 leading-relaxed text-lg"
-                        >
-                            <p className="font-medium text-primary/80 italic text-xl border-l-4 border-accent pl-6 py-2">
-                                "At East West Vets we practice modern Western medicine along with Chinese medicine to achieve the best outcome for your pet."
-                            </p>
-                            <p>
-                                East West Vets Glen Waverley is a newly opening clinic, proudly part of the East West Veterinary Group. We are dedicated to providing comprehensive care that addresses the root cause of illness, not just the symptoms.
-                            </p>
-                        </motion.div>
-                        {/* Trust Badge - Animated */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="pt-4 flex items-center gap-3"
-                        >
-                            <div className="h-px w-12 bg-primary/20"></div>
-                            <motion.div
-                                animate={{
-                                    textShadow: [
-                                        "0 0 0px rgba(212, 175, 55, 0)",
-                                        "0 0 10px rgba(212, 175, 55, 0.5)",
-                                        "0 0 0px rgba(212, 175, 55, 0)"
-                                    ]
-                                }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                                className="text-sm font-medium text-primary/80 uppercase tracking-widest border border-primary/20 px-3 py-1 rounded-full bg-primary/5 backdrop-blur-sm dark:text-accent dark:border-accent/40 dark:bg-accent/10"
-                            >
-                                Backed by East West Vets Bentleigh
-                            </motion.div>
-                        </motion.div>
+                            <span className="underline decoration-2 underline-offset-4 decoration-primary/50 group-hover:decoration-primary">Meet the Team</span>
+                            <span className="material-icons-outlined text-lg transform group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </Link>
                     </div>
 
-                    {/* 3D Image Frame */}
-                    <div className="relative perspective-1000 group">
-                        <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full transform rotate-6 scale-90 group-hover:scale-100 transition-transform duration-700"></div>
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
-                            whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                            viewport={{ once: true }}
-                            whileHover={{
-                                rotateY: -5,
-                                rotateX: 5,
-                                scale: 1.02,
-                                boxShadow: "20px 20px 60px -15px rgba(0,0,0,0.3)"
-                            }}
-                            transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                            className="bg-muted/50 dark:bg-gray-800/50 rounded-[2rem] h-[400px] w-full flex items-center justify-center text-muted-foreground border border-white/50 backdrop-blur-sm shadow-xl relative overflow-hidden transform-style-3d cursor-pointer"
-                        >
-                            {/* Decorative Shine effect on hover */}
-                            <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 group-hover:translate-x-0 group-hover:translate-y-0" />
-
-                            {/* Placeholder for an image */}
-                            <div className="text-center p-6 transform-style-3d group-hover:translate-z-10 transition-transform duration-300">
-                                <span className="block text-4xl mb-4 transform group-hover:scale-110 transition-transform">🏥</span>
-                                <span className="font-serif italic text-xl text-primary/70 block">Glen Waverley Clinic</span>
-                                <span className="text-xs uppercase tracking-widest text-primary/40 mt-2 block">Opening Soon</span>
-                            </div>
-                        </motion.div>
-                    </div>
-                </section>
-
-                {/* Philosophy Section */}
-                <PhilosophySection />
-
-                {/* Core Services Section */}
-                <ServicesSection />
-
-                {/* Team Section */}
-                <section>
-                    <div className="text-center mb-10">
-                        <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">Meet Our Team</h2>
-                        <p className="text-muted-foreground">Experienced professionals dedicated to your pet's holistic health.</p>
-                    </div>
-                    <TeamSection />
-                </section>
-
-                {/* Info Grid (Opening Hours & Map) */}
-                <section id="location" className="grid md:grid-cols-2 gap-8">
-                    <OpeningHours />
-                    <div className="min-h-[400px] rounded-3xl overflow-hidden shadow-lg border border-border/50 relative">
-                        <MapEmbed />
-                    </div>
-                </section>
-
-                {/* Contact Section */}
-                <section className="bg-primary text-white rounded-[2.5rem] p-8 md:p-16 relative overflow-hidden shadow-2xl">
-                    {/* Decorative background circles */}
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                    <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-accent/10 rounded-full blur-[60px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-
-                    <div className="grid md:grid-cols-2 gap-12 relative z-10">
-                        <div className="space-y-8">
-                            <div>
-                                <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">Get in Touch</h2>
-                                <p className="text-white/80 text-lg leading-relaxed">
-                                    Online booking will be available soon. For now, please contact us directly to enquire or make an appointment.
-                                </p>
-                            </div>
-                            <div className="space-y-6">
-                                <Link href="tel:0390000000" className="flex items-center gap-4 group">
-                                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
-                                        📞
-                                    </div>
-                                    <span className="text-xl group-hover:text-accent transition-colors">(03) 9000 0000</span>
-                                </Link>
-                                <Link href="mailto:info@eastwestvets.com.au" className="flex items-center gap-4 group">
-                                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-primary transition-colors">
-                                        📧
-                                    </div>
-                                    <span className="text-xl group-hover:text-accent transition-colors">info@eastwestvets.com.au</span>
-                                </Link>
-                            </div>
+                    <div className="pt-8 flex items-center justify-center lg:justify-start gap-6 opacity-80">
+                        <div className="flex -space-x-3">
+                            <img alt="Vet Avatar" className="w-10 h-10 rounded-full border-2 border-background-light dark:border-background-dark object-cover" src="/images/team_placeholder.png" />
+                            {/* Reusing same placeholder for demo purposes, replicating the triple avatar look */}
+                            <img alt="Vet Avatar" className="w-10 h-10 rounded-full border-2 border-background-light dark:border-background-dark object-cover" src="/images/team_placeholder.png" />
+                            <img alt="Vet Avatar" className="w-10 h-10 rounded-full border-2 border-background-light dark:border-background-dark object-cover" src="/images/team_placeholder.png" />
                         </div>
-                        <div className="bg-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-md border border-white/10 shadow-inner">
-                            <ContactForm />
+                        <div className="text-xs font-semibold uppercase tracking-wide text-navy-custom/70 dark:text-slate-400">
+                            Top Rated Local Clinic
                         </div>
                     </div>
-                </section>
-
-            </main>
-
-            {/* Footer */}
-            <footer className="bg-white/50 backdrop-blur-md border-t border-primary/5 py-12 mt-20">
-                <div className="max-w-7xl mx-auto px-6 text-center space-y-4">
-                    <p className="font-serif text-primary text-lg font-bold">East West Vets – Glen Waverley</p>
-                    <p className="text-muted-foreground text-sm">
-                        Part of the <span className="font-medium text-primary">East West Veterinary Group</span>
-                    </p>
-                    <p className="text-xs text-muted-foreground/60">
-                        © {new Date().getFullYear()} East West Vets. All rights reserved. <br />
-                        Online booking powered by <span className="font-medium">VetFlow</span> — coming soon
-                    </p>
                 </div>
-            </footer>
-        </div>
+
+                {/* Right Column: Image */}
+                <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end h-full min-h-[400px] lg:min-h-[700px]">
+                    <div className="absolute top-10 right-10 w-full h-full bg-white/20 dark:bg-white/5 rounded-t-full rounded-b-[200px] transform rotate-3 scale-95 blur-sm z-0"></div>
+                    <div className="relative z-10 w-full max-w-md lg:max-w-lg aspect-[3/4] overflow-hidden rounded-t-[12rem] rounded-b-3xl shadow-2xl shadow-navy-custom/20 dark:shadow-black/50 border-4 border-white/30 dark:border-slate-700/30 backdrop-blur-sm">
+
+                        {/* Use the login-hero or clinic placeholder as the main image */}
+                        <img
+                            alt="A happy golden retriever dog looking up and to the right, representing the care at East Vets Glen"
+                            className="w-full h-full object-cover object-center transform scale-105 hover:scale-110 transition-transform duration-700 ease-out"
+                            src="/login-hero.png"
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-t from-navy-custom/40 to-transparent pointer-events-none"></div>
+
+                        <div className="absolute bottom-8 right-8 bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-lg flex items-center gap-3 max-w-[200px] animate-pulse">
+                            <div className="bg-green-100 dark:bg-green-900 p-2 rounded-full">
+                                <span className="material-icons-outlined text-primary text-xl">pets</span>
+                            </div>
+                            <div>
+                                <p className="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Open Today</p>
+                                <p className="text-sm font-bold text-navy-custom dark:text-white">Until 7:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Dotted Pattern SVG */}
+                    <div className="absolute -bottom-6 -left-6 z-20 hidden lg:block">
+                        <svg fill="none" height="100" viewBox="0 0 100 100" width="100" xmlns="http://www.w3.org/2000/svg">
+                            <pattern height="20" id="dotPattern" patternUnits="userSpaceOnUse" width="20" x="0" y="0">
+                                <circle className="fill-white dark:fill-slate-600" cx="2" cy="2" r="2"></circle>
+                            </pattern>
+                            <rect fill="url(#dotPattern)" height="100" width="100"></rect>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            {/* Mobile Floating Action Button */}
+            <div className="fixed bottom-6 right-6 z-50 lg:hidden">
+                <button className="bg-orange-500 hover:bg-orange-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center transition-transform active:scale-95">
+                    <span className="material-icons-outlined text-2xl">calendar_month</span>
+                </button>
+            </div>
+        </main>
     )
 }

@@ -1,26 +1,28 @@
 import type { Metadata } from "next";
-import { Outfit, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
 import Head from "next/head";
 import { Providers } from "@/components/providers";
 import SchemaHead from "@/components/landing/SchemaHead";
 import { Header } from "@/components/layout/Header";
 
-// Modern, clean sans-serif for body text
-const outfit = Outfit({
+// Clean, modern sans-serif
+const jakarta = Plus_Jakarta_Sans({
     subsets: ["latin"],
-    variable: "--font-outfit",
+    variable: "--font-jakarta",
 });
 
 // Elegant serif for headings
-const playfair = Playfair_Display({
+const fraunces = Fraunces({
     subsets: ["latin"],
-    variable: "--font-playfair",
+    variable: "--font-fraunces",
+    // Include the specific axes if needed, defaults are usually fine
+    axes: ["SOFT", "WONK", "opsz"],
 });
 
 export const metadata: Metadata = {
-    title: "East West Vets – Glen Waverley Clinic",
-    description: "Integrative veterinary care at the new Glen Waverley clinic – holistic, modern, and trusted.",
+    title: "East Vets Glen - Modern Veterinary Care",
+    description: "Independent, family-owned veterinary care in Glen Waverley.",
 };
 
 export default function RootLayout({
@@ -32,8 +34,13 @@ export default function RootLayout({
         <html lang="en" className="scroll-smooth" suppressHydrationWarning>
             <head>
                 <SchemaHead />
+                {/* Material Icons required for the design */}
+                <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
             </head>
-            <body className={`${outfit.variable} ${playfair.variable} font-sans antialiased text-foreground bg-background`} suppressHydrationWarning>
+            <body className={`${jakarta.variable} ${fraunces.variable} font-sans antialiased text-navy-custom dark:text-slate-100 bg-background-light dark:bg-background-dark transition-colors duration-300 relative min-h-screen flex flex-col`} suppressHydrationWarning>
+                {/* Noise texture overlay */}
+                <div className="absolute inset-0 z-0 pointer-events-none opacity-40 dark:opacity-10 bg-noise mix-blend-overlay fixed"></div>
+
                 <Providers>
                     <Header />
                     {children}
