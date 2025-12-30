@@ -5,6 +5,8 @@ import Link from "next/link"
 import { LocalPartners } from "@/components/landing/LocalPartners"
 import { ServicesGrid } from "@/components/landing/ServicesGrid"
 import { SisterClinic } from "@/components/landing/SisterClinic"
+import { OurTeam } from "@/components/landing/OurTeam"
+import { LandingFooter } from "@/components/landing/LandingFooter"
 import { motion, Variants } from "framer-motion"
 
 // Animation Variants
@@ -179,6 +181,12 @@ export default function LandingPage() {
 
             {/* Sister Clinic Section */}
             <SisterClinic />
+
+            {/* Our Team Section */}
+            <OurTeam />
+
+            {/* Footer */}
+            <LandingFooter />
 
             {/* Mobile Floating Action Button */}
             <motion.div
