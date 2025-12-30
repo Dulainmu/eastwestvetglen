@@ -3,6 +3,7 @@
 
 import Link from "next/link"
 import { LocalPartners } from "@/components/landing/LocalPartners"
+import { ServicesGrid } from "@/components/landing/ServicesGrid"
 import { motion, Variants } from "framer-motion"
 
 // Animation Variants
@@ -171,6 +172,9 @@ export default function LandingPage() {
 
             {/* Local Partners Section */}
             <LocalPartners />
+
+            {/* Services Section */}
+            <ServicesGrid />
 
             {/* Mobile Floating Action Button */}
             <motion.div
