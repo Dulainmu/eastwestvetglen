@@ -29,7 +29,7 @@ const cardVariant: Variants = {
 
 export function OurTeam() {
     return (
-        <section className="py-24 px-6 md:px-12 lg:px-20 bg-emerald-50/50 dark:bg-slate-800/30 relative">
+        <section className="py-16 xl:py-24 px-6 md:px-12 lg:px-20 bg-emerald-50/50 dark:bg-slate-800/30 relative">
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div
                     className="text-center mb-16 relative"
@@ -56,7 +56,7 @@ export function OurTeam() {
                         className="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
-                        <div className="relative h-96 overflow-hidden">
+                        <div className="relative h-64 xl:h-96 overflow-hidden">
                             <img
                                 alt="Dr. Sarah Jenkins examining a patient"
                                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
@@ -96,7 +96,7 @@ export function OurTeam() {
                         className="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
-                        <div className="relative h-96 overflow-hidden">
+                        <div className="relative h-64 xl:h-96 overflow-hidden">
                             <img
                                 alt="Dr. Michael Chang smiling with a dog"
                                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"

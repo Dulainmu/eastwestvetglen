@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 export function LocalPartners() {
     return (
-        <section className="relative py-20 px-6 lg:px-12 overflow-hidden">
+        <section className="relative py-16 xl:py-20 px-6 lg:px-12 overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 

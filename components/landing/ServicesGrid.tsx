@@ -29,17 +29,17 @@ const cardVariant: Variants = {
 
 export function ServicesGrid() {
     return (
-        <section className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-800/50 relative">
+        <section className="py-16 xl:py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-800/50 relative">
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div
-                    className="text-center mb-16"
+                    className="text-center mb-12 xl:mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="text-xs font-bold tracking-widest text-navy-custom/70 dark:text-slate-300 uppercase mb-4 opacity-70">Compassionate & Comprehensive</h2>
-                    <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-navy-custom dark:text-white mb-6">
+                    <h1 className="font-display text-4xl md:text-4xl xl:text-6xl text-navy-custom dark:text-white mb-6">
                         Complete Care for Your Companion
                     </h1>
                     <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
