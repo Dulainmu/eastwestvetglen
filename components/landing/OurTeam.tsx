@@ -91,7 +91,7 @@ export function OurTeam() {
                         className="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
-                        <div className="relative h-64 lg:h-56 xl:h-96 overflow-hidden">
+                        <div className="relative h-64 lg:h-48 xl:h-96 overflow-hidden">
                             <img
                                 alt="Dr. Michael Chang smiling with a dog"
                                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
@@ -125,7 +125,7 @@ export function OurTeam() {
                             </div>
                         </div>
                     </motion.div>
-                </motion.div>
+                </div>
 
                 <motion.div
                     className="text-center mt-12"
