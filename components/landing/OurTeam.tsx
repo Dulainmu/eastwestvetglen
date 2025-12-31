@@ -29,29 +29,29 @@ const cardVariant: Variants = {
 
 export function OurTeam() {
     return (
-        <section className="py-12 lg:py-10 xl:py-24 px-6 md:px-12 lg:px-16 xl:px-20 bg-emerald-50/50 dark:bg-slate-800/30 relative">
+        <section className="py-12 lg:py-10 2xl:py-24 px-6 md:px-12 lg:px-16 2xl:px-20 bg-emerald-50/50 dark:bg-slate-800/30 relative">
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div
-                    className="text-center mb-10 lg:mb-8 xl:mb-16 relative"
+                    className="text-center mb-10 lg:mb-8 2xl:mb-16 relative"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <span className="text-primary font-bold tracking-wider uppercase text-[10px] lg:text-[10px] xl:text-xs mb-2 block">Meet the Owners</span>
-                    <h2 className="font-display text-3xl md:text-4xl lg:text-3xl xl:text-5xl text-navy-custom dark:text-white mb-4 lg:mb-4 xl:mb-6">Experienced Hands & Warm Hearts</h2>
-                    <p className="max-w-2xl mx-auto text-base lg:text-sm xl:text-lg text-navy-custom/70 dark:text-slate-300 font-medium leading-relaxed">
+                    <span className="text-primary font-bold tracking-wider uppercase text-[10px] lg:text-[10px] 2xl:text-xs mb-2 block">Meet the Owners</span>
+                    <h2 className="font-display text-3xl md:text-4xl lg:text-3xl 2xl:text-5xl text-navy-custom dark:text-white mb-4 lg:mb-4 2xl:mb-6">Experienced Hands & Warm Hearts</h2>
+                    <p className="max-w-2xl mx-auto text-base lg:text-sm 2xl:text-lg text-navy-custom/70 dark:text-slate-300 font-medium leading-relaxed">
                         Led by a husband and wife team with over 20 years of combined experience in small animal medicine and surgery.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-6 xl:gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-6 2xl:gap-12">
                     {/* Dr. Sarah Jenkins */}
                     <motion.div
                         className="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
-                        <div className="relative h-64 lg:h-48 xl:h-96 overflow-hidden">
+                        <div className="relative h-64 lg:h-48 2xl:h-96 overflow-hidden">
                             <img
                                 alt="Dr. Sarah Jenkins examining a patient"
                                 className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
@@ -91,7 +91,7 @@ export function OurTeam() {
                         className="group bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
-                        <div className="relative h-64 lg:h-48 xl:h-96 overflow-hidden">
+                        <div className="relative h-64 lg:h-48 2xl:h-96 overflow-hidden">
                             <img
                                 alt="Dr. Michael Chang smiling with a dog"
                                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
