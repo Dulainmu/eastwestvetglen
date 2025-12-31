@@ -29,8 +29,15 @@ const cardVariant: Variants = {
 
 export function ServicesGrid() {
     return (
-        <section className="py-20 px-6 lg:px-12 bg-background-light/30 dark:bg-background-dark/30">
-            <div className="max-w-7xl mx-auto">
+        <section className="py-24 px-6 lg:px-12 bg-slate-50 dark:bg-slate-800/50 relative">
+            {/* Top Wave Divider */}
+            <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
+                <svg className="relative block w-full h-12 md:h-24 lg:h-32 text-white dark:text-slate-900 translate-y-px" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="currentColor"></path>
+                </svg>
+            </div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div
                     className="text-center mb-16"
                     initial={{ opacity: 0, y: 20 }}
@@ -57,7 +64,7 @@ export function ServicesGrid() {
                 >
                     {/* Wellness & Prevention - Large Card */}
                     <motion.div
-                        className="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-slate-800 shadow-xl hover:shadow-2xl transition-all duration-300"
+                        className="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-white dark:bg-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300"
                         variants={cardVariant}
                     >
                         <div className="absolute inset-0 bg-gradient-to-t from-navy-custom/90 via-navy-custom/20 to-transparent z-10"></div>
@@ -80,7 +87,7 @@ export function ServicesGrid() {
 
                     {/* Advanced Surgery */}
                     <motion.div
-                        className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between border border-navy-custom/5 dark:border-slate-700"
+                        className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex flex-col justify-between border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
                         <div>
@@ -94,7 +101,7 @@ export function ServicesGrid() {
 
                     {/* Dental Care */}
                     <motion.div
-                        className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between border border-navy-custom/5 dark:border-slate-700"
+                        className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex flex-col justify-between border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
                         <div>
@@ -134,7 +141,7 @@ export function ServicesGrid() {
 
                     {/* Emergency Triage - Wide Card */}
                     <motion.div
-                        className="md:col-span-2 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row items-center gap-8 border border-navy-custom/5 dark:border-slate-700"
+                        className="md:col-span-2 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex flex-col md:flex-row items-center gap-8 border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
                         <div className="flex-1">
@@ -162,7 +169,7 @@ export function ServicesGrid() {
 
                     {/* Nutrition Advice */}
                     <motion.div
-                        className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between border border-navy-custom/5 dark:border-slate-700"
+                        className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 flex flex-col justify-between border border-navy-custom/5 dark:border-slate-700"
                         variants={cardVariant}
                     >
                         <div>
