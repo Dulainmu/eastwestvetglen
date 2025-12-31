@@ -70,13 +70,6 @@ const statsVariant: Variants = {
 export function SisterClinic() {
     return (
         <section className="py-24 px-6 md:px-12 lg:px-20 relative overflow-hidden bg-white dark:bg-slate-900" style={{ backgroundImage: 'radial-gradient(#e5e7eb 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
-            {/* Top Slanted Divider */}
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
-                <svg className="relative block w-full h-12 md:h-20 lg:h-24 text-slate-50 dark:text-slate-800/50" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M1200 120L0 16.48V0h1200v120z" fill="currentColor"></path>
-                </svg>
-            </div>
-
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div
                     className="text-center mb-16"
