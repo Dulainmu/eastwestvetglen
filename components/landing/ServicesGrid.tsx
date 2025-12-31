@@ -29,21 +29,21 @@ const cardVariant: Variants = {
 
 export function ServicesGrid() {
     return (
-        <section className="py-12 lg:py-12 xl:py-24 px-6 lg:px-8 xl:px-12 bg-slate-50 dark:bg-slate-800/50 relative">
+        <section className="py-12 lg:py-10 xl:py-24 px-6 lg:px-8 xl:px-12 bg-slate-50 dark:bg-slate-800/50 relative">
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div
-                    className="text-center mb-10 lg:mb-12 xl:mb-16"
+                    className="text-center mb-10 lg:mb-8 xl:mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-[10px] lg:text-xs font-bold tracking-widest text-navy-custom/70 dark:text-slate-300 uppercase mb-2 lg:mb-4 opacity-70">Compassionate & Comprehensive</h2>
-                    <h1 className="font-display text-3xl md:text-3xl lg:text-4xl xl:text-6xl text-navy-custom dark:text-white mb-4 lg:mb-6">
+                    <h2 className="text-[10px] lg:text-[10px] xl:text-xs font-bold tracking-widest text-navy-custom/70 dark:text-slate-300 uppercase mb-2 lg:mb-2 xl:mb-4 opacity-70">Compassionate & Comprehensive</h2>
+                    <h1 className="font-display text-3xl md:text-3xl lg:text-2xl xl:text-6xl text-navy-custom dark:text-white mb-4 lg:mb-4 xl:mb-6">
                         Complete Care for Your Companion
                     </h1>
-                    <div className="w-16 lg:w-24 h-1 bg-primary mx-auto rounded-full"></div>
-                    <p className="mt-4 lg:mt-6 text-base lg:text-base xl:text-lg text-navy-custom/80 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
+                    <div className="w-16 lg:w-16 xl:w-24 h-1 bg-primary mx-auto rounded-full"></div>
+                    <p className="mt-4 lg:mt-4 xl:mt-6 text-base lg:text-sm xl:text-lg text-navy-custom/80 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-medium">
                         From routine wellness checks to advanced surgical procedures, we provide a full spectrum of veterinary services tailored to your pet's unique needs.
                     </p>
                 </motion.div>

@@ -69,23 +69,23 @@ const statsVariant: Variants = {
 
 export function SisterClinic() {
     return (
-        <section className="py-12 lg:py-12 xl:py-24 px-6 md:px-12 lg:px-16 xl:px-20 relative overflow-hidden bg-white dark:bg-slate-900" style={{ backgroundImage: 'radial-gradient(#e5e7eb 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
+        <section className="py-12 lg:py-10 xl:py-24 px-6 md:px-12 lg:px-16 xl:px-20 relative overflow-hidden bg-white dark:bg-slate-900" style={{ backgroundImage: 'radial-gradient(#e5e7eb 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
             <div className="max-w-7xl mx-auto relative z-10">
                 <motion.div
-                    className="text-center mb-10 lg:mb-12 xl:mb-16"
+                    className="text-center mb-10 lg:mb-8 xl:mb-16"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <span className="text-primary font-bold tracking-wider uppercase text-[10px] lg:text-xs mb-2 block">One Family, Two Locations</span>
-                    <h2 className="font-display text-3xl md:text-4xl lg:text-4xl xl:text-5xl text-navy-custom dark:text-white mb-4 lg:mb-6">Connected Care</h2>
-                    <p className="max-w-2xl mx-auto text-base lg:text-base xl:text-lg text-navy-custom/70 dark:text-slate-300 font-medium leading-relaxed">
+                    <span className="text-primary font-bold tracking-wider uppercase text-[10px] lg:text-[10px] xl:text-xs mb-2 block">One Family, Two Locations</span>
+                    <h2 className="font-display text-3xl md:text-4xl lg:text-3xl xl:text-5xl text-navy-custom dark:text-white mb-4 lg:mb-4 xl:mb-6">Connected Care</h2>
+                    <p className="max-w-2xl mx-auto text-base lg:text-sm xl:text-lg text-navy-custom/70 dark:text-slate-300 font-medium leading-relaxed">
                         We are proud to be the sister clinic of <span className="font-bold text-navy-custom dark:text-white">East Vets Bentleigh</span>. Sharing resources, expertise, and a commitment to excellence.
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-8 xl:gap-20 items-center">
                     {/* Left Column: Text Content */}
                     <motion.div
                         className="lg:col-span-5 order-2 lg:order-1 bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-xl transition-all hover:shadow-2xl border border-navy-custom/5 dark:border-slate-700"
