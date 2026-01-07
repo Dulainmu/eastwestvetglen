@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ServiceCard } from "@/components/services/ServiceCard"
+import { LandingFooter } from "@/components/landing/LandingFooter"
 import {
     Syringe,
     Leaf,
@@ -177,70 +178,93 @@ const services = [
 
 export default function ServicesPage() {
     return (
-        <div className="min-h-screen bg-background relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
+        <div className="min-h-screen bg-background-light/30 relative overflow-hidden">
+            {/* Background Texture & Gradients */}
+            <div className="fixed inset-0 pointer-events-none z-0">
+                <div className="absolute inset-0 bg-noise opacity-[0.03] mix-blend-overlay" />
+                <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] mix-blend-multiply animate-pulse-slow" />
+                <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-white/40 rounded-full blur-[120px] mix-blend-overlay animate-pulse-slow" style={{ animationDelay: '1s' }} />
+                <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-accent/20 rounded-full blur-[100px] mix-blend-multiply opacity-50" />
             </div>
 
-            <div className="relative pt-32 pb-24 px-6">
-                <div className="max-w-7xl mx-auto space-y-20">
+            <div className="relative z-10 pt-32 pb-24 px-6">
+                <div className="max-w-7xl mx-auto space-y-24">
 
-                    {/* Header */}
-                    <div className="text-center space-y-6 max-w-3xl mx-auto">
+                    {/* Hero Section */}
+                    <div className="text-center space-y-8 max-w-4xl mx-auto">
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="inline-block"
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="relative inline-block"
                         >
-                            <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-2">Integrative Veterinary Medicine</h2>
-                            <h1 className="text-5xl md:text-6xl font-serif font-bold text-foreground mb-6">
-                                All Services
+                            <span className="inline-block py-1 px-3 rounded-full bg-white/40 backdrop-blur-sm border border-white/40 text-xs font-bold tracking-widest text-primary uppercase mb-6 shadow-sm">
+                                Integrative Veterinary Medicine
+                            </span>
+                            <h1 className="text-6xl md:text-7xl font-serif font-black text-navy-custom mb-6 tracking-tight drop-shadow-sm">
+                                World-Class <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-teal-600">Care</span>
+                                <br />For Your Best Friend
                             </h1>
-                            <div className="w-24 h-1.5 bg-primary mx-auto rounded-full" />
+                            <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-accent mx-auto rounded-full shadow-lg" />
                         </motion.div>
 
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="text-xl text-muted-foreground leading-relaxed"
+                            transition={{ delay: 0.2, duration: 0.8 }}
+                            className="text-2xl text-navy-custom/70 leading-relaxed font-medium max-w-2xl mx-auto"
                         >
-                            Browse our comprehensive list of treatments. From western medicine to holistic therapies, find the right care for your pet.
+                            From advanced surgery to holistic acupuncture, we offer a complete spectrum of loving care tailored to your pet's unique needs.
                         </motion.p>
                     </div>
 
                     {/* Services Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((service, index) => (
                             <motion.div
                                 key={service.title}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}
-                                transition={{ delay: index * 0.05 }}
+                                transition={{ delay: index * 0.05, duration: 0.5 }}
                             >
-                                <ServiceCard {...service} />
+                                <ServiceCard {...service} className="h-full bg-white/70 hover:bg-white/90 border-white/60 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 backdrop-blur-md" />
                             </motion.div>
                         ))}
                     </div>
 
-                    {/* Animals Treated Section */}
+                    {/* Animals Treated Section - Feature Block */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        className="bg-primary/5 rounded-3xl p-12 text-center space-y-8"
+                        className="relative overflow-hidden rounded-[2.5rem] bg-white/40 backdrop-blur-xl border border-white/50 shadow-2xl p-12 md:p-16 text-center"
                     >
-                        <PawPrint className="w-16 h-16 text-primary mx-auto opacity-50" />
-                        <h2 className="text-3xl font-serif font-bold text-foreground">Animals We Treat</h2>
-                        <div className="flex flex-wrap justify-center gap-4 text-lg text-muted-foreground max-w-4xl mx-auto">
-                            {["Cats", "Dogs", "Birds", "Reptiles", "Ferrets", "Rabbits", "Guinea Pigs", "Other Pocket Pets"].map((animal) => (
-                                <span key={animal} className="px-4 py-2 bg-white/50 dark:bg-black/20 rounded-full border border-primary/10">
-                                    {animal}
-                                </span>
-                            ))}
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none" />
+
+                        <div className="relative z-10 space-y-10">
+                            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-teal-600 text-white flex items-center justify-center mx-auto shadow-lg transform rotate-3">
+                                <PawPrint className="w-10 h-10" />
+                            </div>
+
+                            <div>
+                                <h2 className="text-4xl md:text-5xl font-serif font-bold text-navy-custom mb-4">All Creatures Great & Small</h2>
+                                <p className="text-xl text-navy-custom/60 max-w-2xl mx-auto">
+                                    We welcome every member of your furry (or scaled, or feathered) family with open arms and expert care.
+                                </p>
+                            </div>
+
+                            <div className="flex flex-wrap justify-center gap-3 max-w-5xl mx-auto">
+                                {["Cats", "Dogs", "Birds", "Reptiles", "Ferrets", "Rabbits", "Guinea Pigs", "Other Pocket Pets"].map((animal, i) => (
+                                    <motion.span
+                                        key={animal}
+                                        whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.9)" }}
+                                        className="px-6 py-3 bg-white/60 rounded-xl border border-white/60 text-lg font-bold text-navy-custom shadow-sm cursor-default transition-colors"
+                                    >
+                                        {animal}
+                                    </motion.span>
+                                ))}
+                            </div>
                         </div>
                     </motion.div>
 
@@ -249,25 +273,26 @@ export default function ServicesPage() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-center space-y-8"
+                        className="text-center space-y-10 pb-12"
                     >
-                        <div className="inline-block p-1 rounded-full bg-white/50 dark:bg-slate-800/50 backdrop-blur border border-white/50 dark:border-slate-700">
-                            <span className="px-4 py-1 text-sm font-medium text-muted-foreground">Need something else?</span>
-                        </div>
-                        <h3 className="text-4xl font-serif text-foreground">Can't find the service you need?</h3>
-                        <p className="text-xl text-muted-foreground max-w-lg mx-auto">
-                            Contact our reception team. We offer many specialized procedures and can refer to specialists if needed.
+                        <h3 className="text-4xl md:text-5xl font-serif text-navy-custom font-medium">
+                            Can't find what you're looking for?
+                        </h3>
+                        <p className="text-xl text-navy-custom/70 max-w-xl mx-auto font-medium">
+                            Our reception team is here to help. We offer many specialized procedures and can refer to specialists if needed.
                         </p>
                         <a
                             href="/contact"
-                            className="inline-flex items-center justify-center px-8 py-4 text-base font-medium rounded-xl text-white bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all hover:-translate-y-1"
+                            className="inline-flex items-center justify-center px-10 py-5 text-lg font-bold rounded-2xl text-white bg-gradient-to-r from-primary to-teal-600 hover:shadow-lg hover:shadow-primary/30 transform hover:-translate-y-1 transition-all duration-300"
                         >
-                            Contact Us
+                            Contact Our Team
                         </a>
                     </motion.div>
 
                 </div>
             </div>
+
+            <LandingFooter />
         </div>
     )
 }
