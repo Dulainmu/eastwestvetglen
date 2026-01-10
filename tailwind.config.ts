@@ -30,12 +30,16 @@ const config = {
                 foreground: "hsl(var(--foreground))",
                 // New Brand Colors
                 primary: {
-                    DEFAULT: "#16a34a", // Solid Green
+                    DEFAULT: "#12b563", // Updated from user: #12b563
+                    dark: "#0e8c4d",
                     foreground: "#ffffff",
                 },
-                "background-light": "#89A8D6", // Periwinkle Blue
-                "background-dark": "#0f172a", // Dark Slate
+                "primary-dark": "#0e8c4d",
+                "background-light": "#f6f8f7",
+                "background-dark": "#112119", 
+                "surface-dark": "#1c3329",
                 "navy-custom": "#1e293b",
+                "accent-glass": "rgba(255, 255, 255, 0.05)",
 
                 secondary: {
                     DEFAULT: "hsl(var(--secondary) / <alpha-value>)",

@@ -42,7 +42,6 @@ export default function RootLayout({
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-40 dark:opacity-10 bg-noise mix-blend-overlay fixed"></div>
 
                 <Providers>
-                    <Header />
                     {children}
                 </Providers>
             </body>
