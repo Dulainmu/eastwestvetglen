@@ -232,54 +232,87 @@ export default function ComingSoonPage() {
                         <div className="h-1.5 w-24 rounded-full bg-primary"></div>
                     </motion.div>
 
-                    <motion.div 
-                         initial={{ opacity: 0, scale: 0.95 }}
-                         whileInView={{ opacity: 1, scale: 1 }}
-                         viewport={{ once: true }}
-                         transition={{ duration: 0.8 }}
-                         className="rounded-3xl overflow-hidden border border-navy-custom/5 dark:border-white/10 shadow-2xl bg-white dark:bg-[#162921]"
-                    >
-                        <div className="flex flex-col md:flex-row">
-                            {/* Image Side */}
-                            <div className="relative h-96 md:h-auto md:w-2/5 lg:w-1/3 overflow-hidden">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        {/* Vet 1: Dr. Ayesha */}
+                        <motion.div 
+                             initial={{ opacity: 0, scale: 0.95 }}
+                             whileInView={{ opacity: 1, scale: 1 }}
+                             viewport={{ once: true }}
+                             transition={{ duration: 0.8 }}
+                             className="rounded-3xl overflow-hidden border border-navy-custom/5 dark:border-white/10 shadow-2xl bg-white dark:bg-[#162921] flex flex-col"
+                        >
+                            <div className="relative h-80 overflow-hidden">
                                 <img 
-                                    src="/images/team_placeholder.png" 
-                                    alt="Dr. Sarah Jenkins" 
-                                    className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                                    src="/images/dr-ayesha.png" 
+                                    alt="Dr. Ayesha" 
+                                    className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-navy-custom/80 via-transparent to-transparent md:bg-gradient-to-r"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-navy-custom/90 via-transparent to-transparent"></div>
+                                <div className="absolute bottom-4 left-6">
+                                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/20 backdrop-blur-md px-3 py-1 text-xs font-bold text-primary uppercase tracking-wider mb-2">
+                                        Principal Veterinarian
+                                    </div>
+                                    <h3 className="font-display text-2xl font-bold text-white">Dr. Ayesha</h3>
+                                </div>
                             </div>
                             
-                            {/* Content Side */}
-                            <div className="flex flex-1 flex-col justify-center gap-8 p-8 lg:p-12 relative">
-                                <div>
-                                    <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold text-primary uppercase tracking-wider">
-                                        Lead Veterinarian
-                                    </div>
-                                    <h3 className="font-display text-3xl lg:text-4xl font-bold text-navy-custom dark:text-white mb-2">Meet Dr. Sarah Jenkins</h3>
-                                    <p className="text-navy-custom/60 dark:text-slate-400 font-medium">B.V.Sc (Hons) • Surgery Certified</p>
-                                </div>
-                                <div className="space-y-6 text-navy-custom/80 dark:text-slate-300 leading-relaxed text-lg">
+                            <div className="p-8 flex-1 flex flex-col gap-6">
+                                <div className="space-y-4 text-navy-custom/80 dark:text-slate-300 leading-relaxed text-base">
                                     <p>
-                                        With over 15 years of compassion-led experience, Dr. Jenkins brings a wealth of knowledge in internal medicine and soft tissue surgery. Her philosophy is simple: <span className="text-primary font-bold">treat every pet as if they were her own family member.</span>
+                                        Dr. Ayesha bridges cultural divides with fluency in English and Sinhala. With a Master's in Food Science & Nutrition, she brings a unique perspective to pet well-being.
                                     </p>
                                     <p>
-                                        Previously the Senior Vet at Melbourne Central Animal Hospital, she is now bringing her expertise to Glen Waverley to set a new benchmark in personalized pet healthcare.
+                                        A visionary leader who established two state-of-the-art clinics, she specializes in complex medical cases and surgery, treating every patient like her own Jack Russell, Danny.
                                     </p>
                                 </div>
-                                <div className="flex flex-wrap gap-4 pt-4 border-t border-navy-custom/5 dark:border-white/5">
-                                    <div className="flex items-center gap-2 text-sm font-semibold text-navy-custom/70 dark:text-slate-400">
-                                        <span className="material-icons-outlined text-primary">school</span>
-                                        <span>Melbourne Univ. Alumni</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-sm font-semibold text-navy-custom/70 dark:text-slate-400">
-                                        <span className="material-icons-outlined text-primary">verified</span>
-                                        <span>Fear Free Certified</span>
-                                    </div>
+                                <div className="mt-auto pt-4 border-t border-navy-custom/5 dark:border-white/5 flex flex-wrap gap-x-4 gap-y-2">
+                                    <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• BVSc (Hons)</span>
+                                    <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• MSc (Nutrition)</span>
+                                    <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• 23+ Years Exp</span>
                                 </div>
                             </div>
-                        </div>
-                    </motion.div>
+                        </motion.div>
+
+                        {/* Vet 2: Dr. Kamani Dissanayake */}
+                        <motion.div 
+                             initial={{ opacity: 0, scale: 0.95 }}
+                             whileInView={{ opacity: 1, scale: 1 }}
+                             viewport={{ once: true }}
+                             transition={{ duration: 0.8, delay: 0.2 }}
+                             className="rounded-3xl overflow-hidden border border-navy-custom/5 dark:border-white/10 shadow-2xl bg-white dark:bg-[#162921] flex flex-col"
+                        >
+                            <div className="relative h-80 overflow-hidden">
+                                <img 
+                                    src="/images/dr-kamani.jpg" 
+                                    alt="Dr. Kamani Dissanayake" 
+                                    className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-navy-custom/90 via-transparent to-transparent"></div>
+                                <div className="absolute bottom-4 left-6">
+                                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/20 backdrop-blur-md px-3 py-1 text-xs font-bold text-primary uppercase tracking-wider mb-2">
+                                        Senior Veterinarian
+                                    </div>
+                                    <h3 className="font-display text-2xl font-bold text-white">Dr. Kamani Dissanayake</h3>
+                                </div>
+                            </div>
+                            
+                            <div className="p-8 flex-1 flex flex-col gap-6">
+                                <div className="space-y-4 text-navy-custom/80 dark:text-slate-300 leading-relaxed text-base">
+                                    <p>
+                                        Dr. Kamani joins us with 15 years of international and local experience. Her calm and loving approach is complemented by qualification in Acupuncture and herbal medicine.
+                                    </p>
+                                    <p>
+                                        An excellent surgeon and gentle practitioner, she combines modern veterinary science with natural alternatives to provide holistic care for your pets.
+                                    </p>
+                                </div>
+                                <div className="mt-auto pt-4 border-t border-navy-custom/5 dark:border-white/5 flex flex-wrap gap-x-4 gap-y-2">
+                                    <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• B.V.Sc</span>
+                                    <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• Acupuncture Cert.</span>
+                                    <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• Holistic Care</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
             </section>
 
