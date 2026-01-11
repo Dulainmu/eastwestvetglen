@@ -368,43 +368,54 @@ export default function ComingSoonPage() {
                     <div className="reveal-on-scroll relative rounded-3xl overflow-hidden bg-navy-custom shadow-2xl border border-white/10">
                         <div className="absolute inset-0 bg-[#162921]"></div>
                         <div className="absolute inset-0 bg-[url('/images/map-placeholder.png')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-navy-custom via-navy-custom/90 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-navy-custom via-navy-custom/95 to-transparent"></div>
                         
                         <div className="relative z-10 p-8 lg:p-16 flex flex-col lg:flex-row items-center gap-12">
-                            <div className="flex-1 space-y-6 text-center lg:text-left">
-                                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-white uppercase tracking-wider border border-white/20">
-                                    <span className="material-icons-outlined text-sm">history_edu</span>
-                                    Since 2019
+                            <div className="flex-1 space-y-8 text-center lg:text-left">
+                                <div className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-amber-400 uppercase tracking-wider border border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                                    <span className="material-icons-outlined text-sm">verified</span>
+                                    Established 1994
                                 </div>
-                                <h2 className="font-display text-3xl lg:text-5xl font-bold text-white leading-tight">
-                                    A Legacy of Compassionate Care
-                                </h2>
-                                <p className="text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                                    East Vets Glen is the newest chapter in our story. We are proudly part of the <strong>East West Veterinary Group</strong>, building on the trusted reputation of our sister clinic in Bentleigh.
-                                </p>
-                                <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                                
+                                <div className="space-y-4">
+                                    <h2 className="font-display text-3xl lg:text-5xl font-bold text-white leading-tight">
+                                        A Legacy of <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">Excellence</span>
+                                    </h2>
+                                    <p className="text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0 font-light">
+                                        For over <strong className="text-white font-semibold">30 years</strong>, the East West Veterinary Group has set the standard for compassionate pet care in Melbourne. 
+                                    </p>
+                                    <p className="text-base text-slate-400 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                        East Vets Glen continues this proud tradition, bringing decades of veterinary expertise and trusted community service to Glen Waverley.
+                                    </p>
+                                </div>
+
+                                <div className="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                                     <a 
                                         href="http://www.eastwestvet.com.au" 
                                         target="_blank" 
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center justify-center gap-2 bg-white text-navy-custom font-bold py-3 px-8 rounded-xl hover:bg-slate-100 transition-colors shadow-lg"
+                                        className="inline-flex items-center justify-center gap-2 bg-white text-navy-custom font-bold py-3 px-8 rounded-xl hover:bg-amber-50 transition-all shadow-lg hover:shadow-amber-500/20 hover:-translate-y-0.5"
                                     >
-                                        Visit Bentleigh Clinic
+                                        Visit Our Bentleigh Clinic
                                         <span className="material-icons-outlined text-sm">open_in_new</span>
                                     </a>
                                 </div>
                             </div>
                             
-                            {/* Visual/Statistic */}
-                            <div className="hidden lg:flex items-center gap-8 opacity-80">
-                                <div className="flex flex-col items-center gap-2">
-                                    <span className="text-5xl font-display font-bold text-primary">2+</span>
-                                    <span className="text-sm font-bold text-white uppercase tracking-wider">Locations</span>
+                            {/* Visual/Statistic Badge */}
+                            <div className="hidden lg:flex items-center gap-8 opacity-90">
+                                <div className="relative group">
+                                    <div className="absolute inset-0 bg-amber-500 blur-2xl opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                                    <div className="relative border border-white/10 bg-white/5 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center gap-1 min-w-[140px]">
+                                        <span className="text-4xl font-display font-bold text-white">30+</span>
+                                        <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Years</span>
+                                    </div>
                                 </div>
-                                <div className="w-px h-16 bg-white/20"></div>
-                                <div className="flex flex-col items-center gap-2">
-                                    <span className="text-5xl font-display font-bold text-primary">15k+</span>
-                                    <span className="text-sm font-bold text-white uppercase tracking-wider">Happy Pets</span>
+                                <div className="relative group">
+                                     <div className="relative border border-white/10 bg-white/5 backdrop-blur-sm p-6 rounded-2xl flex flex-col items-center gap-1 min-w-[140px]">
+                                        <span className="text-4xl font-display font-bold text-white">15k+</span>
+                                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Happy Pets</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
