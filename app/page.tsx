@@ -278,7 +278,12 @@ export default function ComingSoonPage() {
                         className="reveal-on-scroll mb-12 flex flex-col items-start gap-3"
                     >
                         <h2 className="font-display text-3xl lg:text-4xl font-bold text-navy-custom dark:text-white">Trusted Experience</h2>
-                        <div className="h-1.5 w-24 rounded-full bg-primary"></div>
+                        <div className="flex items-center gap-3">
+                            <div className="h-1.5 w-24 rounded-full bg-primary"></div>
+                            <span className="text-xs font-bold text-navy-custom/40 dark:text-slate-500 uppercase tracking-wider">
+                                part of East West Vet Group
+                            </span>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -350,6 +355,56 @@ export default function ComingSoonPage() {
                                     <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• B.V.Sc</span>
                                     <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• Acupuncture Cert.</span>
                                     <span className="text-sm font-semibold text-navy-custom/60 dark:text-slate-400">• Holistic Care</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             {/* Our Legacy Section */}
+             <section className="py-20 bg-background-light dark:bg-background-dark relative z-20">
+                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+                    <div className="reveal-on-scroll relative rounded-3xl overflow-hidden bg-navy-custom shadow-2xl border border-white/10">
+                        <div className="absolute inset-0 bg-[#162921]"></div>
+                        <div className="absolute inset-0 bg-[url('/images/map-placeholder.png')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-navy-custom via-navy-custom/90 to-transparent"></div>
+                        
+                        <div className="relative z-10 p-8 lg:p-16 flex flex-col lg:flex-row items-center gap-12">
+                            <div className="flex-1 space-y-6 text-center lg:text-left">
+                                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-white uppercase tracking-wider border border-white/20">
+                                    <span className="material-icons-outlined text-sm">history_edu</span>
+                                    Since 2019
+                                </div>
+                                <h2 className="font-display text-3xl lg:text-5xl font-bold text-white leading-tight">
+                                    A Legacy of Compassionate Care
+                                </h2>
+                                <p className="text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                    East Vets Glen is the newest chapter in our story. We are proudly part of the <strong>East West Veterinary Group</strong>, building on the trusted reputation of our sister clinic in Bentleigh.
+                                </p>
+                                <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                                    <a 
+                                        href="http://www.eastwestvet.com.au" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center gap-2 bg-white text-navy-custom font-bold py-3 px-8 rounded-xl hover:bg-slate-100 transition-colors shadow-lg"
+                                    >
+                                        Visit Bentleigh Clinic
+                                        <span className="material-icons-outlined text-sm">open_in_new</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            {/* Visual/Statistic */}
+                            <div className="hidden lg:flex items-center gap-8 opacity-80">
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-5xl font-display font-bold text-primary">2+</span>
+                                    <span className="text-sm font-bold text-white uppercase tracking-wider">Locations</span>
+                                </div>
+                                <div className="w-px h-16 bg-white/20"></div>
+                                <div className="flex flex-col items-center gap-2">
+                                    <span className="text-5xl font-display font-bold text-primary">15k+</span>
+                                    <span className="text-sm font-bold text-white uppercase tracking-wider">Happy Pets</span>
                                 </div>
                             </div>
                         </div>
@@ -463,6 +518,12 @@ export default function ComingSoonPage() {
                         <span className="text-lg font-display font-bold text-navy-custom dark:text-white tracking-tight">East Vets Glen</span>
                     </div>
                     <div className="flex flex-wrap justify-center gap-8">
+                        <a className="text-sm font-medium text-navy-custom/60 dark:text-slate-400 hover:text-primary transition-colors" href="http://www.eastwestvet.com.au" target="_blank" rel="noopener noreferrer">
+                            <span className="flex items-center gap-2">
+                                <span className="material-icons-outlined text-sm">open_in_new</span>
+                                Sister Clinic (Bentleigh)
+                            </span>
+                        </a>
                         <a className="text-sm font-medium text-navy-custom/60 dark:text-slate-400 hover:text-primary transition-colors" href="#">Instagram</a>
                         <a className="text-sm font-medium text-navy-custom/60 dark:text-slate-400 hover:text-primary transition-colors" href="#">Facebook</a>
                         <a className="text-sm font-medium text-navy-custom/60 dark:text-slate-400 hover:text-primary transition-colors" href="mailto:hello@eastvetsglen.com.au">hello@eastvetsglen.com.au</a>
