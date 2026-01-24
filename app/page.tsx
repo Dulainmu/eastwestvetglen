@@ -116,7 +116,7 @@ export default function ComingSoonPage() {
                     <span className="font-display font-bold text-xl tracking-tight">East Vets Glen</span>
                 </div>
                 <div className="hidden sm:block">
-                     <span className="text-sm font-medium text-navy-custom/60 dark:text-slate-400">Opening Late 2024</span>
+                     <span className="text-sm font-medium text-navy-custom/60 dark:text-slate-400">Opening Late 2026</span>
                 </div>
             </header>
 
@@ -424,62 +424,134 @@ export default function ComingSoonPage() {
             </section>
 
             {/* Bento Grid Services */}
-            <section className="py-24 bg-background-light dark:bg-background-dark relative z-20">
-                <div className="mx-auto max-w-7xl px-6 lg:px-12">
+            {/* Coming Soon & Timeline */}
+            <section className="py-24 bg-background-light dark:bg-background-dark relative z-20 overflow-hidden">
+                {/* Background Decor */}
+                <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent opacity-50"></div>
+
+                <div className="mx-auto max-w-7xl px-6 lg:px-12 relative z-10">
                     <div 
-                        className="reveal-on-scroll mb-12 flex flex-col items-start gap-3"
+                        className="reveal-on-scroll mb-16 flex flex-col items-center text-center gap-4"
                     >
-                        <h2 className="font-display text-3xl lg:text-4xl font-bold text-navy-custom dark:text-white">Coming Soon</h2>
-                        <div className="h-1.5 w-24 rounded-full bg-primary"></div>
+                        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-bold text-primary uppercase tracking-wider">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                            </span>
+                            Opening Late 2026
+                        </div>
+                        <h2 className="font-display text-4xl lg:text-5xl font-bold text-navy-custom dark:text-white">
+                            What to Expect
+                        </h2>
+                        <p className="text-lg text-navy-custom/60 dark:text-slate-400 max-w-2xl">
+                            We are crafting a sanctuary for healing. Here is a glimpse into the future state-of-the-art facility coming to Glen Waverley.
+                        </p>
+                    </div>
+
+                    {/* Timeline */}
+                    <div className="reveal-on-scroll mb-20">
+                        <div className="relative">
+                            {/* Line */}
+                            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 dark:bg-gray-800 -translate-y-1/2 hidden md:block"></div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                                {[
+                                    { title: "Planning & Design", status: "completed", date: "Jan 2025" },
+                                    { title: "Construction", status: "active", date: "Mid 2025" },
+                                    { title: "Fitout & Equipment", status: "upcoming", date: "Late 2025" },
+                                    { title: "Grand Opening", status: "upcoming", date: "2026" }
+                                ].map((phase, i) => (
+                                    <div key={i} className="flex flex-col items-center gap-4 text-center group">
+                                        <div className={`relative z-10 w-4 h-4 rounded-full border-4 transition-all duration-500
+                                            ${phase.status === 'completed' ? 'bg-primary border-primary' : 
+                                              phase.status === 'active' ? 'bg-white border-primary scale-125 shadow-[0_0_0_4px_rgba(16,185,129,0.2)]' : 
+                                              'bg-gray-200 dark:bg-gray-800 border-gray-200 dark:border-gray-800'}`}>
+                                            {phase.status === 'completed' && (
+                                                <span className="material-icons-outlined text-[10px] text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">check</span>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <p className={`text-sm font-bold uppercase tracking-wider mb-1
+                                                ${phase.status === 'active' ? 'text-primary' : 
+                                                  phase.status === 'completed' ? 'text-navy-custom/80 dark:text-slate-300' : 
+                                                  'text-gray-400'}`}>
+                                                {phase.title}
+                                            </p>
+                                            <p className="text-xs text-gray-500 font-medium">{phase.date}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 h-auto lg:h-[600px]">
                         {/* Panel 1: Diagnostics (Large) */}
                          <div 
-                            className="reveal-on-scroll group relative overflow-hidden rounded-3xl bg-navy-custom lg:col-span-2 lg:row-span-2 shadow-xl border border-white/10"
+                            className="reveal-on-scroll group relative overflow-hidden rounded-3xl bg-navy-custom lg:col-span-2 lg:row-span-2 shadow-2xl border border-white/10"
                         >
                             <img 
                                 src="/login-hero.png" 
                                 alt="Diagnostics" 
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-50"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-40 group-hover:opacity-30"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                            <div className="absolute bottom-0 left-0 p-8 lg:p-12">
-                                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/20 backdrop-blur-md text-primary">
-                                    <span className="material-icons-outlined text-2xl">radiology</span>
+                            <div className="absolute inset-0 bg-gradient-to-t from-navy-custom via-navy-custom/50 to-transparent"></div>
+                            
+                            {/* Hover Reveal Content */}
+                            <div className="absolute inset-0 p-8 lg:p-12 flex flex-col justify-end">
+                                <div className="transform transition-all duration-300 translate-y-4 group-hover:translate-y-0">
+                                    <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-green-600 text-white shadow-lg shadow-green-900/20">
+                                        <span className="material-icons-outlined text-3xl">radiology</span>
+                                    </div>
+                                    <h3 className="mb-4 font-display text-3xl lg:text-4xl font-bold text-white">Full Diagnostics Suite</h3>
+                                    <div className="space-y-4 max-w-lg">
+                                        <p className="text-slate-300 text-lg leading-relaxed">
+                                            Rapid, accurate results are crucial. Our in-house laboratory, digital radiology, and ultrasound suite will provide immediate answers for your pet's care.
+                                        </p>
+                                        <ul className="grid grid-cols-2 gap-2 text-sm text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Digital X-Ray</li>
+                                            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Ultrasound</li>
+                                            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Pathology</li>
+                                            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary"></span>Dental Imaging</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <h3 className="mb-3 font-display text-3xl font-bold text-white">State-of-the-art Diagnostics</h3>
-                                <p className="max-w-md text-slate-300 text-lg leading-relaxed">
-                                    Our clinic will feature a full in-house laboratory, digital radiology, and ultrasound capabilities, ensuring rapid results for peace of mind.
-                                </p>
                             </div>
                         </div>
 
                         {/* Panel 2: Holistic Care */}
                         <div 
-                            className="reveal-on-scroll group relative overflow-hidden rounded-3xl bg-navy-custom shadow-xl border border-white/10 min-h-[300px]"
+                            className="reveal-on-scroll group relative overflow-hidden rounded-3xl bg-[#1c3329] shadow-xl border border-white/10 min-h-[300px]"
                         >
-                             <div className="absolute inset-0 bg-[#1c3329]"></div> {/* Placeholder Color */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div className="absolute bottom-0 left-0 p-8">
-                                <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 backdrop-blur-md text-primary">
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
+                            <div className="absolute top-0 right-0 p-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                            
+                            <div className="absolute bottom-0 left-0 p-8 w-full">
+                                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md text-primary border border-white/10">
                                     <span className="material-icons-outlined text-xl">spa</span>
                                 </div>
-                                <h3 className="font-display text-xl font-bold text-white">Holistic &amp; Wellness Care</h3>
+                                <h3 className="mb-2 font-display text-2xl font-bold text-white">Holistic Wellness</h3>
+                                <p className="text-sm text-slate-400 line-clamp-2 group-hover:line-clamp-none transition-all">
+                                    Integrating Acupuncture, Chinese Herbal Medicine, and nutritional therapy for balanced healing.
+                                </p>
                             </div>
                         </div>
 
                         {/* Panel 3: Surgery */}
                         <div 
-                            className="reveal-on-scroll group relative overflow-hidden rounded-3xl bg-navy-custom shadow-xl border border-white/10 min-h-[300px]"
+                            className="reveal-on-scroll group relative overflow-hidden rounded-3xl bg-[#0f172a] shadow-xl border border-white/10 min-h-[300px]"
                         >
-                             <div className="absolute inset-0 bg-[#0f172a]"></div> {/* Placeholder Color */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div className="absolute bottom-0 left-0 p-8">
-                                <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 backdrop-blur-md text-primary">
+                            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
+                            
+                            <div className="absolute bottom-0 left-0 p-8 w-full">
+                                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/20 backdrop-blur-md text-blue-400 border border-blue-500/20">
                                     <span className="material-icons-outlined text-xl">medical_services</span>
                                 </div>
-                                <h3 className="font-display text-xl font-bold text-white">Advanced Surgical Suite</h3>
+                                <h3 className="mb-2 font-display text-2xl font-bold text-white">Advanced Surgery</h3>
+                                <p className="text-sm text-slate-400 line-clamp-2 group-hover:line-clamp-none transition-all">
+                                    A sterile, hospital-grade surgical theatre equipped for soft-tissue and orthopaedic procedures.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -540,7 +612,7 @@ export default function ComingSoonPage() {
                         <a className="text-sm font-medium text-navy-custom/60 dark:text-slate-400 hover:text-primary transition-colors" href="mailto:hello@eastvetsglen.com.au">hello@eastvetsglen.com.au</a>
                     </div>
                     <p className="text-xs text-navy-custom/40 dark:text-slate-600 font-medium">
-                        © 2024 East Vets Glen. All rights reserved.
+                        © 2026 East Vets Glen. All rights reserved.
                     </p>
                 </div>
             </footer>
